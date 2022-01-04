@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="renderer" content="webkit">
+  <meta name="viewport" content="width=device-width, initial-scale=0.3, minimum-scale=0.1, maximum-scale=2.0, user-scalable=yes">
+  <title>在线会议</title>
+
+  <link rel="stylesheet" type="text/css" href="./css/video.css">
+  <style type="text/css">
+    #live-box{
+      float: left;
+    }
+    .live-box{
+      display: none;
+      position: relative;
+    }
+    .active{
+      display: inline-block;
+    }
+    .audio-level{
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      height: 40%;
+      width: 15px;
+      background-color: rgba(80,80,80,0.8);
+      z-index: 2;
+    }
+    .audio-size{
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 15px;
+      height: 0;
+      background-color: rgb(75, 236, 0);
+    }
+  </style>
+
+</head>
+
+<body>
+  <div id="content"  v-cloak>
+    <header>
+      <div class="left-cla">会议主题：{{meetName}}</div>
+      <!--<div class="center-cla"></div>-->
+      <div class="right-cla">00:01:40</div>
+    </header>
+
+    <div class="middle-cla">
+      <div class="video-cla  live-card" ></div>
+      <div class="person-cla">
+        <div class="pers-cla" :class=" userList && userList.length ? '' : 'pers-bg' ">
+          <div class="pers-one" v-for="(user,index) in userList">
+            <div class="pers-head " @click="anchorJoin()">
+              <img :src="user.headImg ? user.headImg : 'img/header.png'">
+            </div>
+            <div class="pers-name">
+              <div class="first-cla">{{user.userId}}</div>
+              <div class="remark-cla" v-if="user.isHost">{{ user.myself ? '我|主持人' : '主持人' }}</div>
+              <div class="remark-cla" v-if="!user.isHost && user.myself ">我</div>
+            </div>
+            <div class="pers-fun">
+              <i @click="openAudio(user)" :class="user.myself ? 'pointer-cla' : 'off-cla'" class="audio-father">
+                <div :id="user.userId" class="audio-cla"></div>
+                <img class="mv-cla" :src=" user.micr ? 'img/micr.png' : 'img/micoff.png' " >
+              </i>
+              <i @click="openVideo(user)" :class="user.myself ? 'pointer-cla' : 'off-cla'" ><img class="mv-cla" :src=" user.video ? 'img/video.png' : 'img/videoff.png' " ></i>
+              <i @click="removeUsers(user.userId)" class="pointer-cla" v-if="!user.isHost && (privilege == '255')"><img class="mv-cla" src="img/remove.png"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="func-cla">
+          <div class="mute" @click="openShare()" v-if="privilege == '255'">{{ stream ? "关闭分享" : "屏幕分享" }}</div>
+          <div class="mute red-cla" @click="dissolveRoom()">{{(privilege == '255') ? '解散会议' : '退出房间'}}</div>
+        </div>
+
+      </div>
+    </div>
+
+    <footer ></footer>
+  </div>
+
+  <script src="./js/jquery-3.2.1.min.js"></script>
+  <script src="./js/lib-generate-test-usersig.min.js"></script>
+  <script src="./js/debug/GenerateTestUserSig.js"></script>
+  <script src="./js/trtc.js"></script>
+  <script src="./js/vue.min.js"></script>
+  <script src="./js/video.js"></script>
+
+</body>
+</html>

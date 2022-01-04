@@ -1,0 +1,149 @@
+@charset "UTF-8";
+/*tab start*/
+.top_tab_block {
+    position: relative;
+    padding-left: 40px;
+    overflow: hidden;
+    padding-top: 30px;
+}
+.top_tab_block:after {
+    content:'';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: #e5e5e5;
+    z-index: 1;
+}
+.top_tab_block .tab_cell {
+    width: 170px;
+    height: 60px;
+    float: left;
+    line-height: 58px;
+    text-align: center;
+    font-size: 18px;
+    color: #999;
+    font-weight: 400;
+    position: relative;
+    z-index: 2;
+    border: 1px solid #e5e5e5;
+    border-bottom: 0;
+    background-color: #eeeeee;
+    cursor: pointer;
+    margin-right: -1px;
+    user-select: none;
+}
+.top_tab_block .tab_cell:after {
+    content:'';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: #fff;
+}
+.top_tab_block .tab_cell.actived {
+    color: #333;
+    font-weight: bold;
+    background-color: #fff;
+}
+/*tab end*/
+.layui-form.dj-form.pd_side0 {
+    padding-left: 0;
+    padding-right: 0;
+}
+.bc_white {
+    background-color: #fff;
+}
+.appraisal-form {
+    padding-top: 40px;
+}
+.appraisal-form .layui-input-inline {
+    width: 300px;
+    margin-bottom: 30px;
+}
+.timerange_block .layui-input {
+    width: 140px;
+    display: inline-block;
+}
+.timerange_block .layui-form-label {
+    width: 122px;
+}
+.selected_rs_txt {
+    font-size: 14px;
+    color: #333;
+    font-weight: 700;
+    display: inline-block;
+    line-height: 39px;
+    margin-right: 40px;
+    vertical-align: top;
+}
+.ck_detail {
+    display: inline-block;
+    font-size: 14px;
+    color: #438cef;
+    line-height: 39px;
+    padding: 0 5px;
+    cursor: pointer;
+    vertical-align: top;
+}
+.ck_detail:hover {
+    text-decoration: underline;
+}
+.cutdate {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 700;
+    color: #333;
+    line-height: 40px;
+}
+.cutdate .layui-input {
+    width: 120px;
+    height: 40px;
+    text-align: center;
+    font-weight: 400;
+    color: #333;
+    display: inline-block;
+    margin: 0 8px;
+}
+.cutdayTip {
+    display: inline-block;
+    font-size: 16px;
+    color: #fbbd2b;
+    line-height: 40px;
+    padding: 0 10px;
+    cursor: pointer;
+}
+.upload_remark {
+    font-size: 14px;
+    color: #999;
+    margin-left: 10px;
+}
+.appraisal-form .layui-form-checkbox[lay-skin=primary] {
+    margin-right: 10px;
+}
+.appraisal-form2 .layui-input-inline {
+    width: 240px;
+}
+.appraisal-form2 .layui-btn {
+    margin-left: 80px;
+}
+.appraisal-form2 {
+    border-bottom: 1px solid #eeeeee;
+}
+.right-remark {
+    padding: 0 12px;
+    border: 1px solid #eeeeee;
+    font-size: 14px;
+    color: #333333;
+    line-height: 38px;
+}
+.right-remark .iconfont {
+    font-size: 16px;
+    color: #fbbd2b;
+    line-height: 38px;
+}
+.right-remark .txt_red {
+    color: #d5282b;
+}

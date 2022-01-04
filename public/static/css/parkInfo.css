@@ -1,0 +1,286 @@
+@charset "UTF-8";
+/*------ 组织架构顶部chart -----*/
+.basicMsgTit{
+    display: flex;
+    justify-content: flex-start;
+    background-color: #fff;
+    margin-bottom: 15px;
+}
+.nonPublicEnt{
+    /*width: 32%;*/
+    width: 28%;
+    border-right: 1px solid #eeeeee;
+    box-sizing: border-box;
+    height: 335px;
+}
+.nonPublicEntMem{
+    width: 24%;
+    border-right: 1px solid #eeeeee;
+    box-sizing: border-box;
+}
+.nonPublicCont{
+    width: 48%;
+    min-width: 520px;
+}
+.nonPubTit{
+    text-align: center;
+    margin: 40px auto;
+    font-size: 18px;
+}
+.nonPubNum{
+    color: #d5282b;
+}
+.alreadyPub{
+    float: left;
+    width: 50%;
+    text-align: center;
+}
+.singlePub{
+    float: left;
+    width: 50%;
+    text-align: center;
+}
+.noPubEntNum{
+    width: 100%;
+}
+.nonPublicList{
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+    align-items: center;
+    padding: 22px 30px;
+    box-sizing: border-box;
+    float: left;
+    border-bottom: 1px solid #eee;
+}
+.nonPublicList p{
+    white-space: nowrap;
+    font-size: 16px
+}
+.nonPublicList .nonPubSjNum{
+    color: #fe9900;
+    font-size: 30px
+}
+.nonPublicList .redNum{
+    color: #e03d36;
+    font-size: 30px
+}
+.nonPublicList .blueNum{
+    color: #c6b6e5;
+    font-size: 30px
+}
+.nonPublicList .orangeNum{
+    color: #cdcc00;
+    font-size: 30px
+}
+.nonPublicList .deepBlueTit{
+    color: #769ce6;
+    font-size: 30px
+}
+.nonPublicCont .nonPublicList:nth-child(2n-1){
+    border-right: 1px solid #eee;
+}
+.nonPublicCont .nonPublicList:last-child{
+    width: 100%;
+    border: none;
+}
+.nonPublicNumTit p:first-child{
+    margin-bottom: 10px;
+}
+
+.info-filteropt-block .layui-form-label {
+    padding-right: 5px;
+}
+.info-filteropt-block .layui-form-item .layui-input-inline {
+    width: 400px;
+    margin-bottom: 0;
+}
+.info-filteropt-block {
+    margin-bottom: 0;
+}
+.partybuilding-main .rs-table-wrap {
+    padding-top: 0;
+}
+.layui-table, .layui-table-view {
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+.nonPubNum {
+    font-size: 24px;
+}
+.parkchart>div {
+    margin: 0 auto!important;
+}
+/*---------------6-10新增主要展示项 start--------------*/
+.home-main-wrap {
+    display: flex;
+}
+.home-main-wrap .left-wrap {
+    width: 70%;
+    /*padding-right: 10px;*/
+    position: relative;
+    padding-right: 332px;
+    margin-right: 10px;
+}
+.home-main-wrap .right-wrap {
+    width: 30%;
+    margin-left: 10px;
+}
+.home-main-wrap .left-wrap .common-block {
+    width: 100%;
+}
+.home-main-wrap .left-wrap .excellent-mem {
+    position: absolute;
+    width: 166px;
+    right: 0;
+    top: 0;
+    border-right: 1px solid #eee;
+}
+.home-main-wrap .left-box {
+    display: flex;
+}
+.home-main-wrap .left-box .common-block {
+/*    width: 50%;*/
+    border-right: 1px solid #eee;
+}
+.home-main-wrap .img-wrap img {
+    width: 100%;
+    min-height: 100%;
+    height: auto;
+}
+.home-main-wrap .left-box .img-wrap {
+    height: 164px;
+    overflow: hidden;
+}
+.home-main-wrap .left-box .img-wrap img {
+    height: 100%;
+}
+.home-main-wrap .left-wrap, .home-main-wrap .right-wrap {
+    background-color: #fff;
+}
+.home-main-wrap .common-tit {
+    padding: 18px 0 24px 36px;
+    height: 63px;
+    position: relative;
+    font-size: 18px;
+    color: #000;
+    font-weight: bold;
+}
+.home-main-wrap .common-tit:before {
+    content:'';
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    width: 6px;
+    height: 22px;
+    background-image: linear-gradient( 90deg, rgb(243,156,31) 0%, rgb(254,203,47) 100%);
+    background-image: -moz-linear-gradient( 0deg, rgb(243,156,31) 0%, rgb(254,203,47) 100%);
+    background-image: -webkit-linear-gradient( 0deg, rgb(243,156,31) 0%, rgb(254,203,47) 100%);
+    background-image: -ms-linear-gradient( 0deg, rgb(243,156,31) 0%, rgb(254,203,47) 100%);
+}
+.home-main-wrap .inner-block {
+    padding: 20px;
+    padding-top: 0;
+    height: 500px;
+    overflow: auto;
+}
+.home-main-wrap .adv-party .img-card {
+    float: left;
+    width: 49%;
+    margin-right: 2%;
+}
+.home-main-wrap .adv-party .inner-block .img-card:nth-of-type(even) {
+    float: right;
+    margin-right: 0;
+}
+.home-main-wrap .excellent-mem .inner-block {
+    padding: 0 10px;
+    height: 510px;
+    overflow: auto;
+}
+.home-main-wrap .inner-block::-webkit-scrollbar {/*滚动条整体样式*/
+    width: 7px!important; /*高宽分别对应横竖滚动条的尺寸*/
+    height: 7px!important;
+}
+.home-main-wrap .inner-block::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+    border-radius: 3px;
+    background: #ccc!important;
+    box-shadow: none!important;
+}
+.home-main-wrap .inner-block::-webkit-scrollbar-track {/*滚动条里面轨道*/
+    border-radius: 0;
+    background: #eee!important;
+    box-shadow: none!important;
+}
+.home-main-wrap .inner-block::-webkit-scrollbar-track:hover {
+    box-shadow: none!important;
+}
+.home-main-wrap .img-card, .home-main-wrap .person-card {
+    border: 1px solid #FBC02B;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+.common-block .desc-txt {
+    padding: 10px;
+}
+.common-block .desc-txt .tit, .common-block .desc-txt .desc {
+    display: block;
+}
+.common-block .desc-txt .tit {
+    font-size: 14px;
+    color: #333;
+    line-height: 18px;
+    margin-bottom: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow:ellipsis;
+}
+.common-block .desc-txt .desc {
+    font-size: 13px;
+    color: #666;
+    line-height: 19px;
+}
+.common-block .person-card .desc-txt {
+    text-align: center;
+    padding: 6px;
+}
+.person-card .desc img {
+    width: 16px;
+}
+.home-main-wrap .excellent-mem .common-tit {
+    padding-left: 26px;
+}
+.home-main-wrap .excellent-mem .common-tit:before {
+    left: 10px;
+}
+.home-main-wrap .left-wrap .excellent-mem2{
+    right: 166px;
+}
+.notice-block {
+    padding: 10px;
+    padding-top: 0;
+}
+.notice-block .notice-tit {
+    font-size: 16px;
+    color: #333;
+    line-height: 22px;
+    margin-bottom: 6px;
+}
+.notice-block .notice-con {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp:2;
+    font-size: 14px;
+    color: #999999;
+    line-height: 18px;
+    max-height: 36px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.notice-block .cell {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #EEEEEE;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+/*---------------6-10新增主要展示项 end--------------*/

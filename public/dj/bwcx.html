@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0028)http://www.tjzzb.cn/zt/bwcx/ -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>不忘初心牢记使命专题</title>
+<link href="css/20190604bwcxzt.css" rel="stylesheet" type="text/css" ignoreapd="1">
+<script src="js/jquery-1.8.2.js" ignoreapd="1"></script>
+<script src="js/jquery.SuperSlide.2.1.1.js" type="text/javascript" charset="utf-8" ignoreapd="1"></script>
+	<style type="text/css">
+		.text-oneline{
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			overflow: hidden;
+			word-break: break-all;
+		}
+		[v-cloak]{display: none}
+	</style>
+	<script src="js/common.js" type="text/javascript"></script>
+</head>
+
+<body>
+<div id="wrapper" class="bwcx-wrap" v-cloak>
+	<div id="div03" class="odiv" style="width: 49%;height:500px"> <!--一页显示10条-->
+		<h2><span style="display:block; float:left;">学习参考</span></h2>
+		<ul class="IBTbox15">
+			<li v-for="value in learningReference" class="text-oneline" @click="lookDetail('text.html',155,100,value.infoid)">·&nbsp;<a href="#" :title="value.title" >{{value.title}}</a></li>
+
+		</ul>
+		<ul class="zh-pagination">
+			<li class="page-cell page-prev" @click="prePage(1)"><img src="images/btn-prev.png" ></li>
+			<li class="page-cell " v-for="(value,index) in learnTotal" :class="{actived:(learnIndex == index)}" @click="goToPage(index+1,1)"
+				v-if="learnMark == index || (learnMark+1) == index || (learnMark+2) == index || (learnMark+3) == index || (learnMark+4) == index || (learnMark+5) == index">
+				<span class="num">{{index+1}}</span>
+			</li>
+			<li class="page-cell page-next" @click="nextPage(1)"><img src="images/btn-next.png"></li>
+		</ul>
+	</div>
+	<div id="div04" class="odiv" style="float: right;width: 49%;height:500px;">
+		<h2><span style="display:block; float:left;">观点评论</span></h2>
+		<ul class="IBTbox15">
+			<li v-for="value in opinionReview" class="text-oneline"  @click="lookDetail('text.html',154,100,value.infoid)">·&nbsp;<a href="#" :title="value.title">{{value.title}}</a></li>
+		</ul>
+		<ul class="zh-pagination">
+			<li class="page-cell page-prev" @click="prePage(2)"><img src="images/btn-prev.png"></li>
+			<li class="page-cell " v-for="(value,index) in opinionTotal" :class="{actived:(opinioIndex == index)}" @click="goToPage(index+1,2)"
+				v-if="learnMark == index || (opinioMark+1) == index || (opinioMark+2) == index || (opinioMark+3) == index || (opinioMark+4) == index || (opinioMark+5) == index">
+				<span class="num">{{index+1}}</span>
+			</li>
+			<li class="page-cell page-next"  @click="nextPage(2)"><img src="images/btn-next.png"></li>
+		</ul>
+	</div>
+
+</div>
+<br>
+<br>
+<br>
+<br>
+<script type="text/javascript" src="js/vue.min.js"></script>
+<script type="text/javascript" src="js/public.js"></script>
+<script type="text/javascript" src="bwcx.js"></script>
+</body>
+</html>

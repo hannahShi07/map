@@ -1,0 +1,409 @@
+.clear { display: block; height: 0; overflow: hidden; clear: both }
+.clearfix:after { content: '\20'; display: block; height: 0; clear: both; }
+.clearfix { *zoom:1;}
+.Business-services{
+    background-color: #eeeeee;
+    min-width: 900px;
+}
+.enterScreen{
+    background-color: #fff;
+}
+.searchService{
+    background-color: #fff;
+    margin-top: 20px;
+}
+.serviceTop{
+    padding: 5px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+}
+.finded{
+    font-size: 12px;
+}
+.right{
+    float: left;
+    margin-right: 30px;
+}
+.rightTit{
+    display: flex;
+    align-items: center;
+}
+.right .layui-input{
+    width: 130px;
+    height: 30px;
+}
+.inputing{
+    width: 55px;
+    height: 26px;
+    padding-left: 5px;
+    box-sizing: border-box;
+}
+.export{
+    background-color: #e74447;
+    color: #fff;
+    border-radius: 4px;
+    font-size: 14px;
+    padding: 4px 10px;
+    margin-left: 20px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+.right{
+    margin-bottom: 0;
+}
+.right .layui-input-block{
+    margin-left: 0;
+}
+#layuiPage{
+    position: relative;
+    text-align: center;
+    margin-top: 30px;
+}
+#layuiPage .layui-laypage{
+    display: inline-block;
+}
+.number{
+    color: #d5282b;
+}
+.screenTit{
+    height: 50px;
+    padding: 0 20px;
+    line-height: 50px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+}
+.screenTit .label{
+    color: #d5282b;
+    font-size: 16px;
+    line-height: 50px;
+    font-weight: 700;
+    border-bottom: 2px solid #fcc42d;
+    margin-right: 5px;
+}
+.retract{
+    color: #f4a222;
+    margin-right: 5px;
+}
+.screenTit .rights{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+}
+.screenTit .rights .iconfont {
+    color: #f4a222;
+    font-size: 14px;
+}
+.percent{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 34%;
+    float: left;
+    min-width: 390px;
+    margin-bottom: 30px;
+}
+.extraCon{
+    width: 98px;
+    margin-left: 0;
+    display: inline-block;
+}
+.extraPro{
+    width: 210px;
+    margin-left: 0;
+    display: inline-block;
+}
+.layui-form-item {
+    margin-bottom: 0;
+    display: inline-block;
+}
+.right .layui-input-block {
+    min-height: 30px!important;
+}
+
+
+.inputing{
+    height: 38px;
+    width: calc(100% - 150px);
+    border: 1px solid #e6e6e6;
+    border-radius: 2px;
+    box-sizing: border-box;
+    line-height: 38px;
+}
+.inputProvince{
+    height: 38px;
+    border: 1px solid #e6e6e6;
+    border-radius: 2px;
+    box-sizing: border-box;
+    line-height: 38px;
+    padding-left: 5px;
+}
+.labelProvince{
+    margin-left: 32px;
+    margin-right: 5px;
+}
+.labelType{
+    margin-left:0;
+    margin-right:0;
+    float: left;
+    line-height: 36px;
+    width: 110px;
+    text-align: right;
+    padding-right: 10px;
+}
+.proType{
+    margin-bottom: 10px;
+}
+.faName{
+    margin-left: 32px;
+    margin-right: 5px;
+}
+.inputings{
+    width: 60px;
+    height: 28px;
+    margin: 0 5px;
+    border: 1px solid #e6e6e6;
+    padding-left: 2px;
+}
+.screenCon{
+    padding: 20px;
+}
+.layui-form-select dl dd.layui-this,.layui-form-select .layui-input{
+    line-height: 38px;
+}
+.include,.noinclude{
+    color: #999;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+.layui-form-item .layui-form-checkbox[lay-skin=primary]{
+    margin-right: 30px;
+}
+.layui-form-radio {
+    margin-right: 30px;
+}
+.proType .layui-form-item{
+    margin-bottom: 20px;
+}
+.bottom-btn{
+    text-align: center;
+}
+.bottom-btn .btn-item:hover {
+    opacity: .7;
+}
+.bottom-btn .reset{
+    border: 1px solid #e33e41;
+    color: #e33e41;
+    width: 120px;
+    height: 40px;
+    line-height: 38px;
+    display: inline-block;
+    border-radius: 4px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+.bottom-btn .search{
+    margin-left: 10px;
+    background-color:#e33e41;
+    width: 120px;
+    height: 40px;
+    line-height: 40px;
+    display: inline-block;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+}
+.bottom-btn .reset img{
+    margin-right: 10px;
+}
+.bottom-btn .search img{
+    margin-right: 10px;
+    vertical-align: text-top;
+}
+/*---- 搜索结果公司列表 start ----*/
+.inputing::placeholder,.layui-input::placeholder {
+    color: #bababa;
+}
+.labelType {
+    white-space: nowrap;
+}
+.filter_rslist {
+    padding: 0 30px;
+}
+.filter_rslist .c_item {
+    padding: 26px 60px 29px 120px;
+    position: relative;
+    border-bottom:1px solid #eeeeee ;
+    cursor: pointer;
+}
+.filter_rslist .leftico {
+    width: 88px;
+    height: 88px;
+    position: absolute;
+    overflow: hidden;
+    left: 0;
+    top: 30px;
+    border-radius: 6px;
+}
+.filter_rslist .leftico img {
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+}
+.filter_rslist .leftico .c-name {
+    display: block;
+    width: 100%;
+    height: 100%;
+    font-size: 24px;
+    color: #fff;
+    padding: 14px 20px;
+    text-align: center;
+    line-height: 30px;
+}
+.filter_rslist .c_item:nth-of-type(4n+1) .c-name {
+    background-color: #fd5942;
+}
+.filter_rslist .c_item:nth-of-type(4n+2) .c-name {
+    background-color: #f9b649;
+}
+.filter_rslist .c_item:nth-of-type(4n+3) .c-name {
+    background-color: #b1bb95;
+}
+.filter_rslist .c_item:nth-of-type(4n+4) .c-name {
+    background-color: #84a6e5;
+}
+.filter_rslist .c_item .right_label {
+    height: 22px;
+    position: absolute;
+    right: 0;
+    top: 64px;
+    padding: 0 8px;
+    font-size: 14px;
+    color: #009933;
+    line-height: 20px;
+    border: 1px solid #009933;
+    border-radius: 11px;
+}
+.filter_rslist .c_item .right_label.txt-red {
+    color: #d5282b;
+    border-color: #d5282b;
+}
+.filter_rslist .c_item .tit {
+    font-size: 20px;
+    line-height: 30px;
+    color: #d5282b;
+    font-weight: 700;
+    margin-bottom: 7px;
+}
+.filter_rslist .c_item .label_item {
+    display: inline-block;
+    padding: 0 10px;
+    height: 25px;
+    line-height: 25px;
+    font-size: 14px;
+    color: #3399ff;
+    background-color: #eaf5ff;
+    border-radius: 4px;
+    margin-right: 10px;
+    margin-bottom: 4px;
+}
+.filter_rslist .c_item .info_item {
+    display: inline-block;
+    margin-right: 70px;
+    line-height: 26px;
+    color: #666;
+    font-size: 14px;
+}
+.filter_rslist .c_locationt {
+    line-height: 26px;
+    color: #666;
+    font-size: 14px;
+}
+.filter_rslist .c_locationt .iconfont {
+    font-size: 14px;
+}
+/*---- 搜索结果公司列表 end ----*/
+.areasel-box .extraPro {
+    width: 420px;
+}
+.areasel-box .layui-form-select {
+
+}
+.areasel-box .selbox,.industrytype .selbox {
+    display: inline-block;
+}
+.areasel-box .provincebox .layui-form-select {
+    width: 180px;
+}
+.layui-form-label {
+    white-space: nowrap;
+}
+.industrytype .extraPro {
+    width: 460px;
+}
+.layui-form-item.range-input {
+    display: inline-block;
+    margin-bottom: 0;
+    vertical-align: top;
+    margin-top: 3px;
+}
+.range-input .layui-input-inline {
+    position: relative;
+    margin-bottom: 0;
+}
+.range-input .layui-input-inline .layui-input {
+    padding-right: 26px;
+}
+.range-input .layui-input-inline .unit {
+    position: absolute;
+    right: 5px;
+    top: 0;
+    line-height: 38px;
+    color: #999;
+    font-size: 14px;
+}
+.nodata-wrap {
+    text-align: center;
+    padding: 65px 0;
+}
+.boxvisible {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+}
+.mainfilter-block .hidefilter  {
+    height: 0;
+    overflow: hidden;
+    opacity: 0;
+}
+.open .mainfilter-block .hidefilter {
+    height: auto;
+    overflow: inherit;
+    opacity: 1;
+}
+/*----- 0530改 ----*/
+.line-item {
+    padding: 15px 0;
+    position: relative;
+}
+.line-item.bgGray {
+    background-color: #f8f8f8;
+    margin-left: -20px;
+    margin-right: -20px;
+    padding: 15px 20px;
+}
+.line-item.bt-line {
+    border-bottom: 1px solid #eee;
+}
+.percent {
+    margin-bottom: 0;
+}
+.proType {
+    margin-bottom: 0;
+}
+.proType .layui-form-item {
+    margin-bottom: 0;
+}

@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    <meta charset="UTF-8">
+    <title>党组织</title>
+    <link rel="stylesheet" href="css/zTreeStyle/zTreeStyle.css" type="text/css">
+    <link rel="stylesheet" href="layui/css/layui.css"  media="all">
+    <link rel="stylesheet" href="css/plateform.css">
+    <style type="text/css">
+        .ztree li span.button.add {margin-left:2px; margin-right: -1px; background-position:-144px 0; vertical-align:top; *vertical-align:middle}
+
+		.box {
+            position: absolute;
+            padding-top: 8px;
+            z-index: 9999;
+        }
+
+        .box .con {
+            float: left;
+            width: 520px;
+            border: 1px #c5c5c5 solid;
+            border-radius: 5px;
+            background-color: #fff;
+            z-index: 999999999;
+            padding: 10px 15px;
+            color: #333;
+        }
+
+        .box .top_site {
+            border-bottom: 1px solid #c5c5c5;
+            padding-bottom: 5px;
+            line-height: 50px;
+
+        }
+
+        .box .con-ret {
+            border: 10px solid transparent;
+            border-bottom-color: #c5c5c5;
+            position: absolute;
+            left: 30px;
+            top: -12px;
+        }
+
+        /* 白色覆盖*/
+
+        .box .triangle {
+            border: 10px solid transparent;
+            border-bottom-color: #fff;
+            position: absolute;
+            left: 30px;
+            top: -11px;
+        }
+
+        .box .cur_site {
+            background-color: #ffebee;
+            padding: 3px 8px;
+            color: #e44142;
+        }
+
+        .box .common_site {
+            padding-right: 30px;
+        }
+
+        .box .sub_site_list span {
+            padding-right: 20px;
+            display: block;
+            float: left;
+        }
+
+        .banner {
+            z-index: -1;
+        }
+
+        .char {
+            text-align: center;
+            margin-right: 7px;
+            margin-top: 7px;
+            float: left;
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            background-color: #f0f0f0;
+            padding: 0px;
+        }
+
+        .bigchar {
+            text-align: center;
+            margin-right: 7px;
+            margin-top: 7px;
+            float: left;
+            width: 67px;
+            height: 30px;
+            line-height: 30px;
+            background-color: #f0f0f0;
+            padding: 0px;
+        }
+
+        .idea_tu img {
+            width: 240px;
+        }
+
+        .color_red {
+            color: #e40b18;
+        }
+
+        .special_col .tit {
+            height: 42px;
+            border-bottom: 1px solid #eee;
+            line-height: 30px;
+            font-size: 16px;
+        }
+
+        .special_col .cont a {
+            width: 268px;
+            height: 110px;
+            margin-top: 15px;
+            display: block;
+        }
+
+        .news_li1 {
+            line-height: 22px;
+            position: relative;
+            padding-left: 30px;
+            font-size: 14px;
+            margin: 15px 0;
+            border-bottom: 1px dotted #eee;
+            padding-bottom: 10px;
+        }
+
+        .news_li1 i {
+            background: #ff6d76;
+            width: 15px;
+            height: 15px;
+            display: inline-block;
+            position: absolute;
+            left: 0px;
+            top: 6px;
+            font-style: normal;
+            font-size: 12px;
+            color: #fff;
+            text-align: center;
+            line-height: 15px;
+        }
+
+        .news_li1 span {
+            position: absolute;
+            right: 0;
+            top: 0;
+            font-size: 12px;
+            color: #999;
+            width: 40px;
+        }
+
+        .logo {
+            width: 600px;
+        }
+
+        .logo_name {
+            font-size: 26px;
+        }
+
+        .morename {
+            font-size: 25px;
+            line-height: 40px;
+            word-wrap: break-word;
+            width: 329px;
+            padding-top: 10px;
+        }
+        /*文字两行超出省略*/
+        .text-twoline {
+            overflow:hidden;
+            text-overflow:ellipsis;
+            display:-webkit-box;
+            -webkit-box-orient:vertical;
+            -webkit-line-clamp:2;
+        }
+        [v-cloak]{display:none}
+    </style>
+
+		<script type="text/javascript" src="js/jquery-1.4.4.min.js"></script>
+
+    <script type="text/javascript" src="js/jquery.ztree.core.js"></script>
+    <script type="text/javascript" src="js/jquery.ztree.excheck.js"></script>
+    <!--<script type="text/javascript" src="js/jquery.ztree.exedit.js"></script>
+		<script type="text/javascript" src="js/jquery-1.8.2.js"></script>
+		-->
+		<script src="layui/layui.all.js" charset="utf-8"></script>
+		<script type="text/javascript" src="js/fuzzysearch.js"></script>
+
+		<script type="text/javascript" src="js/jquery.ztree.exhide.js"></script>
+		<script src="js/common.js" type="text/javascript"></script>
+</head>
+<body>
+    <div class="container" style="overflow-x: hidden">
+        <div class="headbox">
+            <div class="header">
+                <div class="logo"><img src="images/logo.png">
+                <div class="logo_name" style="padding-left: 5px;">经济开发区非公企业智慧党建平台</div>
+                </div>
+            <!--<div class="fr top_r"><a target="_blank" class="reg" href="">注册</a><a-->
+                    <!--class="uclog" href="">登录</a><a class="userlog"-->
+                                                   <!--href="http://sys.sxjkqdj.cn/login">管理员登录</a></div>-->
+               <!-- <div class="fr search">
+                    <form action="" method="post">
+                        <ul class="clearfix">
+                            <li class="se_box"><input class="search-keywords" name="infoTitle" type="text" value="" size="24" maxlength="30" placeholder="请输入搜索关键词" data-rule="关键词:required"></li>
+                            <li class="sea_an"><input name="" type="submit" value="" class="topsearchbtn"></li>
+                        </ul>
+                    </form>
+                </div> -->
+
+
+<!-- 		<!--新增数据平台入口
+                <a href="shyk.html" class="serviceplatef organizeico" target="_blank" >
+                    <img src="images/organize.png" alt="">
+                    <p class="txt">三会一课</p>
+                </a>
+                <a href="plateform.html" class="serviceplatef" target="_blank" style="right: -120px">
+                    <img src="images/dataservice.png" alt="">
+                    <p class="txt">大数据服务</p>
+                </a> -->
+
+								<!--新增数据平台入口-->
+								<div href="#" class="serviceplatef organizeico"  target="_blank">
+										<img src="images/human.png" alt="">
+										<p class="txt"> 系统管理员</p>
+								</div>
+								<a href="index.html" class="serviceplatef" target="_blank" style="right: -180px;">
+										<!-- <img src="images/dataservice.png" alt=""> -->
+										<p class="txt">返回党建门户首页</p>
+								</a>
+            </div>
+        </div>
+        <div class="menubox">
+            <div class="menu">
+                <dl class="sev" style="z-index:1000">
+									<dd><a href="org.html" target="_blank" >党组织</a>
+											<div class="sec_nav dpnone"></div>
+									</dd>
+									<dd><a href="shyk.html" target="_blank" >三会一课</a>
+											<div class="sec_nav dpnone"></div>
+									</dd>
+
+									<dd><a href="plateform.html"  target="_blank"  >大数据服务</a>
+											<div class="sec_nav dpnone"></div>
+									</dd>
+                </dl>
+            </div>
+        </div>
+
+        <div class="organization-wrap">
+            <div class="left-tree">
+							<!--新增tree顶部搜索-->
+							<div class="search-block">
+								<br/>
+								查询：<input type="text" placeholder="请输入关键词搜索" id="key" value="" class="empty" />
+							</div>
+
+
+                <div class="innerblock">
+                    <ul id="organizeTree" class="ztree" style="width:100%; overflow-x:hidden;overflow-y: auto"></ul>
+                </div>
+
+            </div>
+            <div class="right-con">
+                <div class="innerblock">
+									<!--新增信息-->
+									<div class="organize-info-wrap">
+												<div class="right-img default-img">
+													<img src="" alt="" style="width: 200px;height: 240px;" id="zImg" >
+															<!-- <img src="images/logo.png" alt="" style="width: 240px;height: 320px;" > -->
+												</div>
+									    <div class="left-info ">
+
+									        <div class="info-cell tit">
+									            <label for="">所属上级党组织：</label>
+									            <span class="txt" id="sjName"></span>
+									        </div>
+
+													<div class="info-cell tit">
+															<label for="">党组织编码：</label>
+															<span class="txt" id="Dzzbm"></span>
+													</div>
+
+													<div class="info-cell tit">
+															<label for="">党组织全称：</label>
+															<span class="txt" id="Name"></span>
+													</div>
+
+												<div class="info-cell tit">
+															<label for="">组织类别：</label>
+															<span class="txt" id="zzlbName"></span>
+
+															<select name="interest" lay-filter="aihao">
+																<option  selected="" id="zzlbName" ></option>
+															</select>
+															<!-- </div> -->
+													</div>
+													<!-- <div class="info-cell fl">
+															<label for="">组织类别：</label>
+															<div class="txt select-box">
+																	<select name="" id="">
+																			<option value="" selected="" >
+																				<span class="txt" id="zzlbName"></span>
+																			</option>
+																	</select>
+															</div>
+													</div> -->
+
+													<div class="info-cell">
+															<label for="">批准建立党组织日期：</label>
+															<span class="txt" id="ClriqName"></span>
+													</div>
+
+													<div class="info-cell">
+															<label for="">组织分类：</label>
+															<span class="txt" id="zzflName"></span>
+
+															<select name="interest" lay-filter="aihao">
+																<option  selected="" id="zzlbName" ></option>
+															</select>
+
+													</div>
+									        <div class="info-cell fl">
+									            <label for="">党员人数：</label>
+									            <span class="txt" id="TotalPartymember"></span>
+									        </div>
+
+
+													<div class="info-cell">
+															<label for="">党组织属地关系：</label>
+															<span class="txt" id="DzzsdName"></span>
+													</div>
+
+													<div class="info-cell">
+															<label for="">党支部书记：</label>
+															<span class="txt" id="ZzsjName"></span>
+													</div>
+
+													<div class="info-cell">
+															<label for="">党组织类型：</label>
+															<span class="txt" id="OrgType"></span>
+
+															<select name="interest" lay-filter="aihao">
+																<option  selected="" id="zzlbName" ></option>
+															</select>
+
+													</div>
+													<!-- <div class="info-cell">
+									            <label for="">党员数量(含下级)：</label>
+									            <span class="txt" id="TotalPartymember"></span>
+									        </div> -->
+									       <!-- div class="info-cell fl">
+									            <label for="">下级党组织数量：</label>
+									            <span class="txt" id="SubNodes"></span>
+									        </div> -->
+									        <div class="info-cell cell fullw">
+									            <label for="">党组织简介：</label>
+									            <span class="txt" id="Description">
+
+															</span>
+									        </div>
+									    </div>
+
+									</div>
+									<!--新增搜索框-->
+									<div class="top-search-wrap">
+										<div class="top-search-wrap">
+												<div class="fl">
+													<input type="text" placeholder="请输入党员信息搜索" class="search-input">
+													<input type="button" onclick="searchDy();" value="查询" class="btn">
+												</div>
+											</div>
+									</div>
+
+									<!--新增信息 end-->
+                    <table class="layui-table"  id="demo">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+	<script type="text/html" id="barDemo">
+
+
+		<!-- <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+		 <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+		<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+		-->
+
+	</script>
+
+    <script>
+		sessionStorage.removeItem('tableIndex');
+			var table;
+        layui.use('table', function(){
+          table = layui.table;
+
+					table.init('demo', {
+						height: 315 //设置高度
+						,limit: 10 //注意：请务必确保 limit 参数（默认：10）是与你服务端限定的数据条数一致
+						//支持所有基础参数
+					});
+
+					//监听表格复选框选择
+					table.on('checkbox(demo)', function(obj){
+							// console.log(obj)
+					});
+
+					//监听工具条
+					table.on('tool(demo)', function(obj){
+							var data = obj.data;
+							if(obj.event === 'detail'){
+									layer.msg('ID：'+ data.id + ' 的查看操作');
+							} else if(obj.event === 'del'){
+									layer.confirm('真的删除行么', function(index){
+											obj.del();
+											layer.close(index);
+									});
+							} else if(obj.event === 'edit'){
+									layer.alert('编辑行：<br>'+ JSON.stringify(data))
+							}
+					});
+
+					var $ = layui.$, active = {
+						getCheckData: function(){ //获取选中数据
+								var checkStatus = table.checkStatus('idTest')
+										,data = checkStatus.data;
+								layer.alert(JSON.stringify(data));
+						}
+						,getCheckLength: function(){ //获取选中数目
+								var checkStatus = table.checkStatus('idTest')
+										,data = checkStatus.data;
+								layer.msg('选中了：'+ data.length + ' 个');
+						}
+						,isAll: function(){ //验证是否全选
+								var checkStatus = table.checkStatus('idTest');
+								layer.msg(checkStatus.isAll ? '全选': '未全选')
+						}
+					};
+
+					$('.demoTable .layui-btn').on('click', function(){
+							var type = $(this).data('type');
+							active[type] ? active[type].call(this) : '';
+					});
+				});
+
+		var setting = {
+			check: {
+				enable: false//checkbox
+			},
+			view: {
+				addHoverDom: addHoverDom,
+				removeHoverDom: removeHoverDom,
+				// nameIsHTML: true, //允许name支持html
+				selectedMulti: false
+			},
+			edit: {
+				enable: true,
+				editNameSelectAll: true,
+				showRemoveBtn: showRemoveBtn,
+				showRenameBtn: showRenameBtn
+			},
+			data: {
+				simpleData: {
+					enable: true
+				}
+			},
+			callback: {
+				//单击事件
+				onClick: zTreeOnClick,
+				// onClick: serOnClickDzz,
+				beforeDrag: beforeDrag,
+				beforeEditName: beforeEditName,
+				beforeRemove: beforeRemove,
+				beforeRename: beforeRename,
+				onRemove: onRemove,
+				onRename: onRename
+			}
+		};
+// 			var setting = {
+// // 				check: {
+// // 					enable: true//checkbox
+// // 				},
+// 					view: {
+// 							addHoverDom: addHoverDom,
+// 							removeHoverDom: removeHoverDom,
+// 							//nameIsHTML: true, //允许name支持html
+// 							selectedMulti: false
+// 					},
+// 					edit: {
+// 							enable: true,
+// 							editNameSelectAll: true,
+// 							showRemoveBtn: showRemoveBtn,
+// 							showRenameBtn: showRenameBtn
+// 					},
+// 					data: {
+// 							simpleData: {
+// 									enable: true
+// 							}
+// 					},
+// 					callback: {
+// 							//单击事件
+// 							onClick: zTreeOnClick,
+// 							// onClick: serOnClickDzz,
+// 							beforeDrag: beforeDrag,
+// 							beforeEditName: beforeEditName,
+// 							beforeRemove: beforeRemove,
+// 							beforeRename: beforeRename,
+// 							onRemove: onRemove,
+// 							onRename: onRename
+// 					}
+// 			};
+
+		var zNodes =[];
+		var parents = [];
+		$.ajaxSettings.async = false;//设为同步请求
+		loadSiteList2();
+		//查询党组织  头部
+		function loadSiteList2() {
+			var token = "www.yifarj.com";
+			var produre = "PKG_PHONE.EXESELECT";
+			var operate = "PHONE_PARTY_ORGANIZE_SUMMARY";
+			var modelName = "IFrame.Client.ZiLaiShui.XPhonePartyOrganizeSummary,IFrame.Client.ZiLaiShui";
+			var filter = "";
+			var orderBy = "";
+
+			$.post("https://wx.yifarj.com/zax/yifa.asmx/PhoneFetchList",{
+					'token' : token,
+					'produre' : produre,
+					'operate' : operate,
+					'modelName' : modelName,
+					'filter' : filter,
+					'orderBy' : orderBy
+				},function(data){
+
+				var relust= eval("("+data+")")
+				var Value=relust.Value;
+				// console.log("relust.Value------------------------------");
+				// console.log(relust.Value);
+
+				var k = 0;
+				for(var i=0;i<Value.length;i++){
+					if(
+						Value[i].DjPartyOrganizeId=="20100007" || Value[i].DjPartyOrganizeId=="20100008"  || Value[i].DjPartyOrganizeId=="20100009" ||
+						Value[i].DjPartyOrganizeId=="10100054" || Value[i].DjPartyOrganizeId=="10100055"  || Value[i].DjPartyOrganizeId=="10100056" ||
+						Value[i].DjPartyOrganizeId=="10100061" || Value[i].DjPartyOrganizeId=="10100062"  || Value[i].DjPartyOrganizeId=="10100063" ||
+						Value[i].DjPartyOrganizeId=="10100050" || Value[i].DjPartyOrganizeId=="10100053"  || Value[i].DjPartyOrganizeId=="10100057" ||
+						Value[i].DjPartyOrganizeId=="10100058" || Value[i].DjPartyOrganizeId=="10100059"  || Value[i].DjPartyOrganizeId=="10100060"
+					){
+						// console.log(Value[i].DjPartyOrganizeId);
+						continue;
+					}
+
+					parents[k] = {
+						id:Value[i].DjPartyOrganizeId,
+						name:Value[i].Name
+					};
+
+					zNodes[k]= {
+						id:Value[i].DjPartyOrganizeId,
+						pId:Value[i].DjPartyOrganizePid,
+						name:Value[i].Name,
+						NodePartymember:Value[i].NodePartymember,
+						SubNodes:Value[i].SubNodes,
+						ImageUrl:Value[i].ImageUrl,//图片地址
+						ZzsjName:Value[i].LeaderName,//组织书记
+						ClriqName:Value[i].OrgCreatDate,//成立日期
+						Description:Value[i].Description,//简介
+						Dzzbm:Value[i].OrgCode,//组织编码1
+						DzzsdName:Value[i].OrgAddress,//党组织属地5
+						OrgType:Value[i].OrgType,//党组织类型 3
+						zzlbName:Value[i].OrgClass,//"组织类别",2
+						zzflName:Value[i].OrgSort,//"组织分类",4
+						TotalPartymember:Value[i].TotalPartymember
+						,open:'true'
+					};
+					k++;
+
+// 					if(k==1||k==2||k==3 || k==4 || k==5 ){
+// 							zNodes[k].open = 'true';
+// 					}
+
+				}
+
+			})
+		}
+
+		$.ajaxSettings.async = false;//设为同步请求
+		var className = "dark";
+		var datas=[];
+		var token = "www.yifarj.com";
+		var produre = "PKG_PHONE.EXESELECT";
+		var operate = "PARTYMEMBER_INFO";
+		var modelName = "IFrame.Client.ZiLaiShui.XPhonePartymemberInfo,IFrame.Client.ZiLaiShui";
+		var filter = "";
+		var orderBy = "";
+
+		$.post("https://wx.yifarj.com/zax/yifa.asmx/PhoneFetchList",{
+				'token' : token,
+				'produre' : produre,
+				'operate' : operate,
+				'modelName' : modelName,
+				'filter' : filter,
+				'orderBy' : orderBy
+			},function(data){
+			var relust= eval("("+data+")")
+			var Value=relust.Value;
+
+			for(var i=0;i<Value.length;i++){
+				datas[i]=Value[i];
+			}
+		})
+
+		$.ajaxSettings.async = true;//设为异步请求
+		function isEmptyNull(name) {
+			if(!name || name == undefined || name == null || name == "null"){
+				return true;
+			}else{
+				return false;
+			}
+		}
+
+		//党员信息查询
+		var temDyDatas =[];
+		function searchDy(){
+			var searchStr  = $(".search-input").val();
+
+			var tt =0;
+			for (var i=0;i<datas.length;i++){
+				if (datas[i].Name.indexOf(searchStr) >= 0) {
+					temDyDatas.push(datas[i]);
+				}
+			}
+				// console.log("ttttttttttttttttttttttttttttttttttttttt"+temDyDatas.length);
+				// console.log(temDyDatas);
+				serOnClick();
+				if(temDyDatas.length>0){
+					temDyDatas=[];
+				}
+				searchStr = "";
+				$(".search-input").val("");
+		}
+
+		// 查询人员事件
+		    function serOnClick(event, treeId, treeNode) {
+					var sss=[];
+					var ss=0;
+					for(var i=0;i<temDyDatas.length;i++){
+							sss[ss] = {
+								DjPartyOrganizeName:temDyDatas[i].DjPartyOrganizeName,
+								Name:temDyDatas[i].Name,
+								SexName:temDyDatas[i].SexName,//性别
+								MemberName:temDyDatas[i].MemberName,//党员类别
+								PartyTime:temDyDatas[i].PartyTime,
+								DfQk:"已缴纳",//党费缴纳情况
+								DjEducationName:temDyDatas[i].DjEducationName,//学历
+								DjJobName:temDyDatas[i].DjJobName,
+								PhoneNumber:temDyDatas[i].PhoneNumber
+							};
+							ss++;
+					}
+						//展示已知数据
+						  table.render({
+							elem: '#demo'
+							,height:'full-550'
+							,cols: [[ //标题栏
+								{field: 'DjPartyOrganizeName', title: '党组织', width: '40%', sort: true}
+								,{field: 'Name', title: '姓名', width:'10%'}
+								,{field: 'SexName', title: '性别', width:'8%'}
+								,{field: 'MemberName', title: '党员类型', width:'12%'}
+								,{field: 'PartyTime', title: '入党时间', width:'12%'},
+								,{field: 'DfQk', title: '党费缴纳', width:'8%'}
+								,{field: 'DjEducationName', title: '学历信息', width:'8%'}
+								,{field: 'DjJobName', title: '职业', width:'8%'}
+								,{field: 'PhoneNumber', title: '联系方式', width:'12%'}
+							  // ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:'10%'}
+							]]
+							,data: sss
+							//,skin: 'line' //表格风格
+							,even: true
+							,page: true //是否显示分页
+							,limits: [7, 10, 30]
+							,limit: 7 //每页默认显示的数量
+						  });
+		        }
+
+		//党组织信息查询
+		function searchDzz(){
+			//debugger;
+			var zTree = $.fn.zTree.init($("#organizeTree"), setting, zNodes);
+			fuzzySearch('organizeTree','#searchDzzName',null,true); //初始化模糊搜索方法
+
+
+		}
+
+
+//
+// 		//查询党组织事件 展示
+// 		function serOnClickDzz(event, treeId,treeNode) {
+// 			var sss=[];
+// 			var ss=0;
+// 			for(var i=0;i<temDzzDatas.length;i++){
+// // 				parents[i] = {
+// // 					id:temDzzDatas[i].DjPartyOrganizeId,
+// // 					name:temDzzDatas[i].Name
+// // 				};
+// //
+// var zTree = $.fn.zTree.getZTreeObj("organizeTree");
+// zTree.expandNode(treeNode);
+// 				zNodes[i]= {
+// 					id:temDzzDatas[i].DjPartyOrganizeId,
+// 					pId:temDzzDatas[i].DjPartyOrganizePid,
+// 					name:temDzzDatas[i].Name,
+// 					NodePartymember:temDzzDatas[i].NodePartymember,
+// 					SubNodes:temDzzDatas[i].SubNodes,
+// 					ImageUrl:temDzzDatas[i].ImageUrl,//图片地址
+// 					ZzsjName:temDzzDatas[i].LeaderName,//组织书记
+// 					ClriqName:temDzzDatas[i].OrgCreatDate,//成立日期
+// 					Description:temDzzDatas[i].Description,//简介
+// 					Dzzbm:temDzzDatas[i].OrgCode,//组织编码1
+// 					DzzsdName:temDzzDatas[i].OrgAddress,//党组织属地5
+// 					// sjName:"", OrgType
+// 					OrgType:temDzzDatas[i].OrgType,//党组织类型 3
+// 					zzlbName:temDzzDatas[i].OrgClass,//"组织类别",2
+// 					zzflName:temDzzDatas[i].OrgSort,//"组织分类",4
+//
+// 					TotalPartymember:temDzzDatas[i].TotalPartymember
+// 				};
+// 				if(i==0){
+// 					zNodes[i].open = 'true';
+// 				}
+// 			}
+// 		}
+
+		// 单击事件
+    function zTreeOnClick(event, treeId, treeNode) {
+			$.fn.zTree.init($("#organizeTree"), setting, zNodes);
+			var zTree = $.fn.zTree.getZTreeObj("organizeTree");
+			fuzzySearch('organizeTree','#searchDzz',null,true); //初始化模糊搜索方法
+
+			zTree.expandNode(treeNode);
+			$("#DjPartyOrganizePid").html(treeNode.DjPartyOrganizePid);
+
+			if(!isEmptyNull(treeNode.pId)){
+				for(var i=0;i<parents.length;i++){
+					var parentStr = "中共经济开发区工作委员会";
+					if(treeNode.pId == parents[i].id){
+						if(parents[i].name == "A类示范类" || parents[i].name == "B类稳健类" ||
+						parents[i].name == "非公企业党组织" || parents[i].name == "C类成长类" ||
+						parents[i].name == "D类孵化类" || parents[i].name == "村党组织" ||
+						parents[i].name == "机关党组织" || parents[i].name == "社区党组织" ){
+							$("#sjName").html(parentStr);
+						}else{
+							$("#sjName").html(parents[i].name);
+						}
+					}
+				}
+			}else{
+				$("#sjName").html("无");
+			}
+			$("#Name").html(treeNode.name);
+			$("#SubNodes").html(treeNode.SubNodes);
+			$("#NodePartymember").html(treeNode.NodePartymember);
+			$("#TotalPartymember").html(treeNode.TotalPartymember);
+			if(treeNode.NodePartymember > 0){
+				for (var ij =0 ;ij < treeNode.NodePartymember;ij ++){
+
+				}
+			}
+			$("#XhId").html(treeNode.OrgType);
+
+			$("#OrgType").html(treeNode.OrgType);
+			$("#ClriqName").html(treeNode.ClriqName);
+			$("#sjName").html(treeNode.sjName);//上级党组名称
+			$("#zzlbName").html(treeNode.zzlbName);//组织类别
+			$("#zzflName").html(treeNode.zzflName);//组织分类
+
+			$("#Dzzbm").html(treeNode.Dzzbm);//党组织编码
+			$("#ZzsjName").html(treeNode.ZzsjName);//组织书记
+			$("#DzzsdName").html(treeNode.DzzsdName);//党组织属地
+			$("#Description").html(treeNode.Description);//简介
+			var tImg = "https://dj.yifarj.com/hfzax/"+treeNode.ImageUrl;
+			$("#zImg").attr("src",tImg );//组织图片
+
+			var sss=[];
+			var ss=0;
+			for(var i=0;i<datas.length;i++){
+				if(treeNode.id==datas[i].DjPartyOrganizeId){
+					sss[ss] = {
+						DjPartyOrganizeName:datas[i].DjPartyOrganizeName,
+						Name:datas[i].Name,
+						PhoneNumber:datas[i].PhoneNumber,
+						MemberName:datas[i].MemberName,//党员类别
+						DjJobName:datas[i].DjJobName,
+						DjEducationName:datas[i].DjEducationName,//学历
+						SexName:datas[i].SexName,//性别
+						ZzsjName:datas[i].LeaderName,//组织书记
+						ClriqName:datas[i].OrgCreatDate,//成立日期
+						Description:datas[i].Description,//组织简介
+						Dzzbm:"222",//党组织编码
+						DfQk:"已缴纳",//党费缴纳情况
+						DzzsdName:"2",
+						PartyTime:datas[i].PartyTime
+					};
+					ss++;
+				}
+
+			}
+
+				//展示已知数据
+				  table.render({
+					elem: '#demo'
+					,height:'full-550'
+					,cols: [[ //标题栏
+					  {field: 'DjPartyOrganizeName', title: '党组织', width: '20%'}
+/* 					  ,{field: 'Name', title: '用户姓名', width: 100}
+					  ,{field: 'PhoneNumber', title: '手机号', width: 130}
+					  ,{field: 'DjJobName', title: '人员类别', width: 100}
+					  ,{field: 'PartyTime', title: '入党时间', width: 130} */
+						// {field: 'DjPartyOrganizeName', title: '党组织', width:'30%'},
+						// ,{field: 'XhId', title: '序号', width:'10%'}
+						,{field: 'Name', title: '姓名', width:'10%'}
+						,{field: 'SexName', title: '性别', width:'8%'}
+						,{field: 'MemberName', title: '党员类型', width:'12%'}
+						,{field: 'PartyTime', title: '入党时间', width:'12%'},
+						,{field: 'DfQk', title: '党费缴纳', width:'8%'}
+						,{field: 'DjEducationName', title: '学历信息', width:'8%'}
+						,{field: 'DjJobName', title: '职业', width:'8%'}
+						,{field: 'PhoneNumber', title: '联系方式', width:'12%'}
+					  // ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:'10%'}
+					]]
+					,data: sss
+					//,skin: 'line' //表格风格
+					,even: true
+					,page: true //是否显示分页
+					,limits: [7, 10, 30]
+					,limit: 7 //每页默认显示的数量
+				  });
+        }
+
+		//初始化时
+		function zTreeOnClick1() {
+			var sss=[];
+			var ss=0;
+			for(var i=0;i<datas.length;i++){
+					sss[ss] = {
+						DjPartyOrganizeName:datas[i].DjPartyOrganizeName,
+						Name:datas[i].Name,
+						PhoneNumber:datas[i].PhoneNumber,
+						MemberName:datas[i].MemberName,//党员类别
+						DjJobName:datas[i].DjJobName,
+						DjEducationName:datas[i].DjEducationName,//学历
+						SexName:datas[i].SexName,//性别
+						DfQk:"已缴纳",//党费缴纳情况
+						Dzzbm:"1111",//党组织编码
+						DzzsdName:"1",
+						PartyTime:datas[i].PartyTime
+					};
+					ss++;
+			}
+			//展示已知数据
+				  table.render({
+					elem: '#demo'
+					,height:'full-550'
+					,cols: [[ //标题栏
+					  {field: 'DjPartyOrganizeName', title: '党组织', width:'20%'}
+					  ,{field: 'Name', title: '用户姓名', width:'10%'},
+						,{field: 'SexName', title: '性别', width:'8%'}
+						,{field: 'PartyTime', title: '入党时间', width:'12%'}
+						,{field: 'DfQk', title: '党费缴纳', width:'8%'}
+					  ,{field: 'MemberName', title: '类别', width:'12%'}
+						,{field: 'DjJobName', title: '人员类别', width:'8%'}
+						,{field: 'DjEducationName', title: '学历', width:'8%'},
+					  ,{field: 'PhoneNumber', title: '联系方式', width:'12%'}
+
+					  // ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:'10%'}
+					]]
+					,data: sss
+					//,skin: 'line' //表格风格
+					,even: true
+					,page: true //是否显示分页
+					,limits: [7, 10, 30]
+					,limit: 7 //每页默认显示的数量
+				  });
+			}
+
+		function beforeDrag(treeId, treeNodes) {
+				return false;
+		}
+
+		function beforeEditName(treeId, treeNode) {
+				className = (className === "dark" ? "":"dark");
+				var zTree = $.fn.zTree.getZTreeObj("organizeTree");
+				zTree.selectNode(treeNode);
+				setTimeout(function() {
+						if (confirm("进入节点 -- " + treeNode.name + " 的编辑状态吗？")) {
+								setTimeout(function() {
+										zTree.editName(treeNode);
+								}, 0);
+						}
+				}, 0);
+				return false;
+		}
+
+		function beforeRemove(treeId, treeNode) {
+				className = (className === "dark" ? "":"dark");
+				var zTree = $.fn.zTree.getZTreeObj("organizeTree");
+				zTree.selectNode(treeNode);
+				return confirm("确认删除 节点 -- " + treeNode.name + " 吗？");
+		}
+
+		function onRemove(e, treeId, treeNode) {
+				showLog("[ "+getTime()+" onRemove ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name);
+		}
+
+		function beforeRename(treeId, treeNode, newName, isCancel) {
+				className = (className === "dark" ? "":"dark");
+				if (newName.length == 0) {
+						setTimeout(function() {
+								var zTree = $.fn.zTree.getZTreeObj("organizeTree");
+								zTree.cancelEditName();
+								alert("节点名称不能为空.");
+						}, 0);
+						return false;
+				}
+				return true;
+		}
+
+		function onRename(e, treeId, treeNode, isCancel) {
+				return true;
+		}
+
+		function showRemoveBtn(treeId, treeNode) {
+				return true;
+		}
+
+		function showRenameBtn(treeId, treeNode) {
+				return true;
+		}
+
+		var newCount = 1;
+		function addHoverDom(treeId, treeNode) {
+				var sObj = $("#" + treeNode.tId + "_span");
+				if (treeNode.editNameFlag || $("#addBtn_"+treeNode.tId).length>0) return;
+				var addStr = "<span class='button add' id='addBtn_" + treeNode.tId
+						+ "' title='add node' onfocus='this.blur();'></span>";
+				sObj.after(addStr);
+				var btn = $("#addBtn_"+treeNode.tId);
+				if (btn) btn.bind("click", function(){
+						var zTree = $.fn.zTree.getZTreeObj("organizeTree");
+						zTree.addNodes(treeNode, {id:(100 + newCount), pId:treeNode.id, name:"new node" + (newCount++)});
+						return false;
+				});
+		};
+
+		function removeHoverDom(treeId, treeNode) {
+				$("#addBtn_"+treeNode.tId).unbind().remove();
+		};
+
+		function selectAll() {
+				var zTree = $.fn.zTree.getZTreeObj("organizeTree");
+				zTree.setting.edit.editNameSelectAll =  $("#selectAll").attr("checked");
+		}
+
+		$(document).ready(function(){
+
+		$.fn.zTree.init($("#organizeTree"), setting, zNodes);
+		fuzzySearch('organizeTree','#key',null,true); //初始化模糊搜索方法
+
+
+// 				$.fn.zTree.init($("#organizeTree"), setting, zNodes);
+// 				$("#selectAll").bind("click", selectAll);
+				zTreeOnClick1();
+		});
+
+  </script>
+
+	<script type="text/javascript" src="js/vue.min.js"></script>
+	<script type="text/javascript" src="organization.js"></script>
+
+
+</body>
+</html>

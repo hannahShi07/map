@@ -1,0 +1,125 @@
+.txt-oneline{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+/*文字两行超出省略*/
+.text-twoline {
+    overflow:hidden;
+    text-overflow:ellipsis;
+    display:-webkit-box;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:2;
+}
+.nav-box{
+    width: 100%;
+    height: 60px;
+    background:rgba(237,60,60,1);
+    display: inline-flex;
+    flex-direction: row;
+}
+.nav-box .logo{
+    float: none;
+    height: auto;
+    width: 464px;
+    display: flex;
+    align-items: center;
+}
+.nav-box .logo img {
+    float: left;
+    width: 36px;
+    height: 36px;
+    padding: 12px 0px 12px 30px;
+}
+.nav-box .logo_name{
+    width: fit-content;
+    height:24px;
+    font-size:18px;
+    line-height:24px;
+    padding: 18px 0px;
+    color:rgba(255,255,255,1);
+}
+.nav-box  .menubox{
+    height: 60px;
+    width: 70%;
+    min-width: 700px;
+    background: rgba(237,60,60,1);
+}
+.nav-box  .menubox ul{
+    display: flex;
+    font-size: 14px;
+    font-weight: bold;
+    color: #FFFFFF;
+    height: 60px;
+}
+.nav-box  .menubox ul li{
+    width: 75px;
+    height: 20px;
+    padding: 20px 10px;
+    text-align: center;
+    cursor: pointer;
+}
+.nav-box  .menubox ul li.actived{
+    background: #FFDE00;
+    color: #ED3C3C;
+}
+.nav-box .serviceplatef{
+    top: 0px;
+    color: #FFFFFF;
+    font-size: 12px;
+    height: 60px;
+    line-height: 60px;
+    right: 42px;
+}
+.fullSlide{
+    /*height: 400px;*/
+}
+.tabBox .news-header{
+    height: 24px;
+    left: 24px;
+    font-size: 18px;
+    color: #ED3C3C;
+    font-weight: bold;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #E1E1E1;
+    display: flex;
+    align-items: center
+}
+.tabBox .news-header img{
+    align-items: center
+}
+.tabBox .news-header .news-title{
+    padding-left: 6px;
+    cursor: pointer;
+}
+.tabBox .news-header .right_link{
+    justify-content: flex-end;
+    margin-left: auto;
+    font-size: 14px;
+    font-weight: 400;
+    color: #999999;
+}
+.tabBox .news_li i{
+    border-radius: 50%;
+}
+.swiper-button-next, .swiper-button-prev{
+    width: 28px;
+    height: 28px;
+    background-size: 28px 28px;
+}
+.friendlylink-box .tp_imglist ul li img, .friendlylink-box .tp_imglist ul li{
+    height: 80px!important;
+}
+.tp_imglist ul li img{
+    height: 120px!important;
+}
+.foot{
+    height: 80px;
+    line-height: 80px;
+}
+.foot span{
+    display: inline-block;
+}
+.container{
+    min-height: calc(100vh - 80px);;
+}

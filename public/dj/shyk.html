@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+			<meta charset="UTF-8">
+			<script></script>
+			<title>三会一课</title>
+			<link rel="stylesheet" href="layui/css/layui.css"  media="all">
+			<link rel="stylesheet" href="css/zTreeStyle/zTreeStyle.css" type="text/css">
+			<link rel="stylesheet" href="css/plateform.css">
+			<style type="text/css">
+					.ztree li span.button.add {margin-left:2px; margin-right: -1px; background-position:-144px 0; vertical-align:top; *vertical-align:middle}
+
+					.box {
+							position: absolute;
+							padding-top: 8px;
+							z-index: 9999;
+					}
+
+					.box .con {
+							float: left;
+							width: 520px;
+							border: 1px #c5c5c5 solid;
+							border-radius: 5px;
+							background-color: #fff;
+							z-index: 999999999;
+							padding: 10px 15px;
+							color: #333;
+					}
+
+					.box .top_site {
+							border-bottom: 1px solid #c5c5c5;
+							padding-bottom: 5px;
+							line-height: 50px;
+
+					}
+
+					.box .con-ret {
+							border: 10px solid transparent;
+							border-bottom-color: #c5c5c5;
+							position: absolute;
+							left: 30px;
+							top: -12px;
+					}
+
+					/* 白色覆盖*/
+
+					.box .triangle {
+							border: 10px solid transparent;
+							border-bottom-color: #fff;
+							position: absolute;
+							left: 30px;
+							top: -11px;
+					}
+
+					.box .cur_site {
+							background-color: #ffebee;
+							padding: 3px 8px;
+							color: #e44142;
+					}
+
+					.box .common_site {
+							padding-right: 30px;
+					}
+
+					.box .sub_site_list span {
+							padding-right: 20px;
+							display: block;
+							float: left;
+					}
+
+					.banner {
+							z-index: -1;
+					}
+
+					.char {
+							text-align: center;
+							margin-right: 7px;
+							margin-top: 7px;
+							float: left;
+							width: 30px;
+							height: 30px;
+							line-height: 30px;
+							background-color: #f0f0f0;
+							padding: 0px;
+					}
+
+					.bigchar {
+							text-align: center;
+							margin-right: 7px;
+							margin-top: 7px;
+							float: left;
+							width: 67px;
+							height: 30px;
+							line-height: 30px;
+							background-color: #f0f0f0;
+							padding: 0px;
+					}
+
+					.idea_tu img {
+							width: 240px;
+					}
+
+					.color_red {
+							color: #e40b18;
+					}
+
+					.special_col .tit {
+							height: 42px;
+							border-bottom: 1px solid #eee;
+							line-height: 30px;
+							font-size: 16px;
+					}
+
+					.special_col .cont a {
+							width: 268px;
+							height: 110px;
+							margin-top: 15px;
+							display: block;
+					}
+
+					.news_li1 {
+							line-height: 22px;
+							position: relative;
+							padding-left: 30px;
+							font-size: 14px;
+							margin: 15px 0;
+							border-bottom: 1px dotted #eee;
+							padding-bottom: 10px;
+					}
+
+					.news_li1 i {
+							background: #ff6d76;
+							width: 15px;
+							height: 15px;
+							display: inline-block;
+							position: absolute;
+							left: 0px;
+							top: 6px;
+							font-style: normal;
+							font-size: 12px;
+							color: #fff;
+							text-align: center;
+							line-height: 15px;
+					}
+
+					.news_li1 span {
+							position: absolute;
+							right: 0;
+							top: 0;
+							font-size: 12px;
+							color: #999;
+							width: 40px;
+					}
+
+					.logo {
+							width: 600px;
+					}
+
+					.logo_name {
+							font-size: 26px;
+					}
+
+					.morename {
+							font-size: 25px;
+							line-height: 40px;
+							word-wrap: break-word;
+							width: 329px;
+							padding-top: 10px;
+					}
+					/*文字两行超出省略*/
+					.text-twoline {
+							overflow:hidden;
+							text-overflow:ellipsis;
+							display:-webkit-box;
+							-webkit-box-orient:vertical;
+							-webkit-line-clamp:2;
+					}
+					[v-cloak]{display:none}
+			</style>
+
+			<script src="js/jquery.js"></script>
+
+			<script src="layui/layui.js"></script>
+			<script src="js/jquery.ztree.core.js"></script>
+		<!-- <script type="text/javascript" src="js/jquery.ztree.excheck.js"></script> -->
+			<script type="text/javascript" src="js/jquery.ztree.exhide.js"></script>
+			<script type="text/javascript" src="js/fuzzysearch.js"></script>
+		<script src="js/common.js" type="text/javascript"></script>
+	</head>
+	<body>
+		<div class="container" style="overflow-x: hidden">
+			<div class="headbox">
+					<div class="header">
+							<div class="logo"><img src="images/logo.png">
+									<div class="logo_name" style="padding-left: 5px;">经济开发区非公企业智慧党建平台</div>
+							</div>
+							<!--新增数据平台入口-->
+							<div href="org.html" class="serviceplatef organizeico"  target="_blank">
+									<img src="images/human.png" alt="">
+									<p class="txt">系统管理员</p>
+							</div>
+							<a href="index.html" class="serviceplatef" target="_blank" style="right: -180px;">
+									<!-- <img src="images/dataservice.png" alt=""> -->
+									<p class="txt">返回党建门户首页</p>
+							</a>
+					</div>
+			</div>
+			<div class="menubox">
+					<div class="menu">
+							<dl class="sev" style="z-index:1000">
+									<dd><a href="org.html" target="_blank" >党组织</a>
+											<div class="sec_nav dpnone"></div>
+									</dd>
+									<dd><a href="shyk.html" target="_blank" >三会一课</a>
+											<div class="sec_nav dpnone"></div>
+									</dd>
+
+									<dd><a href="plateform.html" target="_blank" >大数据服务</a>
+											<div class="sec_nav dpnone"></div>
+									</dd>
+									<!-- <dd><a href="#"  @click="lookDetail('tzgg.html','111','1','10','4','0')" >工作动态</a>
+											<div class="sec_nav dpnone"></div>
+									</dd>
+									<dd><a href="#" @click="lookDetail('tzgg.html','112','1','10','5','0')">基层党建</a>
+											<div class="sec_nav dpnone"></div>
+									</dd>
+									<dd><a href=""  @click="lookDetail('tzgg.html','131','1','10','6','0')">先锋模范</a>
+											<div class="sec_nav dpnone"></div>
+									</dd>
+									<dd><a href="" @click="lookDetail('tzgg.html','115','1','10','7','0')">政策文件</a>
+											<div class="sec_nav dpnone"></div>
+									</dd>
+									<dd class="last" ><a href="#" @click="lookDetail('tzgg.html','115','1','10','8','0')" >特色</a>
+									</dd> -->
+							</dl>
+					</div>
+			</div>
+			<div class="organization-wrap">
+				<div class="left-tree">
+					<div class="search-block">
+						<li>
+							<br/>
+							查询：<input type="text" placeholder="请输入关键词搜索" id="key" value="" class="empty" />
+							<!-- <p>根据属性值搜索：<input type="text" id="key" value="" class="empty" /><br/> -->
+						</li>
+					</div>
+					<div class="innerblock">
+						<ul id="treeDemo" class="ztree" style="width:100%; overflow-x:hidden;overflow-y: auto"></ul>
+					</div>
+				</div>
+				<div class="right-con">
+					<div class="innerblock">
+							<table class="layui-table"  id="shyk" >
+							<div class="sx-top-tit" >
+									<h2>三会一课 学习内容</h2>
+							</div>
+									<p><br/>
+									<p><br/>
+							<!--新增搜索框-->
+							<div class="top-search-wrap">
+									<div class="fl">
+											<span class="txt" id="ZzName">中共经济开发区工作委员会</span>
+											<span class="txt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+									</div>
+									<div class="top-search-wrap">
+											<input id="search-input" type="text" placeholder="请输入关键词搜索" class="search-input">
+											<input type="button"  onclick="searchNews()" value="查询" class="btn"/>
+									</div>
+									<div>
+										<table class="layui-hide" id="demo" lay-filter="demo"></table>
+									</div>
+							</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+
+		<script>
+			//请求树数据header
+			var treeheader = {
+        token:"www.yifarj.com"
+        ,produre:"PKG_PHONE.EXESELECT"
+        ,operate:"PHONE_PARTY_ORGANIZE_SUMMARY"
+        ,modelName:"IFrame.Client.ZiLaiShui.XPhonePartyOrganizeSummary,IFrame.Client.ZiLaiShui"
+        ,filter:""
+        ,orderBy:""
+			}
+
+    //请求三会一课列表
+    var shyk = {
+     token:"www.yifarj.com",
+     produre:"PKG_WX.EXESELECT",
+     operate:"PHONE_SYSTEM",
+     modelName:"IFrame.Client.ZiLaiShui.XPhoneSystem,IFrame.Client.ZiLaiShui",
+     filter:"T.SYSTEM_TYPE=3 AND T.DJ_SYSTEM_TYPE_ID=1010010",// AND T.dj_party_organize_id = 党组织id
+     orderBy:"T.RELEASE_DATE DESC",
+     pageIndex:1,
+     pageSize:100
+    }
+
+			//请求三会一课内容
+			var shykCon ={
+				token:"www.yifarj.com",
+				produre:"PKG_WX.EXESELECT",
+				operate:"PHONE_SYSTEM_FILE0000000",
+				modelName:"IFrame.Client.ZiLaiShui.EPhoneSystemFile,IFrame.Client.ZiLaiShui",
+				filter:" T.DJ_SYSTEM_ID=",// 1010237(文件主键id  DjSystemId)
+				orderBy:"",
+			}
+
+
+
+
+    layui.use(['jquery','layer','table'],()=>{
+	var resudata ;
+        var $ = layui.jquery,layer = layui.layer,table = layui.table
+        //树的数据
+        var zNodes = [];
+        //树设置
+        var newshyk={
+            inittree(zNodes){
+                $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+                fuzzySearch('treeDemo','#key',null,true); //初始化模糊搜索方法
+            }
+        }
+        //初始化树 组织机构
+        $.post("https://wx.yifarj.com/zax/yifa.asmx/PhoneFetchList",{
+            'token' : treeheader.token,
+            'produre' : treeheader.produre,
+            'operate' : treeheader.operate,
+            'modelName' : treeheader.modelName,
+            'filter' : treeheader.filter,
+            'orderBy' : treeheader.orderBy
+        },function(data){
+            var relust= eval("("+data+")")
+            var Value=relust.Value;
+            // console.log(Value)
+						var j = 0;
+            for(var i=0;i<Value.length;i++){
+							if(
+								Value[i].DjPartyOrganizeId=="20100007" || Value[i].DjPartyOrganizeId=="20100008"  || Value[i].DjPartyOrganizeId=="20100009" ||
+								Value[i].DjPartyOrganizeId=="10100054" || Value[i].DjPartyOrganizeId=="10100055"  || Value[i].DjPartyOrganizeId=="10100056" ||
+								Value[i].DjPartyOrganizeId=="10100061" || Value[i].DjPartyOrganizeId=="10100062"  || Value[i].DjPartyOrganizeId=="10100063" ||
+								Value[i].DjPartyOrganizeId=="10100050" || Value[i].DjPartyOrganizeId=="10100053"  || Value[i].DjPartyOrganizeId=="10100057" ||
+								Value[i].DjPartyOrganizeId=="10100058" || Value[i].DjPartyOrganizeId=="10100059"  || Value[i].DjPartyOrganizeId=="10100060"
+							){
+								continue;
+							}
+
+                zNodes[j]= {
+                    id:Value[i].DjPartyOrganizeId,
+                    pId:Value[i].DjPartyOrganizePid,
+                    name:Value[i].Name
+					,open:'true'
+                };
+								j++;
+
+//                 if(i==0 || i==1 || i==2 || i==3 || i==6 || i==5 || i==7 ){
+//                     zNodes[i].open = 'true';
+//                 }
+
+            }
+            //初始化树
+            newshyk.inittree(zNodes);
+        });
+        //初始化 表格
+        //解析列表数据
+        var initsxyk =(e)=>{
+            if(e!=null && e != ''){
+                shyk.filter =  shyk.filter +" AND T.dj_party_organize_id ="+e
+            }
+            // console.log(shyk.filter)
+            $.post("https://wx.yifarj.com/zax/yifa.asmx/PhoneFetchPageList",{
+                'token' : shyk.token,
+                'produre' : shyk.produre,
+                'operate' : shyk.operate,
+                'modelName' : shyk.modelName,
+                'filter' : shyk.filter,
+                'orderBy' : shyk.orderBy,
+                'pageIndex': shyk.pageIndex,
+                'pageSize': shyk.pageSize
+            },function(data){
+                var data = jx(JSON.parse(data).Value)
+                // console.log(data)
+                tarbleview(data)
+				resudata = data;
+                shyk.filter ="T.SYSTEM_TYPE=3 AND T.DJ_SYSTEM_TYPE_ID=1010010";
+
+            })
+        }
+        //第一次初始化渲染
+        initsxyk();
+        table.on('rowDouble(demo)', function(obj){//单击 row(test)
+            // alert((obj.data.id))
+            // console.log(obj.tr) //得到当前行元素对象
+            // console.log(obj.data) //得到当前行数据
+            //obj.del(); //删除当前行
+            //obj.update(fields) //修改当前行数据
+						initshykCon(obj.data.id)
+        });
+				// 解析 征文内容
+				var initshykCon =(e)=>{
+					if(e!=null && e != ''){
+							shykCon.filter =  shykCon.filter +e
+							// alert(e);
+					}
+					console.log("111111111111111111111"+shykCon.filter)
+					$.post("https://wx.yifarj.com/zax/yifa.asmx/PhoneSingleSystem",{
+							'token' : shykCon.token,
+							'produre' : shykCon.produre,
+							'operate' : shykCon.operate,
+							'modelName' : shykCon.modelName,
+							'filter' : shykCon.filter,
+							'orderBy' : shykCon.orderBy
+					},function(data){
+						//Content
+						// var relust= eval("("+data+")")
+							var contents =JSON.parse(data).Value.Content ;
+						if (contents == null  ){
+							layer.msg('暂无正文内容');
+						}else{
+						layer.open({
+								type:0
+								,title: '正文内容'
+								,area: ['800px', '600px']
+								,content:  contents
+							});
+						}
+						shykCon.filter = " T.DJ_SYSTEM_ID=";
+					})
+				}
+
+        var tarbleview = (data)=>{
+            table.render({
+                elem: '#demo'
+                ,cols: [[ //标题栏
+//                    {field: 'id', title: 'ID', width: '5%', sort: true},
+                    {field: 'Name', title: '会议主题/名称', width: '25%'}
+                    ,{field: 'LeiXing', title: '类型', width: '12%'}
+                    ,{field: 'Time', title: '时间', width: '15%'}
+										,{field: 'DiDian', title: '地点', width: '13%'}
+                    ,{field: 'Zxr', title: '主持人', width: '10%'}
+                    ,{field: 'cyrs', title: '人数', width: '5%'}
+                    ,{field: 'cyry', title: '人员', width: '15%'}
+                ]]
+                ,data:data
+                ,page: true
+        })}
+
+        //解析数据
+        var jx =(e)=>{
+            var f = 0;
+            var k = [];
+            for(var i=0;i<e.length;i++){
+                var result = e[i].Description.split("：");
+                var  index = -1;
+                var  index1 = -1;
+                var  index2 = -1;
+                var  index3 = -1;
+                var  index4 = -1;
+                var  index5 = -1;
+                for(var j=0;j<result.length;j++){
+                    if(result[j].indexOf("类型")!=-1){
+                        index = j;
+                    }
+                    if(result[j].indexOf("主持人")!=-1){
+                        index1 = j;
+                    }if(result[j].indexOf("时间")!=-1){
+                        index2 = j;
+                    }
+                    if(result[j].indexOf("地点")!=-1){
+                        index3 = j;
+                    }
+                    if(result[j].indexOf("人员")!=-1){
+                        index4 = j;
+                    }
+                    if(result[j].indexOf("人数")!=-1){
+                        index5 = j;
+                    }
+                }
+                var Name = "";
+                if(index != -1){
+                    Name = result[index].substring(0,result[index].length-2);
+                }
+                var LeiXing = "";
+                if(index1 != -1){
+                    LeiXing = result[index1].substring(0,result[index1].length-3);
+                }
+                var Zxr = "";
+                if(index2 != -1){
+                    Zxr = result[index2].substring(0,result[index2].length-2);
+                }
+                var Time = "";
+                if(index3 != -1){
+                    Time = result[index3].substring(0,result[index3].length-2);
+										if(Time.indexOf("-")<0){
+											Time = "";
+										}
+                }
+                var DiDian = "";
+                if(index4 != -1){
+                    DiDian = result[index4].substring(0,result[index4].length-4);
+                }
+                var cyry = "";
+                if(index5 != -1){
+                    cyry = result[index5].substring(0,result[index5].length-2);
+                }
+                var cyrs = "";
+                if(index5 != -1){
+                    cyrs = result[index5+1];
+                }
+                k[f] = {
+                    Name:Name,
+                    LeiXing:LeiXing,
+                    Zxr:Zxr,
+                    Time:Time,
+                    DiDian:DiDian,
+                    cyry:cyry,
+                    cyrs:cyrs,
+                    id:e[i].DjSystemId,
+                    ReleaseDate:e[i].ReleaseDate,
+                   Description:e[i].Description
+                };
+            f++;
+            }
+        return k;
+        }
+var tempDatas=[];
+
+
+
+
+$(".btn").click(function(){
+  // debugger;
+					var searchStr  = $("#search-input").val();
+					console.log(searchStr)
+					// var searchStr ="不忘初心 牢记使命";
+					// var type = $(this).data('searchStr');
+
+					var tt =0;
+					for (var i=0;i<resudata.length;i++){
+						if (resudata[i].Description.indexOf(searchStr) >= 0) {
+							tempDatas.push(resudata[i]);
+						}
+					}
+							// console.log("ttttttttttttttttttttttttttttttttttttttt"+tempDatas.length);
+						// console.log(tempDatas);
+
+						if(tempDatas.length>0){
+tarbleview(tempDatas);
+
+						}else{tempDatas=[];}
+
+						console.log(tempDatas);
+						searchStr = "";
+						$("#search-input").val("");
+});
+
+	//左侧树点击事件
+	var zTreeOnClick =(event, treeId, treeNode)=>{
+
+			var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+			zTree.expandNode(treeNode);
+			initsxyk(treeNode.id);
+			document.getElementById("ZzName").innerHTML=treeNode.name;
+
+
+	}
+
+        var setting = {
+            check: {
+                enable: false//checkbox
+            },
+            view: {
+                nameIsHTML: true, //允许name支持html
+                selectedMulti: false
+            },
+            edit: {
+                enable: false,
+                editNameSelectAll: false
+            },
+            data: {
+                simpleData: {
+                    enable: true
+                }
+            },
+            callback: {
+                //单击事件
+                onClick: zTreeOnClick
+            }
+        };
+
+
+    })
+
+
+
+    // var zNodes =[
+    //     { id:1, pId:0, name:"模糊搜索演示 1", t:"id=1", open:true},
+    //     { id:11, pId:1, name:"[]\\^$.|?*+():关键字可以是js正则元字符", t:"id=11"},
+    //     { id:12, pId:1, name:"{}<>'\"~`!@#%&-;:/,=:关键字可以是其他字符", t:"id=12"},
+    //     { id:2, pId:0, name:"模糊搜索演示 2", t:"id=2", open:true},
+    //     { id:21, pId:2, name:"大写ABDEFGHINQRT:关键字查找不区分大小写", t:"id=21"},
+    //     { id:22, pId:2, name:"小写abdefghinqrt:关键字查找不区分大小写", t:"id=21"},
+    //     { id:3, pId:0, name:"模糊搜索演示 3", t:"id=3", open:true },
+    //     { id:31, pId:3, name:"空 格:关键字是空格", t:"id=31"}
+    // ];
+
+
+
+</script>
+
+
+
+</html>

@@ -1,0 +1,139 @@
+.title-bar{
+  padding:14px 0 14px 0px;
+  margin-bottom:20px;
+  background: #fff;
+  width: calc(100%);
+  height: auto !important;
+  margin-left: 0;
+  border-radius: 4px;
+}
+
+.logo-button {
+  width: 55px;
+  height: 24px;
+  background: #3D9EFF;
+  opacity: 0.1;
+  border-radius: 194px;
+  position: relative;
+  //margin-left: 20px;
+  margin-right: 15px;
+}
+.logo-nobutton {
+  width: 68px;
+  height: 24px;
+  background: #ED3C3C;
+  opacity: 0.1;
+  border-radius: 194px;
+  position: relative;
+  //margin-left: 20px;
+  margin-right: 15px;
+}
+.logo-staybutton{
+  width: 68px;
+  height: 24px;
+  background: #FC5921;
+  opacity: 0.1;
+  border-radius: 194px;
+  position: relative;
+  //margin-left: 20px;
+  margin-right: 15px;
+}
+.logo-text{
+  font-size: 14px;
+  font-family: Microsoft YaHei;
+  font-weight: 400;
+  line-height: 19px;
+  color: #3D9EFF;
+  position: absolute;
+  left: 33px;
+}
+.logo-notext{
+  font-size: 14px;
+  font-family: Microsoft YaHei;
+  font-weight: 400;
+  line-height: 19px;
+  color: #ED3C3C;
+  position: absolute;
+  left: 33px;
+}
+.logo-staytext{
+  font-size: 14px;
+  font-family: Microsoft YaHei;
+  font-weight: 400;
+  line-height: 19px;
+  color: #FC5921;
+  position: absolute;
+  left: 33px;
+}
+
+.title-bar .logotxt{
+  margin-bottom: 20px;
+  display:flex;
+  padding-left: 20px;
+  align-items:center;
+  line-height:36px;
+  font-size: 16px;
+  color: #7D7D7D;
+}
+.title-bar .logotxt sapn{
+  font-size: 20px;
+  font-family: Microsoft YaHei;
+  font-weight: bold;
+  line-height: 26px;
+  color: #666666;
+}
+
+.label-txt {
+  font-size: 14px;
+  color: #888;
+  font-weight: 400;
+}
+
+.el-radio-group{
+  margin-left: 20px;
+}
+.clearfloat{
+  border-top: 1px solid #EEEEEE;
+  clear:both;
+  //display: flex;
+  line-height: 20px;
+  text-align: left;
+  //height: 36px;
+  position: relative;
+  padding: 10px 10px 10px 20px;
+  font-size: 14px;
+  font-family: Microsoft YaHei;
+  font-weight: 400;
+  color: #555555;
+}
+.base-card-box .margin-top {
+  margin-top: 5px !important;
+}
+.tac{
+  background: #fff;
+}
+.card-box1 {
+  display: table;
+  border-bottom: 1px solid #EEEEEE;
+  .card-box-title {
+    width: 150px;
+    text-align: left;
+    font-size: 14px;
+    color: #555555;
+    padding-left: 20px;
+  }
+  .card_line {
+    line-height: 20px;
+  }
+  .card_multiple {
+    line-height: 25px;
+    display:table-cell;
+    vertical-align:middle;
+  }
+  .card-box-content {
+    flex: 1;
+    margin-left: 20px;
+    font-weight: bold;
+    font-size: 14px;
+  }
+}

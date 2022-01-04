@@ -1,0 +1,275 @@
+<template>
+  <div class="base-page-tree">
+    <div class="base-page-tree__left">
+      <el-input
+        class="base-page-tree__left-input"
+        placeholder="请输入党组织名称"
+        @keyup.enter.native="search()"
+        clearable
+        v-model="filterText">
+        <span slot="suffix" @click="search()" class="el-input__icon el-icon-search rel font-16">
+          <span class="border"></span>
+        </span>
+      </el-input>
+
+      <el-tree
+        v-loading="loading"
+        :expand-on-click-node="false"
+        class="base-page-tree__tree"
+        :data="treeData"
+        :props="defaultProps"
+        :indent="0"
+        default-expand-all
+        node-key="id"
+        @node-click="nodeClick"
+        :filter-node-method="filterNode"
+        highlight-current
+        ref="tree">
+        <p slot-scope="{ node, data }" class="slot-tree-node">
+          <img v-if="node.childNodes.length === 0" src="@/assets/page/icon-file.png" alt="">
+          <span>{{ node.label }}</span>
+        </p>
+      </el-tree>
+    </div>
+
+    <div class="base-page-tree__right">
+      <slot></slot>
+    </div>
+  </div>
+</template>
+
+<script>
+  import dictApi from "@/api/backstage/sysset/basic/dict/Dict";
+  export default {
+    name: 'PageTree',
+    watch: {
+      filterText (val) {
+        // this.$refs.tree.filter(val);
+        this.getTree();
+      }
+    },
+    data () {
+      return {
+        // 加载遮罩控制条件
+        loading:true,
+        filterText: '',
+        defaultProps: {
+          children: 'children',
+          label: 'label'
+        },
+        treeData: [],
+        choose:null,//选中的组织树
+     }
+    },
+    mounted(){
+      this.getTree();
+    },
+    methods: {
+      //会返回过滤节点的子节点
+      filterNode (value, data) {
+        if(!value){
+          return true;
+        }
+        let level = node.level;
+        let _array = [];//这里使用数组存储 只是为了存储值。
+        this.getReturnNode(node,_array,value);
+        let result = false;
+        _array.forEach((item)=>{
+          result = result || item;
+        });
+        return result;
+      },
+      //树的点击事件
+      nodeClick (row, node) {
+        this.choose = row
+        this.$emit('handleTreeClick', row)
+      },
+      //点击搜索按钮
+      search(){
+        this.getTree();
+      },
+      // 调用数据接口
+      getTree(val){
+        if(val === "clear"){
+          this.filterText = ""
+          this.choose = null
+          this.$emit('handleTreeClick', {id:""})
+        }
+        let params = {
+          name:this.filterText
+        }
+        this.loading = true;
+        this.partyType(params);
+      },
+
+
+      partyType(params){
+        dictApi.dictTree(params).then(response => {
+          const res = response.data.data;
+          this.treeData=res;
+          if(res && res[0] && res[0].id){
+            if(!this.choose){
+              this.choose = res[0].id
+            }
+            this.$nextTick(function(){
+              this.$refs.tree.setCurrentKey(this.choose);
+            })
+          }
+        }).finally(() => {
+          this.loading = false;
+        });
+      }
+
+    }
+  }
+</script>
+
+<style lang="scss" scoped>
+
+  .base-page-tree__left-input /deep/ .el-input__inner {
+    height: 40px;
+    line-height: 40px;
+  }
+
+  .base-page-tree__tree {
+    margin-top: 30px;
+  }
+
+  .base-page-tree__tree /deep/ {
+    .el-tree-node {
+      position: relative;
+      padding-left: 16px;
+      caret-color: transparent;
+    }
+
+    > .el-tree-node {
+      padding-left: 0;
+    }
+
+    .el-tree-node__content {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #666666;
+      padding-left: 0px;
+      height: auto;
+      padding-right: 20px;
+      display: flex !important;
+      align-items: flex-start !important;
+
+    }
+
+    .el-tree-node__children {
+      padding-left: 16px;
+    }
+
+    .el-tree-node::before {
+      content: '';
+      height: calc(100% + 12px);
+      width: 1px;
+      position: absolute;
+      left: -3px;
+      top: -26px;
+      border-width: 1px;
+      border-left: 1px dashed #52627C;
+      z-index: 1;
+    }
+
+    .el-tree-node:last-child::before {
+      height: 38px;
+    }
+
+    .el-tree-node::after {
+      content: '';
+      width: 24px;
+      height: 20px;
+      position: absolute;
+      left: -3px;
+      top: 16px;
+      border-width: 1px;
+      border-top: 1px dashed #52627C;
+    }
+
+    & > .el-tree-node::after {
+      border-top: none;
+    }
+
+    & > .el-tree-node::before {
+      border-left: none;
+    }
+
+    .el-tree-node__expand-icon {
+      position: relative;
+      left: 5px;
+      top: 6px;
+      font-size: 0px;
+      width: 22px;
+      height: 17px;
+      background: url('~@/assets/page/icon-plus.png') no-repeat 100% 100%;
+      margin-right: 10px;
+
+      &.is-leaf {
+        margin-right: 0;
+        width: 0;
+        height: 0;
+        background: none;
+      }
+
+      &.expanded {
+        transform: none;
+        background: url('~@/assets/page/icon-sub.png') no-repeat 100% 100%;
+      }
+    }
+  }
+
+  .slot-tree-node {
+    padding: 0 0;
+    margin-top: 5px;
+
+    > img {
+      width: 14px;
+      height: 16px;
+      vertical-align: sub;
+      margin-right: 3px;
+    }
+
+    > span {
+      white-space: pre-wrap;
+      word-break: break-all;
+      display: inline-block;
+      vertical-align: top;
+    }
+  }
+
+  .base-page-tree {
+    display: flex;
+    height: 100%;
+  }
+
+  .base-page-tree__left {
+    width: 320px;
+    padding: 20px;
+    margin-right: 20px;
+    background: #FFFFFF;
+    border-radius: 4px;
+    max-height: 100%;
+    overflow: auto;
+  }
+
+  .base-page-tree__right {
+    flex: 1;
+    max-height: 100%;
+    overflow: auto;
+    background: #fff;
+  }
+
+  .el-input__icon .border {
+    position: absolute;
+    left: -5px;
+    top: 10px;
+    width: 1px;
+    height: 20px;
+    background: #E5E5E5;
+  }
+
+
+</style>

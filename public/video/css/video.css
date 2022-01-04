@@ -1,0 +1,200 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    /* firefox私有属性 */
+    -moz-user-select: none;
+    /* webKit内核私有属性 */
+    -webkit-user-select: none;
+    /* IE私有属性（IE10及以后） */
+    -ms-user-select: none;
+    /* KHTML内核私有属性 */
+    -khtml-user-select:none;
+    /* Opera私有属性 */
+    -o-user-select: none;
+    /* css3属性 */
+    user-select: none;
+}
+
+[v-cloak] {
+    display: none;
+}
+
+header {
+    height: 90px;
+    line-height: 90px;
+    width: 100%;
+    background-color: #FFEEDE;
+    text-align: center;
+    align-items: center;
+    padding: auto 0;
+    color: #DE000D;
+    font-size: 3vh;
+    font-weight: bold;
+    background-image:url('../img/top1.png');
+    background-repeat:no-repeat;
+    background-position:center center;
+    top: 0;
+}
+
+header .left-cla {
+    float: left;
+    margin-left: 30px;
+}
+
+header .right-cla {
+    float: right;
+    margin-right: 94px;
+    display: none;
+}
+
+footer {
+    height: 90px;
+    width: 100%;
+    background-color: #FFEEDE;
+    background-image:url('../img/footer.png');
+    background-repeat:no-repeat;
+    background-size:100% 100%;
+    -moz-background-size:100% 100%;
+    position: fixed;
+    bottom: 0;
+}
+
+.middle-cla {
+    width: 100%;
+    height: 80vh;
+}
+
+.middle-cla .video-cla {
+    height: calc(100vh - 180px);
+    width: 80%;
+    display: inline-block;
+    background-image:url('../img/bg.png');
+    background-repeat:no-repeat;
+    background-size:100% 100%;
+    -moz-background-size:100% 100%;
+}
+
+.middle-cla .person-cla {
+    float: right;
+    height: calc(100vh - 180px);
+    width: 20%;
+}
+
+.middle-cla .person-cla .pers-cla {
+    height: 62vh;
+    overflow: auto;
+    border-bottom: 1px solid #eeeeee;
+    padding-top: 30px;
+}
+
+
+.middle-cla .person-cla .pers-bg {
+    background-image:url('../img/noper.png');
+    background-repeat:no-repeat;
+    background-position:center center;
+}
+
+.middle-cla .person-cla .pers-one {
+    width: 100%;
+    ext-align: center;
+    align-items: center;
+    padding-bottom: 20px;
+}
+
+.middle-cla .person-cla .pers-one .pers-head {
+    display: inline-block;
+    vertical-align:middle;
+    padding-left: 20px;
+}
+
+.middle-cla .person-cla .pers-one .pers-head  img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #E65D6E;
+    display: inline-block;
+    margin-top: 1vh;
+}
+
+.middle-cla .person-cla .pers-one .pers-name {
+    display: inline-block;
+    margin-left: 1vw;
+    vertical-align:middle;
+    font-family: Microsoft YaHei;
+    font-weight: 400;
+}
+
+.middle-cla .person-cla .pers-one .pers-name .first-cla {
+    color: #333333;
+    font-size: 1.5vh;
+    max-width: 6vw;
+}
+
+.middle-cla .person-cla .pers-one .pers-name .remark-cla {
+    color: #999999;
+    font-size: 1.2vh;
+}
+
+.middle-cla .person-cla .pers-one .pers-fun {
+    float: right;
+    line-height: 7vh;
+}
+
+.middle-cla .person-cla .pers-one .pers-fun .mv-cla{
+    height: 1.5vh;
+    margin-right: 2vw;
+}
+
+
+.middle-cla .person-cla .func-cla {
+    height: 10vh;
+    text-align: center;
+    transform: translateX(-50%);
+    margin-left: 50%;
+}
+
+.middle-cla .person-cla .func-cla .mute{
+    width: 6.3vw;
+    height: 3vh;
+    line-height: 3vh;
+    background: #FFFFFF;
+    border: 1px solid #707070;
+    opacity: 1;
+    border-radius: 5px;
+    color: #666666;
+    margin-top: 2vh;
+    margin-left: 50%;
+    transform: translate(-50%);
+    cursor: pointer;
+}
+
+.middle-cla .person-cla .func-cla  .red-cla{
+    color: #DD001F;
+    margin-top: 3vh;
+    border: 1px solid #DD001F;
+}
+
+.pointer-cla {
+    cursor: pointer
+}
+
+.off-cla {
+    cursor: not-allowed;
+}
+
+.audio-father {
+    position: relative;
+    height: 1.5vh;
+}
+
+.audio-cla {
+    width: 0.2vw;
+    background-color: rgb(75, 236, 0);
+    position: absolute;
+    height: 0;
+    bottom: 1vh;
+    right: 2.2vw;
+}

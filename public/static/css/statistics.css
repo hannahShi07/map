@@ -1,0 +1,1604 @@
+@charset "UTF-8";
+/****************** 党建后台统计分析 ******************/
+
+/* pc>=992px        大屏-------------------------------------------------大屏 */
+
+@media screen and (min-width: 1300px) {
+    /***** 1、党员发展统计 *****/
+    /* list */
+    .page-main-parentBox .page-lists {
+        width: 100%;
+        /* background-color: red; */
+        /* height: 500px; */
+        margin-top: 20px;
+    }
+
+    .page-lists .page-lists-ul {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .page-lists .page-lists-ul .page-lists-li-left {
+        height: 362px;
+        width: 54%;
+        /* background-color: #fff; */
+    }
+
+    .page-lists .page-lists-ul .page-lists-li-right {
+        height: 362px;
+        width: 46%;
+        /* background-color: #fff; */
+        /* margin-left: 20px; */
+        padding-left: 20px;
+        margin-bottom: 20px;
+    }
+
+    .wwk {
+        width: 50% !important;
+    }
+
+    /* .page-lists .page-lists-ul .page-lists-li-78{
+        height: 212px !important;
+    } */
+    .page-lists .page-lists-ul .page-lists-li-7 {
+        height: 238px !important;
+        width: 54%;
+    }
+
+    .page-lists .page-lists-ul .page-lists-li-8 {
+        height: 238px !important;
+        width: 46%;
+    }
+
+    .page-lists .page-lists-ul .page-lists-li-9 {
+        height: 238px !important;
+        width: 54%;
+    }
+
+    .list_title_1 {
+        margin-bottom: 2px;
+        background-color: #fff;
+        height: 57px;
+    }
+
+    .list_chart_1, .list_chart_2, .list_chart_3, .list_chart_4, .list_chart_5, .list_chart_6, .list_chart_7, .list_chart_8 {
+        background-color: #fff;
+    }
+
+    .list_title_1_p img:first-child {
+        width: 20px;
+        height: 20px;
+        margin: 20px 24px;
+        margin-top: 14px;
+    }
+
+    .list_title_1_p img:last-child {
+        width: 25px;
+        height: 20px;
+        margin: 20px 24px;
+        margin-top: 14px;
+    }
+
+    .list_title_1_txt {
+        font-size: 18px;
+        color: #333333;
+        margin-left: -16px;
+        display: inline-block;
+        height: 57px;
+        line-height: 57px;
+        font-weight: 900;
+    }
+
+    .list_title_1_population {
+        font-size: 18px;
+        color: #333333;
+        height: 57px;
+        line-height: 57px;
+        display: inline-block;
+        float: right;
+        margin-right: 26px;
+    }
+
+    .list_title_1_population b {
+        font-size: 18px;
+        color: #e93f33;
+        height: 57px;
+        line-height: 57px;
+        display: inline-block;
+        /* margin-left: 4px; */
+
+    }
+
+    .addRelactive {
+        position: relative;
+    }
+
+    .myLender {
+        height: 50px;
+        width: 300px;
+        /* background-color: pink; */
+        position: absolute;
+        top: 185px;
+        right: 1px;
+    }
+
+    .myLender .peoper_man {
+        position: absolute;
+        top: 15px;
+        right: 169px;
+        z-index: 999;
+    }
+
+    .myLender .peoper_woman {
+        position: absolute;
+        top: 15px;
+        right: 72px;
+        z-index: 999;
+    }
+
+    .myLender .p_man {
+        position: absolute;
+        top: 15px;
+        right: 152px;
+        z-index: 999;
+    }
+
+    .myLender .p_woman {
+        position: absolute;
+        top: 15px;
+        right: 57px;
+        z-index: 999;
+    }
+
+    .myLender .man_conunt {
+        position: absolute;
+        top: 16px;
+        right: 115px;
+        z-index: 999;
+    }
+
+    .myLender .woman_conunt {
+        position: absolute;
+        top: 16px;
+        right: 20px;
+        z-index: 999;
+    }
+
+    .man_box {
+        width: 14px;
+        height: 14px;
+        background-color: #769ce8;
+        position: absolute;
+        top: 19px;
+        left: 32px;
+    }
+
+    .woman_box {
+        width: 14px;
+        height: 14px;
+        background-color: #d5282a;
+        position: absolute;
+        top: 19px;
+        right: 120px;
+
+    }
+
+    .man_conunt8 {
+        position: absolute;
+        top: 16px;
+        right: 178px;
+        z-index: 999;
+    }
+
+    .woman_conunt8 {
+        position: absolute;
+        top: 16px;
+        right: 20px;
+        z-index: 999;
+    }
+
+    .p_man8 {
+        width: 60px;
+        height: 20px;
+        text-align: center;
+        position: absolute;
+        top: 16px;
+        right: 202px;
+        z-index: 999;
+    }
+
+    .p_woman8 {
+        width: 60px;
+        height: 20px;
+        text-align: center;
+        position: absolute;
+        top: 16px;
+        right: 58px;
+        z-index: 999;
+    }
+
+    /***** 党员发展统计 end*****/
+    /*****2、 党组织发展统计 *****/
+    .page2-lists .page2-lists-ul .page2-lists-li-left {
+        height: 362px;
+        width: 50%;
+        /* background-color: #fff; */
+    }
+
+    .page2-lists .page2-lists-ul .page2-lists-li-right {
+        height: 362px;
+        width: 50%;
+        /* background-color: #fff; */
+        /* margin-left: 20px; */
+        /* margin-bottom: 20px; */
+        padding-left: 20px;
+    }
+
+    .page2-lists .page2-lists-ul .page2-lists-li-78 {
+        height: 212px !important;
+        margin-bottom: 20px;
+    }
+
+    .list_title_1 {
+        margin-bottom: 2px;
+        background-color: #fff;
+        height: 57px;
+    }
+
+    .list_chart_1, .list_chart_2, .list_chart_3, .list_chart_4, .list_chart_5, .list_chart_6, .list_chart_7, .list_chart_8 {
+        background-color: #fff;
+    }
+
+    .list_title_1_p img {
+        width: 18px;
+        height: 18px;
+        margin: 20px 24px;
+        margin-top: 14px;
+    }
+
+    .list_title_1_txt {
+        font-size: 18px;
+        color: #333333;
+        margin-left: -16px;
+        display: inline-block;
+        height: 57px;
+        line-height: 57px;
+        font-weight: 900;
+    }
+
+    .list_title_1_population {
+        font-size: 18px;
+        color: #333333;
+        height: 57px;
+        line-height: 57px;
+        display: inline-block;
+        float: right;
+        margin-right: 26px;
+    }
+
+    .list_title_1_population b {
+        font-size: 18px;
+        color: #e93f33;
+        height: 57px;
+        line-height: 57px;
+        display: inline-block;
+        /* margin-left: 4px; */
+
+    }
+
+    /***** 党组织发展统计 end*****/
+    /***** 3、积分统计 *****/
+    .page03_list1 {
+        /* background-color: #fff; */
+    }
+
+    .page03_list1 .page03_list1_ul {
+        background-color: #fff;
+        height: 500px;
+        overflow-y: auto;
+    }
+
+    .page03_list1 .page03_list1_ul li {
+        border-bottom: 1px solid #eeeeee;
+        height: 60px;
+        width: 100%;
+    }
+
+    .plist01 {
+        display: flex;
+        position: relative;
+    }
+
+    .plist01 img {
+        width: 28px;
+        height: 32px;
+        margin: 14px 0;
+        margin-left: 24px;
+    }
+
+    .plist01 .lsth2 {
+        width: 30px !important;
+        height: 34px !important;
+    }
+
+    .plist01 .lsth3 {
+        width: 29px !important;
+        height: 32px !important;
+    }
+
+    .plist01 p {
+        font-size: 14px;
+        color: #333333;
+        height: 57px;
+        width: 76%;
+        line-height: 57px;
+        margin-left: 10px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .plist01 h3 {
+        font-size: 16px;
+        color: #333333;
+        width: 60px;
+        line-height: 57px;
+        align-items: right;
+        text-align: right;
+        position: absolute;
+        right: 20px;
+        top: 1px;
+    }
+
+    .myBorderBottom {
+        border-bottom: 2px solid #eeeeee !important;
+    }
+
+    .plist02 {
+        display: flex;
+    }
+
+    .plist02 > span {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        font-size: 18px;
+        color: #666666;
+        text-align: center;
+        /* margin: 10px 0; */
+        margin-left: 18px;
+    }
+
+    .plist02 p {
+        font-size: 12px;
+        color: #333333;
+        height: 40px;
+        width: 450px;
+        line-height: 40px;
+        margin-left: 5px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .plist02 h3 {
+        font-size: 12px;
+        color: #333333;
+        width: 80px;
+        line-height: 40px;
+        align-items: right;
+        text-align: right;
+        position: absolute;
+        top: 1px;
+        right: 20px;
+    }
+
+    .myNowarp {
+        flex-wrap: nowrap !important;
+    }
+
+    .plist01_dv_flex {
+        display: flex;
+        flex-direction: column;
+        width: 530px;
+        padding-top: 10px;
+    }
+
+    .plist01_dv_flex p {
+        font-size: 14px;
+        color: #333333;
+        height: 20px;
+        width: 76%;
+        line-height: 20px;
+        /* margin-left: -16px; */
+        margin-left: 10px;
+    }
+
+    .plist03 {
+        display: flex;
+        position: relative;
+    }
+
+    .plist03 > span {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        font-size: 18px;
+        color: #666666;
+        text-align: center;
+        margin: 10px 0;
+        margin-left: 20px;
+    }
+
+    .plist03 p {
+        font-size: 12px;
+        color: #333333;
+        height: 57px;
+        width: 600px;
+        line-height: 57px;
+        margin-left: 5px;
+    }
+
+    .plist03 h3 {
+        font-size: 12px;
+        color: #333333;
+        width: 80px;
+        line-height: 57px;
+        align-items: right;
+        text-align: right;
+        position: absolute;
+        top: 1px;
+        right: 20px;
+    }
+
+    .plist03 .plist01_dv_flex p {
+        font-size: 14px;
+        color: #333333;
+        height: 18px;
+        width: 76%;
+        line-height: 18px;
+        margin-left: 5px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .plist01_dv_flex_txt {
+        font-size: 12px !important;
+        color: #666666 !important;
+    }
+
+    .minliWidth {
+        height: 40px !important;
+        position: relative;
+    }
+
+    .page03_list1_ul .plist01 .list2_scorce {
+        font-size: 16px;
+        color: #333333;
+        width: 80px;
+        line-height: 57px;
+        align-items: right;
+        text-align: right;
+        position: absolute;
+        top: 1px;
+        right: 20px;
+    }
+
+    .plist01_dv_flex_txt a:hover {
+        color: #D5282B;
+    }
+
+    .plist01 a:hover {
+        color: #D5282B;
+    }
+
+    .plist02 a:hover {
+        color: #D5282B;
+    }
+
+    /***** 积分统计end *****/
+    /***** 4、会议统计 *****/
+    .page04 {
+        width: 100%;
+        /* height: 400px; */
+        background-color: #fff;
+        margin-top: 20px;
+    }
+
+    .page04_title {
+        width: 100%;
+        height: 60px;
+        border-bottom: 2px solid #eeeeee;
+        display: flex;
+    }
+
+    .page04_title_left {
+        display: flex;
+        width: 90%;
+    }
+
+    .page04_title_left img {
+        width: 21px;
+        height: 19px;
+        margin: 20px 0;
+        margin-left: 24px;
+    }
+
+    .page04_title_left p {
+        margin-left: 12px;
+        height: 58px;
+        line-height: 58px;
+    }
+
+    .page04_main {
+        padding: 20px 40px;
+    }
+
+    .page04_main .layui-table[lay-size=lg] td, .page04_main .layui-table[lay-size=lg] th {
+        padding: 15px 5px;
+        text-align: center;
+    }
+
+    .page04_main .layui-table[lay-size=lg] th {
+        font-weight: 900;
+    }
+
+    .myTdFw {
+        font-weight: 900;
+    }
+
+    /***** 会议统计end *****/
+    /***** 5、党费统计 *****/
+    .page05 {
+        width: 100%;
+        /* height: 400px; */
+        background-color: #fff;
+        margin-top: 20px;
+    }
+
+    .page05_title {
+        width: 100%;
+        height: 60px;
+        border-bottom: 2px solid #eeeeee;
+        display: flex;
+    }
+
+    .page05_title_left {
+        display: flex;
+        width: 90%;
+    }
+
+    .page05_title_left img {
+        width: 18px;
+        height: 18px;
+        margin: 20px 0;
+        margin-left: 24px;
+    }
+
+    .page05_title_left p {
+        margin-left: 12px;
+        height: 58px;
+        line-height: 58px;
+    }
+
+    .page05_content {
+        width: 100%;
+        background-color: #fff;
+        margin-top: 10px;
+        padding: 10px 0px;
+    }
+
+    .page05_main {
+        padding: 20px 40px;
+    }
+
+    .page05_main .layui-table[lay-size=lg] td, .page05_main .layui-table[lay-size=lg] th {
+        padding: 15px 5px;
+        text-align: center;
+    }
+
+    .page05_main .layui-table[lay-size=lg] th {
+        font-weight: 900;
+    }
+
+    /* 公共样式，字体加粗 */
+    .myTdFw {
+        font-weight: 900;
+    }
+
+    /***** 党费统计end *****/
+
+}
+
+/* 768<=pad<=991   中屏 -------------------------------------------------中屏 */
+@media screen and (max-width: 1300px) {
+
+    /* page */
+    .page-main-parentBox .page-lists {
+        width: 100%;
+        /* background-color: red; */
+        /* height: 500px; */
+        margin-top: 20px;
+    }
+
+    .page-lists .page-lists-ul {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .page-lists .page-lists-ul .page-lists-li-left {
+        height: 362px;
+        width: 100%;
+        /* background-color: #fff; */
+    }
+
+    .page-lists .page-lists-ul .page-lists-li-right {
+        height: 362px;
+        width: 100%;
+        /* background-color: #fff; */
+        /* margin-left: 20px; */
+        margin-bottom: 20px;
+        margin-top: 20px;
+    }
+
+    .page-lists .page-lists-ul .page-lists-li-78 {
+        height: 212px !important;
+        margin-bottom: 20px;
+    }
+
+    .list_title_1 {
+        margin-bottom: 2px;
+        background-color: #fff;
+        height: 57px;
+    }
+
+    .list_chart_1, .list_chart_2, .list_chart_3, .list_chart_4, .list_chart_5, .list_chart_6, .list_chart_7, .list_chart_8 {
+        background-color: #fff;
+    }
+
+    .list_title_1_p img {
+        width: 18px;
+        height: 18px;
+        margin: 20px 24px;
+        margin-top: 14px;
+    }
+
+    .list_title_1_txt {
+        font-size: 18px;
+        color: #333333;
+        margin-left: -16px;
+        display: inline-block;
+        height: 57px;
+        line-height: 57px;
+        font-weight: 900;
+    }
+
+    .list_title_1_population {
+        font-size: 18px;
+        color: #333333;
+        height: 57px;
+        line-height: 57px;
+        display: inline-block;
+        float: right;
+        margin-right: 26px;
+    }
+
+    .list_title_1_population b {
+        font-size: 18px;
+        color: #e93f33;
+        height: 57px;
+        line-height: 57px;
+        display: inline-block;
+        /* margin-left: 4px; */
+
+    }
+
+    .addRelactive {
+        position: relative;
+    }
+
+    .myLender .peoper_man {
+        position: absolute;
+        top: 311px;
+        right: 12px;
+        z-index: 999;
+    }
+
+    .myLender .peoper_woman {
+        position: absolute;
+        top: 311px;
+        right: 12px;
+        z-index: 999;
+    }
+
+    .myLender .man_conunt {
+        position: absolute;
+        top: 312px;
+        left: 1054px;
+        z-index: 999;
+    }
+
+    .myLender .woman_conunt {
+        position: absolute;
+        top: 312px;
+        left: 1162px;
+        z-index: 999;
+    }
+
+    .man_box {
+        width: 14px;
+        height: 14px;
+        background-color: #769ce8;
+        position: absolute;
+        top: 315px;
+        right: 390px;
+    }
+
+    .woman_box {
+        width: 14px;
+        height: 14px;
+        background-color: #d5282a;
+        position: absolute;
+        top: 315px;
+        right: 280px;
+
+    }
+
+    .man_conunt8 {
+        position: absolute;
+        top: 312px;
+        left: 958px;
+        z-index: 999;
+    }
+
+    .woman_conunt8 {
+        position: absolute;
+        top: 312px;
+        left: 1092px;
+        z-index: 999;
+    }
+
+    .myLender {
+        height: 50px;
+        width: 300px;
+        /* background-color: pink; */
+        position: relative;
+        /* top: -70px; */
+        /* right: -1149px; */
+        float: right;
+        margin-top: -77px;
+        z-index: 999;
+    }
+
+    .myLender .peoper_man {
+        position: absolute;
+        top: 15px;
+        right: 169px;
+        z-index: 999;
+    }
+
+    .myLender .peoper_woman {
+        position: absolute;
+        top: 15px;
+        right: 72px;
+        z-index: 999;
+    }
+
+    .myLender .p_man {
+        position: absolute;
+        top: 15px;
+        right: 152px;
+        z-index: 999;
+    }
+
+    .myLender .p_woman {
+        position: absolute;
+        top: 15px;
+        right: 57px;
+        z-index: 999;
+    }
+
+    .myLender .man_conunt {
+        position: absolute;
+        top: 16px;
+        left: 152px;
+        z-index: 999;
+    }
+
+    .myLender .woman_conunt {
+        position: absolute;
+        top: 16px;
+        left: 248px;
+        z-index: 999;
+    }
+
+    .man_box {
+        width: 14px;
+        height: 14px;
+        background-color: #769ce8;
+        position: absolute;
+        top: 19px;
+        right: 240px;
+    }
+
+    .woman_box {
+        width: 14px;
+        height: 14px;
+        background-color: #d5282a;
+        position: absolute;
+        top: 19px;
+        right: 118px;
+
+    }
+
+    .man_conunt8 {
+        position: absolute;
+        top: 16px;
+        left: 100px;
+        z-index: 999;
+    }
+
+    .woman_conunt8 {
+        position: absolute;
+        top: 16px;
+        left: 248px;
+        z-index: 999;
+    }
+
+    .p_man8 {
+        width: 60px;
+        height: 20px;
+        text-align: center;
+        position: absolute;
+        top: 16px;
+        right: 192px;
+        z-index: 999;
+    }
+
+    .p_woman8 {
+        width: 60px;
+        height: 20px;
+        text-align: center;
+        position: absolute;
+        top: 16px;
+        right: 58px;
+        z-index: 999;
+    }
+
+    /*****2、 党组织发展统计 *****/
+    .page2-lists .page2-lists-ul .page2-lists-li-left {
+        height: 362px;
+        width: 100%;
+        /* background-color: #fff; */
+        margin-bottom: 20px;
+    }
+
+    .page2-lists .page2-lists-ul .page2-lists-li-right {
+        height: 362px;
+        width: 100%;
+        /* background-color: #fff; */
+        /* margin-left: 20px; */
+        /* margin-top: 20px; */
+        /* padding-left: 20px; */
+    }
+
+    .page2-lists .page2-lists-ul .page2-lists-li-78 {
+        height: 212px !important;
+        margin-bottom: 20px;
+    }
+
+    .list_title_1 {
+        margin-bottom: 2px;
+        background-color: #fff;
+        height: 57px;
+    }
+
+    .list_chart_1, .list_chart_2, .list_chart_3, .list_chart_4, .list_chart_5, .list_chart_6, .list_chart_7, .list_chart_8 {
+        background-color: #fff;
+    }
+
+    .list_title_1_p img {
+        width: 18px;
+        height: 18px;
+        margin: 20px 24px;
+        margin-top: 14px;
+    }
+
+    .list_title_1_txt {
+        font-size: 18px;
+        color: #333333;
+        margin-left: -16px;
+        display: inline-block;
+        height: 57px;
+        line-height: 57px;
+        font-weight: 900;
+    }
+
+    .list_title_1_population {
+        font-size: 18px;
+        color: #333333;
+        height: 57px;
+        line-height: 57px;
+        display: inline-block;
+        float: right;
+        margin-right: 26px;
+    }
+
+    .list_title_1_population b {
+        font-size: 18px;
+        color: #e93f33;
+        height: 57px;
+        line-height: 57px;
+        display: inline-block;
+        /* margin-left: 4px; */
+
+    }
+
+    /***** 党组织发展统计 end*****/
+    /***** 3、积分统计 *****/
+    .page03_list1 {
+        /* background-color: #fff; */
+    }
+
+    .page03_list1 .page03_list1_ul {
+        background-color: #fff;
+        height: 500px;
+
+        overflow-y: auto;
+    }
+
+    .page03_list1 .page03_list1_ul li {
+        border-bottom: 1px solid #eeeeee;
+        height: 60px;
+        width: 100%;
+    }
+
+    .wwk {
+        width: 50% !important;
+    }
+
+    .plist01 {
+        display: flex;
+        position: relative;
+    }
+
+    .plist01 img {
+        width: 28px;
+        height: 32px;
+        margin: 14px 0;
+        margin-left: 24px;
+    }
+
+    .plist01 .lsth2 {
+        width: 30px !important;
+        height: 34px !important;
+    }
+
+    .plist01 .lsth3 {
+        width: 29px !important;
+        height: 32px !important;
+    }
+
+    .plist01 p {
+        font-size: 14px;
+        color: #333333;
+        height: 57px;
+        width: 65%;
+        line-height: 57px;
+        margin-left: 10px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .plist01 h3 {
+        font-size: 16px;
+        color: #333333;
+        width: 60px;
+        line-height: 57px;
+        align-items: right;
+        text-align: right;
+        position: absolute;
+        right: 20px;
+        top: 1px;
+    }
+
+    .myBorderBottom {
+        border-bottom: 2px solid #eeeeee !important;
+    }
+
+    .hf {
+        margin-top: 0px !important;
+        margin-left: 20px !important;
+    }
+
+    .plist02 {
+        display: flex;
+    }
+
+    .plist02 > span {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        font-size: 18px;
+        color: #666666;
+        text-align: center;
+        /* margin: 10px 0; */
+        margin-left: 18px;
+    }
+
+    .plist02 p {
+        font-size: 12px;
+        color: #333333;
+        height: 40px;
+        width: 65%;
+        line-height: 40px;
+        margin-left: 5px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .plist02 h3 {
+        font-size: 12px;
+        color: #333333;
+        width: 80px;
+        line-height: 40px;
+        align-items: right;
+        text-align: right;
+        position: absolute;
+        top: 1px;
+        right: 20px;
+    }
+
+    .myNowarp {
+        flex-wrap: nowrap !important;
+    }
+
+    .plist01_dv_flex {
+        display: flex;
+        flex-direction: column;
+        width: 530px;
+        padding-top: 10px;
+    }
+
+    .plist01_dv_flex p {
+        font-size: 14px;
+        color: #333333;
+        height: 20px;
+        width: 70%;
+        /* margin-left: -16px; */
+        margin-left: 10px;
+        line-height: 20px;
+    }
+
+    .plist03 {
+        display: flex;
+        position: relative;
+    }
+
+    .plist03 > span {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        font-size: 18px;
+        color: #666666;
+        text-align: center;
+        margin: 10px 0;
+        margin-left: 20px;
+    }
+
+    .plist03 p {
+        font-size: 12px;
+        color: #333333;
+        height: 57px;
+        width: 600px;
+        line-height: 57px;
+        margin-left: 5px;
+    }
+
+    .plist03 h3 {
+        font-size: 12px;
+        color: #333333;
+        width: 80px;
+        line-height: 57px;
+        align-items: right;
+        text-align: right;
+        position: absolute;
+        top: 1px;
+        right: 20px;
+    }
+
+    .plist03 .plist01_dv_flex p {
+        font-size: 14px;
+        color: #333333;
+        height: 18px;
+        width: 70%;
+        line-height: 18px;
+        margin-left: 5px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .plist01_dv_flex_txt {
+        font-size: 12px !important;
+        color: #666666 !important;
+    }
+
+    .minliWidth {
+        height: 40px !important;
+        position: relative;
+    }
+
+    .page03_list1_ul .plist01 .list2_scorce {
+        font-size: 16px;
+        color: #333333;
+        width: 80px;
+        line-height: 57px;
+        align-items: right;
+        text-align: right;
+        position: absolute;
+        top: 1px;
+        right: 20px;
+    }
+
+    .plist01_dv_flex_txt a:hover {
+        color: #D5282B;
+    }
+
+    .plist01 a:hover {
+        color: #D5282B;
+    }
+
+    .plist02 a:hover {
+        color: #D5282B;
+    }
+
+    /***** 积分统计end *****/
+    /***** 4、会议统计 *****/
+    .page04 {
+        width: 100%;
+        /* height: 400px; */
+        background-color: #fff;
+        margin-top: 20px;
+    }
+
+    .page04_title {
+        width: 100%;
+        height: 60px;
+        border-bottom: 2px solid #eeeeee;
+        display: flex;
+    }
+
+    .page04_title_left {
+        display: flex;
+        width: 90%;
+    }
+
+    .page04_title_left img {
+        width: 21px;
+        height: 19px;
+        margin: 20px 0;
+        margin-left: 24px;
+    }
+
+    .page04_title_left p {
+        margin-left: 12px;
+        height: 58px;
+        line-height: 58px;
+    }
+
+    .page04_main {
+        padding: 20px 40px;
+    }
+
+    .page04_main .layui-table[lay-size=lg] td, .page04_main .layui-table[lay-size=lg] th {
+        padding: 15px 5px;
+        text-align: center;
+    }
+
+    .page04_main .layui-table[lay-size=lg] th {
+        font-weight: 900;
+    }
+
+    .myTdFw {
+        font-weight: 900;
+    }
+
+    /***** 会议统计end *****/
+    /***** 5、党费统计 *****/
+    .page05 {
+        width: 100%;
+        /* height: 400px; */
+        background-color: #fff;
+        margin-top: 20px;
+    }
+
+    .page05_title {
+        width: 100%;
+        height: 60px;
+        border-bottom: 2px solid #eeeeee;
+        display: flex;
+    }
+
+    .page05_title_left {
+        display: flex;
+        width: 90%;
+    }
+
+    .page05_title_left img {
+        width: 21px;
+        height: 19px;
+        margin: 20px 0;
+        margin-left: 24px;
+    }
+
+    .page05_title_left p {
+        margin-left: 12px;
+        height: 58px;
+        line-height: 58px;
+    }
+
+    .page05_content {
+        width: 100%;
+        background-color: #fff;
+        margin-top: 10px;
+        padding: 10px 0px;
+    }
+
+    .page05_main {
+        padding: 20px 40px;
+    }
+
+    .page05_main .layui-table[lay-size=lg] td, .page05_main .layui-table[lay-size=lg] th {
+        padding: 15px 5px;
+        text-align: center;
+    }
+
+    .page05_main .layui-table[lay-size=lg] th {
+        font-weight: 900;
+    }
+
+    /* 公共样式，字体加粗 */
+    .myTdFw {
+        font-weight: 900;
+    }
+
+    /***** 党费统计end *****/
+}
+
+/* *************************************************公共样式************************************** */
+::-webkit-scrollbar {
+    width: 10px;
+    background-color: transparent;
+}
+
+/* 整个滚动条的样式 */
+::-webkit-scrollbar-track {
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    -webkit-box-shadow: none;
+}
+
+/* 滚动条按钮的样式 */
+::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background-color: #cccccc;
+    border: 1px solid #f4f4f4;
+    width: 8px;
+    -webkit-box-shadow: none;
+}
+
+/* page1 */
+.page-main-parentBox {
+    /* height: 300px; */
+    width: 100%;
+    padding-bottom: 200px;
+}
+
+.top-search-key {
+    height: 57px;
+    width: 100%;
+    /* background-color: red; */
+}
+
+.top-search-key .search-key-container {
+    display: flex;
+}
+
+.top-search-key .search-key-container .search-key-container_title {
+    height: 57px;
+    width: 82.8%;
+    background-color: #fff;
+    font-size: 18px;
+    font-weight: 900;
+    color: #333;
+    line-height: 57px;
+    border: 1px solid #ffffff;
+    padding-left: 25px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.top-search-key .search-key-container span {
+    width: 130px;
+    background-image: url(../../static/img/swich_btn.png);
+    background-repeat: no-repeat;
+    background-position: 2px 22px;
+    background-color: #fff;
+    font-size: 14px;
+    color: #666666;
+    height: 57px;
+    line-height: 57px;
+    padding-left: 27px;
+    cursor: pointer;
+    /* background-color: pink; */
+}
+
+.top-search-key .search-key-container span:active {
+    /* opacity: 0.6; */
+    color: #999
+}
+
+.top-search-key .search-key-container .likBtn {
+    height: 57px;
+    width: 280px;
+    border: 0;
+    font-size: 20px;
+    color: #333;
+    background-color: #cccccc;
+    margin-left: 2px;
+    line-height: 57px;
+    text-align: center;
+}
+
+.list_title_1_p .page01_icon1 {
+    width: 18px !important;
+    height: 18px !important;
+}
+
+.list_title_1_p .page01_icon2 {
+    width: 18px !important;
+    height: 18px !important;
+}
+
+.list_title_1_p .page01_icon3 {
+    width: 18px !important;
+    height: 18px !important;
+}
+
+.list_title_1_p .page01_icon4 {
+    width: 27px !important;
+    height: 18px !important;
+}
+
+.list_title_1_p .page01_icon5 {
+    width: 18px !important;
+    height: 18px !important;
+}
+
+.list_title_1_p .page01_icon6 {
+    width: 15px !important;
+    height: 18px !important;
+}
+
+/* page1      end */
+
+/* page2 */
+.page2-main-parentBox {
+    /* height: 300px; */
+    width: 100%;
+    padding-bottom: 200px;
+}
+
+.page2-main-parentBox .page2-lists {
+    width: 100%;
+    /* background-color: red; */
+    /* height: 500px; */
+    margin-top: 20px;
+}
+
+.page2-lists .page2-lists-ul {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.page02_icon1 {
+    width: 20px !important;
+    height: 20px !important;
+}
+
+.page02_icon2 {
+    width: 25px !important;
+    height: 18px !important;
+}
+
+/* page2      end */
+
+/* page3 */
+.page03_icon1 {
+    width: 18px !important;
+    height: 18px !important;
+}
+
+.page03_icon2 {
+    width: 20px !important;
+    height: 20px !important;
+}
+
+/* page3      end */
+
+/* page4 */
+.page04_title_right img:first-child {
+    width: 15px;
+    height: 15px;
+    margin: 21px 0;
+    margin-left: 15px;
+
+}
+
+.page04_title_right img:last-child {
+    width: 15px;
+    height: 15px;
+    margin: 21px 0;
+    margin-left: -8px;
+}
+
+.page04_title_right {
+    display: flex;
+    width: 125px;
+    margin-right: 34px;
+    /* align-self: flex-end; */
+}
+
+.page04_title_right img:active {
+    opacity: 0.6;
+}
+
+.page04_title_right img:hover {
+    cursor: pointer;
+}
+
+.page04_title_right p {
+    margin-left: 12px;
+    height: 58px;
+    line-height: 58px;
+    width: 65px;
+}
+
+/* page4      end */
+
+/* page5 */
+.page05_title_right {
+    display: flex;
+    width: 125px;
+    margin-right: 42px;
+    /* align-self: flex-end; */
+}
+
+.page05_title_right img:first-child {
+    width: 15px;
+    height: 15px;
+    margin: 21px 0;
+    margin-left: 15px;
+
+}
+
+.page05_title_right img:last-child {
+    width: 15px;
+    height: 15px;
+    margin: 21px 0;
+
+}
+
+.page05_title_right img:active {
+    opacity: 0.6;
+}
+
+.page05_title_right img:hover {
+    cursor: pointer;
+}
+
+.page05_title_right p {
+    /* margin-left: 12px; */
+    height: 58px;
+    line-height: 58px;
+    width: 65px;
+    text-align: center;
+}
+
+/* page5      end */
+
+/*积分统计文字list*/
+.statistics-txt-list {
+    height: 500px;
+    background-color: #fff;
+    overflow: auto;
+}
+.statistics-txt-list .item-list {
+    padding:0 4px;
+}
+.statistics-txt-list .linkbox{
+    display: table;
+    width: 100%;
+    padding: 10px 0;
+    border-bottom:1px solid #eeeeee;
+}
+.statistics-txt-list .leftnum,.statistics-txt-list .centerblock,.statistics-txt-list .rightblock {
+    display: table-cell;
+    vertical-align: middle;
+    position: relative;
+}
+.statistics-txt-list .leftnum {
+    width: 58px;
+    text-align: center;
+    padding-left: 14px;
+    padding-right: 4px;
+    font-size: 18px;
+    color: #666666;
+    line-height: 20px;
+}
+.statistics-txt-list .leftnum .imgwrap {
+    display: inline-block;
+    padding: 3px 0;
+}
+.statistics-txt-list .centerblock {
+    width: auto;
+}
+.statistics-txt-list .centerblock .textup {
+    font-size: 14px;
+    line-height:18px;
+    color: #333;
+}
+.statistics-txt-list .centerblock .textdown {
+    font-size: 12px;
+    line-height: 16px;
+    margin-top: 3px;
+    color: #666;
+}
+.statistics-txt-list .rightblock {
+    width: 100px;
+    text-align: right;
+}
+.statistics-txt-list .rightblock .gradenum{
+    width: 100px;
+    text-align: right;
+    padding-right: 15px;
+    line-height: 20px;
+    font-size: 16px;
+    color: #333;
+}
+.statistics-txt-list .otherlist{
+    border-top:1px solid #eeeeee;
+}
+.statistics-txt-list .otherlist .centerblock .textdown {
+    color: #333;
+}
+.statistics-txt-list .linkbox:hover .textup,.statistics-txt-list .linkbox:hover .textdown,.statistics-txt-list .linkbox:hover .gradenum {
+    color: #d5282b;
+}
+/*积分统计文字list end*/
+
+.chartnodataWrap {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%);
+    left: 50%;
+}
+.resizeFun .chartCon {
+    height: 84%;
+    background-color: #fff;
+}
+
+		
+
+
+
+

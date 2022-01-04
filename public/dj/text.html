@@ -1,0 +1,240 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=0.3, minimum-scale=0.1, maximum-scale=2.0, user-scalable=yes">
+    <title>经济开发区智慧党建平台</title>
+    <link rel="shortcut icon" type="image/ico" href="../../../public/favicon.ico">
+    <link type="text/css" href="css/branch_css.css" rel="stylesheet">
+    <link type="text/css" href="css/style_lb.css" rel="stylesheet">
+    <link type="text/css" href="css/inner_css.css" rel="stylesheet">
+    <link type="text/css" href="css/public.css" rel="stylesheet">
+    <script src="js/jquery-1.8.2.js" type="text/javascript"></script>
+    <style>
+        *{
+            word-wrap:break-word
+        }
+        .box {
+            position: absolute;
+            padding-top: 8px;
+            z-index: 9999;
+        }
+
+        .box .con {
+            float: left;
+            width: 520px;
+            border: 1px #c5c5c5 solid;
+            border-radius: 5px;
+            background-color: #fff;
+            z-index: 999999999;
+            padding: 10px 15px;
+            color: #333;
+        }
+
+        .box .top_site {
+            border-bottom: 1px solid #c5c5c5;
+            padding-bottom: 5px;
+            line-height: 50px;
+
+        }
+
+        .box .con-ret {
+            border: 10px solid transparent;
+            border-bottom-color: #c5c5c5;
+            position: absolute;
+            left: 30px;
+            top: -12px;
+        }
+
+        /* 白色覆盖*/
+
+        .box .triangle {
+            border: 10px solid transparent;
+            border-bottom-color: #fff;
+            position: absolute;
+            left: 30px;
+            top: -11px;
+        }
+
+        .box .cur_site {
+            background-color: #ffebee;
+            padding: 3px 8px;
+            color: #e44142;
+        }
+
+        .box .common_site {
+            padding-right: 30px;
+        }
+
+        .box .sub_site_list span {
+            padding-right: 20px;
+            display: block;
+            float: left;
+        }
+
+        .banner {
+            z-index: -1;
+        }
+
+        .char {
+            text-align: center;
+            margin-right: 7px;
+            margin-top: 7px;
+            float: left;
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            background-color: #f0f0f0;
+            padding: 0px;
+        }
+
+        .bigchar {
+            text-align: center;
+            margin-right: 7px;
+            margin-top: 7px;
+            float: left;
+            width: 67px;
+            height: 30px;
+            line-height: 30px;
+            background-color: #f0f0f0;
+            padding: 0px;
+        }
+
+        .idea_tu img {
+            width: 240px;
+        }
+
+        .color_red {
+            color: #e40b18;
+        }
+
+        .special_col .tit {
+            height: 42px;
+            border-bottom: 1px solid #eee;
+            line-height: 30px;
+            font-size: 16px;
+        }
+
+        .special_col .cont a {
+            width: 268px;
+            height: 110px;
+            margin-top: 15px;
+            display: block;
+        }
+
+        .news_li1 {
+            line-height: 22px;
+            position: relative;
+            padding-left: 30px;
+            font-size: 14px;
+            margin: 15px 0;
+            border-bottom: 1px dotted #eee;
+            padding-bottom: 10px;
+        }
+
+        .news_li1 i {
+            background: #ff6d76;
+            width: 15px;
+            height: 15px;
+            display: inline-block;
+            position: absolute;
+            left: 0px;
+            top: 6px;
+            font-style: normal;
+            font-size: 12px;
+            color: #fff;
+            text-align: center;
+            line-height: 15px;
+        }
+
+        .news_li1 span {
+            position: absolute;
+            right: 0;
+            top: 0;
+            font-size: 12px;
+            color: #999;
+            width: 40px;
+        }
+
+        .logo {
+            width: 580px;
+        }
+
+        .logo_name {
+            font-size: 26px;
+        }
+
+        .morename {
+            font-size: 25px;
+            line-height: 40px;
+            word-wrap: break-word;
+            width: 329px;
+            padding-top: 10px;
+        }
+        [v-cloak] {
+            display: none;
+        }
+        .info_tt{
+            padding-top: 20px;
+        }
+    </style>
+    <script src="js/common.js" type="text/javascript"></script>
+</head>
+
+<body>
+<div class="container" v-cloak>
+    <!-- 头部 -->
+    <header-nav :actived="heightLight"></header-nav>
+    <!-- 缺省页显示 -->
+    <div class="nodata-wrap" style="margin-top: 80px;min-height: 500px;" v-if="!loading && noDate">
+        <img src="images/nodata.png" alt="">
+        <p class="txt">暂无数据</p>
+    </div>
+    <!-- 正在加载 -->
+    <div class="load-mask" v-if="loading">
+        <div class="innerblock">
+            <img src="images/Preloader.gif" alt="">
+            <p class="load-txt">加载中...</p>
+        </div>
+    </div>
+    <!-- 主体 -->
+    <div class="page_main" v-if="!noDate">
+        <div class="info_tt_all">
+            <div class="info_tt">{{title}}</div>
+<!--            <div class="publishdate" style="text-align: center" v-if="heightLight == 7">发布日期：{{time?time.substring(0,10):'-'}}</div>-->
+            <div class="publishdate" style="text-align: center">发布日期：{{time?time:'-'}}<span v-if="type == 4" style="margin-left:10px;text-align: center">浏览数：{{pv?pv:'-'}}</span></div>
+        </div>
+        <div class="article_main">
+            <div class="article" v-html="content">
+            </div>
+            <div v-if="imgList.length>0">
+                <img :src="item.picUrl" alt="" v-for="(item,index) in imgList" style="width: 700px;margin: 21px" >
+            </div>
+                    <div class="click-more" id="more_btn" onclick="loadMoreComment()" style="display: none;">点击查看更多评论</div>
+                </div>
+            </div>
+            <!-- 全部评论 -->
+        </div>
+
+
+    </div>
+    <!-- 底部 -->
+    <div class="foot">
+        <div class="w1100">
+            <!--<span></span>-->
+            <!--<span>主办单位：经济开发区管理委员会      皖ICP备F - 20050040号</span>-->
+            <!--<span>联系电话：0561-6063787</span>-->
+            <!--<span style="line-height: 20px;">系统推荐使用chrome、safari、IE9及以上浏览器，最佳显示分辩率为1280X800或更高。</span>-->
+        </div>
+    </div>
+    <script type="text/javascript" src="js/vue.min.js"></script>
+    <script src="js/public.js" type="text/javascript"></script>
+    <script src="./text.js" type="text/javascript"></script>
+</div>
+</body>
+</html>

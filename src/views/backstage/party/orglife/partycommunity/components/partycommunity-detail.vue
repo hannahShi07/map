@@ -1,0 +1,304 @@
+<template>
+  <el-dialog
+    class="bc-heard"
+    :title="title"
+    :visible.sync="visible"
+    width = '1030px'
+    @close="cancel"
+    :close-on-click-modal="false"
+    :close-on-press-escape="false"
+  >
+    <div class="history-detail" v-cloak v-loading="loading">
+    <base-card-box header="">
+      <el-row class="card-row">
+        <el-col :span="24">
+          <div class="card-box">
+            <div class="card-box-title">
+              党组织名称
+            </div>
+            <div class="card-box-content">
+              {{isEmpty(list,'orgName')}}
+            </div>
+          </div>
+        </el-col>
+      </el-row>
+      <el-row class="card-row">
+        <el-col :span="12">
+          <div class="card-box">
+            <div class="card-box-title">
+              党员姓名
+            </div>
+            <div class="card-box-content">
+              {{isEmpty(list,'memberName')}}
+            </div>
+          </div>
+        </el-col>
+        <el-col :span="12">
+          <div class="card-box">
+            <div class="card-box-title">
+              联系方式
+            </div>
+            <div class="card-box-content">
+              {{isEmpty(list,'phone')}}
+            </div>
+          </div>
+        </el-col>
+      </el-row>
+      <el-row class="card-row">
+        <el-col :span="24">
+          <div class="card-box">
+            <div class="card-box-title">
+              工作单位
+            </div>
+            <div class="card-box-content">
+              {{isEmpty(list,'workUnit')}}
+            </div>
+          </div>
+        </el-col>
+      </el-row>
+      <el-row class="card-row">
+        <el-col :span="12">
+          <div class="card-box">
+            <div class="card-box-title">
+              职务
+            </div>
+            <div class="card-box-content">
+              {{isEmpty(list,'job')}}
+            </div>
+          </div>
+        </el-col>
+        <el-col :span="12">
+          <div class="card-box">
+            <div class="card-box-title">
+              居住在蜀山区
+            </div>
+            <div class="card-box-content">
+              {{isEmpty(list,'isInShushan')}}
+            </div>
+          </div>
+        </el-col>
+      </el-row>
+      <el-row class="card-row">
+<!--        <el-col :span="12">-->
+<!--          <div class="card-box">-->
+<!--            <div class="card-box-title">-->
+<!--              居住小区名称-->
+<!--            </div>-->
+<!--            <div class="card-box-content">-->
+<!--              {{isEmpty(list,'livingCommunity')}}-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </el-col>-->
+        <el-col :span="12">
+          <div class="card-box">
+            <div class="card-box-title">
+              报到地点
+            </div>
+            <div class="card-box-content">
+              {{isEmpty(list,'reportSiteName')}}
+            </div>
+          </div>
+        </el-col>
+        <el-col :span="12">
+          <div class="card-box">
+            <div class="card-box-title">
+              报到日期
+            </div>
+            <div class="card-box-content">
+              {{isEmpty(list,'reportDate')}}
+            </div>
+          </div>
+        </el-col>
+      </el-row>
+<!--      <el-row class="card-row">-->
+<!--        <el-col :span="24">-->
+<!--          <div class="card-box">-->
+<!--            <div class="card-box-title">-->
+<!--              报到日期-->
+<!--            </div>-->
+<!--            <div class="card-box-content">-->
+<!--              {{isEmpty(list,'reportDate')}}-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </el-col>-->
+<!--      </el-row>-->
+
+      <el-row class="card-row">
+        <el-col :span="24">
+          <div class="card-box">
+            <div class="card-box-title">
+              回执
+            </div>
+            <div class="card-box-content" style="flex:1;padding-right:20px;" v-if="fileList!='' && fileList!=undefined && fileList!=null && fileList!='null' && fileList.length>0">
+              <div class="card-img" v-for="(item,index) in fileList">
+                <img :src="item.url">
+              </div>
+            </div>
+            <div class="card-box-content" style="flex:1"  v-if="!(fileList!='' && fileList!=undefined && fileList!=null && fileList!='null' && fileList.length>0)">
+              --
+            </div>
+          </div>
+        </el-col>
+      </el-row>
+    </base-card-box>
+    </div>
+    <div slot="footer" class="text-center">
+      <el-button size="medium" type="primary" @click="cancel()">知道了</el-button>
+    </div>
+
+
+  </el-dialog>
+
+</template>
+
+<script>
+  import commonReq  from "@/api/public/commonReq.js"
+  import {getCommunityDetail} from "@/api/backstage/party/orglife/partycommunity/partycommunity.js"
+  export default {
+    name: "partycommunity-detail",
+    data () {
+      return {
+        loading:true,//加载遮罩条件
+        // 自己的
+        visible: false,
+        title: '详情',
+        list:'',
+        fileList:[],//附件
+        dicts: {//字典
+          REPORT_SITE:{},//报到地点
+        },
+      }
+    },
+    mounted(){
+
+    },
+    methods: {
+      show(t, row) {
+        this.visible = true;
+        this.getDetail(row.id);
+        this.getFile(row.id)
+        this.getDict();
+      },
+      //调用字典接口
+      getDict(){
+        let params = {
+          types:['REPORT_SITE']
+        }
+        commonReq.getHistoryDict(params).then(response =>{
+          const res = response;
+          this.dicts.REPORT_SITE = res.REPORT_SITE;
+
+        })
+      },
+      //获取详情
+      getDetail(id){
+        let params={
+          id:id
+        }
+        getCommunityDetail(params).then(response => {
+          const res = response;
+          this.list=res;
+          if(this.list.isInShushan==1){
+            this.list.isInShushan='是'
+          }else if(this.list.isInShushan==0){
+            this.list.isInShushan='否'
+          }
+
+          if(this.dicts.REPORT_SITE!='' && this.dicts.REPORT_SITE!=undefined && this.dicts.REPORT_SITE!=null && this.dicts.REPORT_SITE!='null' && this.dicts.REPORT_SITE.length>0){
+            for(let i=0;i<this.dicts.REPORT_SITE.length;i++){
+              if(this.list.reportSite==this.dicts.REPORT_SITE[i].id){
+                this.list.reportSiteName=this.dicts.REPORT_SITE[i].name
+              }
+            }
+          }
+
+        }).finally(() => {
+          this.loading = false;
+        })
+      },
+      //获取附件
+      getFile(id){
+        let params={
+          bizIds: id,
+        }
+        commonReq.getAttachment(params).then(response => {
+          const res = response;
+          if(res.length > 0 && res[0].list.length > 0){
+            if(res[0].list!= undefined && res[0].list != null && res[0].list != ""){
+              this.fileList = res[0].list
+            }
+          }
+        })
+      },
+
+      //取消
+      cancel() {
+        this.visible = false;
+        this.list='';
+        this.fileList=[];//附件
+      },
+    },
+  }
+</script>
+
+<style lang="scss" scoped>
+  .bc-heard /deep/ .el-dialog__body{
+    padding:0 0;
+
+  }
+  .card-box {
+    display: flex;
+    border-bottom: 1px solid #EEEEEE;
+
+    .card-box-title {
+      width: 120px;
+      text-align: left;
+      font-size: 14px;
+      color: #555555;
+      padding: 16px 0 16px 20px;
+    }
+
+    .card-box-content {
+      // flex: 1;
+      width: calc(100% - 120px);
+      padding: 16px 0;
+      font-weight: bold;
+      font-size: 14px;
+      color:#333;
+    }
+  }
+
+  .card-file{
+    padding:8px 12px;
+    background: #F9F9F9;
+    border-radius:5px;
+    display:flex;
+    flex-flow:wrap;
+    align-items:center;
+  }
+  .card-file{
+    width:auto;
+    margin-bottom:8px;
+  }
+  .card-file img:first-of-type{
+    width:12px;
+    height:16px;
+  }
+  .card-file img:last-of-type{
+    width:17px;
+    height:17px;
+  }
+  .card-file span{
+    padding-left:10px;
+    padding-right:30px;
+    font-size:14px;
+    color:#999;
+  }
+  .card-img{
+    width:100%;
+    margin-bottom:10px;
+  }
+  .card-img img{
+    width:100%
+  }
+</style>

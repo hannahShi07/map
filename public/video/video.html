@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<style type="text/css">
+		body,html{
+			height: 100%;
+			width: 100%;
+		}
+		body{
+			overflow: hidden;
+		}
+		.box{
+			width: 100%;
+			height: 100%;
+		}
+		.join-room,.live-room{
+			width: 100%;
+			height: 100%;
+			position: relative;
+		}
+		.live-card{
+			width: 600px;
+			height: 600px;
+			margin: 100px auto;
+			box-shadow: 0 0 10px black;
+		}
+		#live-box{
+			float: left;
+		}
+		.live-box{
+			display: none;
+			position: relative;
+		}
+		.active{
+			display: inline-block;
+		}
+		.audio-level{
+			position: absolute;
+			bottom: 0;
+			right: 0;
+			height: 40%;
+			width: 15px;
+			background-color: rgba(80,80,80,0.8);
+			z-index: 2;
+		}
+		.audio-size{
+			position: absolute;
+			bottom: 0;
+			right: 0;
+			width: 15px;
+			height: 0;
+			background-color: rgb(75, 236, 0);
+		}
+		.join-room{
+			display: block;
+		}
+		.live-room{
+			display: none;
+		}
+		.login-card{
+			width: 450px;
+			height: 500px;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			margin-left: -225px;
+			margin-top: -250px;
+			box-shadow: 0 0 10px black;
+		}
+		.user-name,.pass-word{
+			width: 100%;
+			text-align: center;
+			margin: 10px 0 ;
+		}
+		.user-name label,.pass-word label{
+			width: 80px;
+			height: 27px;
+			line-height: 27px;
+			display: inline-block;
+			text-align: right;
+		}
+		.user-name input,.pass-word input{
+			margin-left: 10px;
+			outline: none;
+			border-top: none;
+			border-right: none;
+			border-left: none;
+			padding: 5px 0;
+		}
+		.login-btn{
+			width: 100%;
+			height: 40px;
+			text-align: center;
+			margin-top: 40px;
+		}
+		.login-btn button{
+			width: 100px;
+			height: 30px;
+		}
+		.live-room button{
+			position: absolute;
+		}
+		.live-room ul{
+			width: 200px;
+			position: absolute;
+			top: 20px;
+			left: 0;
+		}
+	</style>
+	<body>
+		<div class="box">
+			<div class="join-room">
+				<div class="login-card">
+					<div class="user-name"><label form="userName">用户名:</label><input name="userName" id="userName" /></div>
+					<div class="pass-word"><label form="roomId">房间:</label><input type="roomId" name="roomId" id="roomId" value="99443" /></div>
+					<div class="login-btn">
+						<button class="login" onclick="anchorJoin()">进入</button>
+					<button class="sign-out" onclick="signOut()">退出</button>
+					</div>
+				</div>
+			</div>
+			<div class="live-room">
+				<ul class="user-list"></ul>
+				<div class="live-card">
+
+				</div>
+				<button class="sign-out" style="top: 0;left: 0;" onclick="signOut()">退出</button>
+				<button class="openVideo" style="top: 0;left: 230px;" onclick="openVideo()">打开视频</button>
+				<button class="openAudio" style="top: 0;left: 50px;" onclick="openAudio('打开')">打开音频</button>
+				<button class="closeAudio" style="top: 0;left: 50px;" onclick="openAudio('关闭')">关闭音频</button>
+				<button class="closeVideo" style="top: 0;left: 230px;" onclick="openVideo()">关闭视频</button>
+				<button class="openShare" style="top: 0;left: 130px;" onclick="openShare()">打开屏幕分享</button>
+				<button class="closeShare" style="top: 0;left: 130px;" onclick="openShare()">关闭屏幕分享</button>
+			</div>
+		</div>
+		<script src="./js/jquery-3.2.1.min.js"></script>
+		<script src="./js/lib-generate-test-usersig.min.js"></script>
+		<script src="./js/debug/GenerateTestUserSig.js"></script>
+		<script src="./js/trtc.js"></script>
+		<script>
+			// 获取音量
+			let audioLevelTimerMap = new Map();
+			let client;//直播实例
+			let localStream = null;//本地流
+			let shareStream = null;
+			let userId;//用户名称
+			let userList=[];//用户列表
+			let isJoin = true;// 是否允许进入
+			let roomId = '';
+			let stream = false;//是否屏幕分享
+			let video = true;//是否打开视频
+			// 检测浏览器是否支持
+			(function (){
+				TRTC.checkSystemRequirements().then(checkResult => {
+					console.log(checkResult)
+				  if (!checkResult.result) {
+				    console.log('checkResult', checkResult.result, 'checkDetail', checkResult.detail);
+				    // 根据用户设备类型建议用户使用 SDK 支持的浏览器
+				  }
+				})
+			}())
+			// 进入房间
+			async function anchorJoin(){
+				if(isJoin){
+					isJoin = false;
+					userId = $("#userName").val();
+					roomId = parseInt($('#roomId').val()) != $('#roomId').val() ? $('#roomId').val():parseInt($('#roomId').val());
+					// 判断房间ID是否为字符串
+					let useStringRoomId = parseInt($('#roomId').val()) != $('#roomId').val()
+					client = TRTC.createClient({
+						mode: 'rtc',
+						sdkAppId:genTestUserSig(userId).sdkAppId,
+						userId,
+						userSig:genTestUserSig(userId).userSig,
+						// privateMapKey :genTestUserSig(userId).PrivateMapKey,
+						roomId,
+						useStringRoomId
+					});
+					// 设置代理服务器
+					// client.setProxyServer('wss://proxy.example.com:443');
+					// 设置 TURN 服务器
+					// client.setTurnServer({ url: '192.168.0.110:3478', username: 'bob', credential: 'bobspassword', credentialType: 'password' });
+					const members = new Map();
+					const config = genTestUserSig(userId);
+					const sdkAppId = config.sdkAppId;
+					const userSig = config.userSig;
+					// 远端流通过监听
+					client.on('stream-added', event => {
+						const remoteStream = event.stream;
+						// console.log(remoteStream,'----------------------')
+						console.log('远端流增加: ' + remoteStream.getId() + remoteStream.getUserId());
+						//订阅远端流
+						subscribe(client,remoteStream);
+					});
+					// 以观众角色进房收看 audience:观众 anchor:主播
+					client.join({
+						roomId,
+						// privateMapKey :config.PrivateMapKey ,
+					})
+					.catch(error => {
+					  isJoin = true;
+					  console.error('进房失败 ' + error);
+					  return 'error'
+					})
+					.then((res) => {
+						if(res !== 'error'){
+							console.log('进房成功');
+							// 创建本地音视频流
+							localStream = TRTC.createStream({ userId, audio: true, video: true });
+							// 初始化本地音视频流
+							localStream.initialize()
+							.catch(error => {
+								isJoin = true;
+								console.error('初始化本地流失败 ' + error);
+								return 'error';
+							})
+							.then((res) => {
+								if(res !== 'error'){
+									console.log('初始化本地流成功');
+									// 关闭登录页面
+									$(".join-room").css("display","none")
+									// 打开音视频页面
+									$(".live-room").css("display","block")
+									// 开启打开视频
+									$(".openVideo").css("display","none")
+									// 禁用打开音频
+									$(".openAudio").css("display","none")
+									// 禁用关闭视频
+									$(".closeVideo").css("display","block")
+									// 开启关闭音频
+									$(".closeAudio").css("display","block")
+									// 禁用关闭屏幕分享
+									$(".closeShare").css("display","none")
+									// 开启屏幕分享
+									$(".openShare").css("display","block")
+									// 用户列表
+									$(".user-list")[0].innerHTML = '';
+									userList.unshift(localStream.getUserId() + '(我)');
+									userList.forEach(item=>{
+										let lis = document.createElement("li")
+										lis.innerText = item;
+										$(".user-list")[0].appendChild(lis);
+									})
+									// 创建视频
+									foundMe()
+									// 播放本地流
+									localStream.play('live-box');
+									// 发布本地流
+									publish(localStream)
+									startGetAudioLevel(localStream,'audio-size');
+								}else{
+									alert('初始化本地流失败')
+								}
+							});
+
+							// 监听用户音量
+							client.on('audio-volume', event => {
+							    event.result.forEach(({ userId, audioVolume, stream }) => {
+									if(document.getElementById('audio-size'+userId)){
+										document.getElementById('audio-size'+userId).style.height = audioVolume+"%";
+									}
+							        // console.log(`userId: ${userId}, audioVolume: ${audioVolume}`);
+							    })
+							})
+
+							// 开启音量回调，并设置每 1000ms 触发一次事件
+							client.enableAudioVolumeEvaluation(100);
+
+							// // 如需关闭音量回调，传入 interval 值小于等于0即可
+							// client.enableAudioVolumeEvaluation(-1);
+
+							// 监听用户进房
+							client.on('peer-join', event => {
+							  $(".user-list")[0].innerHTML = '';
+							  userList.push(event.userId);
+							  userList.forEach(item=>{
+								  let lis = document.createElement("li")
+								  lis.innerText = item;
+								  $(".user-list")[0].appendChild(lis);
+							  })
+							});
+
+							// 监听用户音量
+							client.on('audio-volume', event => {
+							    event.result.forEach(({ userId, audioVolume, stream }) => {
+									if(stream.getId() === localStream.getId()){
+										if(document.getElementById('audio-size')){
+											document.getElementById('audio-size').style.height = audioVolume+"%"
+										}
+									}else{
+										if(shareStream !== null && shareStream.getId() === stream.getId()){
+											if(document.getElementById('audio-size')){
+												document.getElementById('audio-size').style.height = audioVolume+"%"
+											}
+										}else{
+											if(document.getElementById('audio-size' + stream.getId())){
+												document.getElementById('audio-size' + stream.getId()).style.height = audioVolume+"%"
+											}
+										}
+									}
+							    })
+							})
+
+							// 远端用户禁用音频通知
+							client.on('mute-audio', event => {
+							  console.log(event,"----------event----------")
+							});
+
+							// 远端用户禁用视频通知。
+							client.on('mute-video', event => {
+							  const userId = event.userId;
+							  let box = document.getElementById('live-box' + userId)
+							  console.log("关闭视频")
+							  if(box.classList.contains('active')){
+								  box.classList.remove('active')
+							  }
+							  $(".active").css("width",(100/Math.ceil(Math.sqrt($(".active").length)))+"%")
+							  $(".active").css("height",(100/Math.ceil(Math.sqrt($(".active").length)))+"%")
+							});
+							// 远端用户启用视频通知
+							client.on('unmute-video', event => {
+							  const userId = event.userId;
+							  console.log("启用视频")
+							  if(!document.getElementById('live-box' + userId)){
+								  foundOther(userId)
+							  }else{
+								  if(!document.getElementById('live-box' + userId).classList.contains('active')){
+									  document.getElementById('live-box' + userId).classList.add('active')
+								  }
+							  }
+							  $(".active").css("width",(100/Math.ceil(Math.sqrt($(".active").length)))+"%")
+							  $(".active").css("height",(100/Math.ceil(Math.sqrt($(".active").length)))+"%")
+							  // remoteStream.setAudioVolume(0.5)
+							  // 播放远端流
+							  // remoteStream.play('live-box' + userId);
+							});
+
+							// 监听用户被踢出房间通知
+							client.on('client-banned', error => {
+							  // alert('被迫退出房间: ' + error.getCode());
+							  signOut()
+							  // 退出刷新页面
+							});
+
+							// 监听用户退出
+							client.on('peer-leave', event => {
+							  $(".user-list")[0].innerHTML = '';
+							  if(userList.indexOf(event.userId)>-1){
+								  userList.splice(userList.indexOf(event.userId),1)
+							  }
+							  userList.forEach(item=>{
+								  let lis = document.createElement("li")
+								  lis.innerText = item;
+								  $(".user-list")[0].appendChild(lis);
+							  })
+							});
+
+							// 监听远端流增加事件
+							client.on('stream-subscribed', event => {
+								const remoteStream = event.stream;
+								console.log('远端流订阅成功：' + remoteStream.getId());
+								// 创建视频
+								foundOther(remoteStream.getUserId())
+								remoteStream.setAudioVolume(0.5)
+								// 播放远端流
+								remoteStream.play('live-box' + remoteStream.getUserId());
+								// 开启音量回调，并设置每 1000ms 触发一次事件
+								client.enableAudioVolumeEvaluation(100);
+								$("#audio-resize" + remoteStream.getId()).on("input",function(){
+									remoteStream.setAudioVolume(Number($("#audio-resize" + remoteStream.getId()).val())/100)
+								})
+								$("#video" + remoteStream.getId()).on("click",function(){
+									if($("#video" + remoteStream.getId())[0].innerText === '关闭摄像头'){
+										$("#video" + remoteStream.getId())[0].innerText = '打开摄像头';
+										remoteStream.muteVideo()
+										if(!remoteStream.muteVideo()){
+											alert('关闭摄像头失败')
+										}
+									}else{
+										$("#video" + remoteStream.getId())[0].innerText = '关闭摄像头';
+										remoteStream.unmuteVideo()
+										if(!remoteStream.unmuteVideo()){
+											alert('打开摄像头失败')
+										}
+									}
+								})
+							});
+							// 远端流移除事件
+							client.on('stream-removed', event => {
+							  console.log("远端流移除事件")
+							  const remoteStream = event.stream;
+							  if(document.getElementById('live-box' + remoteStream.getUserId())){
+								  let box = document.getElementById('live-box' + remoteStream.getUserId())
+								  $(".live-card")[0].removeChild(box)
+								  $(".active").css("width",(100/Math.ceil(Math.sqrt($(".active").length)))+"%")
+								  $(".active").css("height",(100/Math.ceil(Math.sqrt($(".active").length)))+"%")
+								  // 取消获取音量
+								  // stopGetAudioLevel(remoteStream);
+							  }
+							  // // 取消监听连接状态变更事件
+							  // remoteStream.off('connection-state-changed')
+							});
+						}else{
+							alert("进房失败")
+						}
+					});
+				}
+			}
+
+			// 退出房间
+			async function signOut(){
+				client.leave()
+				.catch(error => {
+				  console.error('退房失败 ' + error);
+				  return 'error'
+				})
+				.then((res) => {
+					if(res !== 'error'){
+						clearGetAudioLevelTimer();
+						userList = [];
+						let box=document.getElementsByClassName("live-card")[0];
+						box.innerHTML = "";
+						$(".join-room").css("display","block")
+						$(".live-room").css("display","none")
+						console.log('退房成功');
+						if(localStream){
+							localStream.stop();
+							localStream.close();
+							localStream = null;
+						}
+						if(shareStream){
+							shareStream.stop();
+							shareStream.close();
+							shareStream = null;
+						}
+						isJoin = true;
+						// 取消监听用户音量大小
+						client.enableAudioVolumeEvaluation(-1);
+						// 取消获取所有音量
+						client = null;
+					}else{
+						alert('退房失败')
+					}
+				});
+			}
+			// 订阅远端流
+			async function subscribe(client,remoteStream){
+				await client.subscribe(remoteStream, { audio: true, video: true }).catch(e => {
+				    console.error('failed to subscribe remoteStream,订阅失败');
+				  })
+			}
+			// 取消订阅远端流
+			async function unsubscribe(client,remoteStream){
+				await client.unsubscribe(remoteStream).catch(e => {
+				    console.error('failed to subscribe remoteStream,取消订阅失败');
+				  })
+			}
+			// 发布本地流
+			async function publish(localStream){
+				await client.publish(localStream)
+					.catch(error => {
+						console.error('本地流发布失败 ' + error);
+					})
+					.then(() => {
+						console.log('本地流发布成功');
+					});
+			}
+			// 取消发布本地流
+			async function unpublish(localStream){
+				console.log(client,localStream)
+				await client.unpublish(localStream)
+					.catch(error => {
+						console.error('取消发布本地流失败 ' + error);
+						return 'error';
+					}).then((res) => {
+						console.log(res)
+						if(res !== 'error'){
+							// 取消发布本地流成功
+							console.log('取消发布本地流成功')
+							localStream.stop();
+						}
+					});
+			}
+
+			// 开始获取指定流音量
+			function startGetAudioLevel(stream,doc) {
+			  let timer = setAnimationFrame(() => {
+			    const volume = stream.getAudioLevel();
+				if(document.getElementById(doc)){
+					document.getElementById(doc).style.height = volume*100+"%";
+				}
+			  });
+			  audioLevelTimerMap.set(stream.getId(), timer);
+			}
+
+			// 停止获取指定流音量
+			function stopGetAudioLevel(stream) {
+			  let timer = audioLevelTimerMap.get(stream.getId());
+			  clearAnimationFrame(timer);
+			}
+
+			// 停止获取所有流的音量
+			function clearGetAudioLevelTimer() {
+			  audioLevelTimerMap.forEach(audioLevelTimer => {
+			    audioLevelTimer && clearAnimationFrame(audioLevelTimer);
+			  });
+			  audioLevelTimerMap.clear();
+			}
+
+			// 设置AnimationFrame
+			function setAnimationFrame(render) {
+			  // 计时器
+			  let timer = {};
+			  function animeLoop() {
+			    render();
+			    timer.id = requestAnimationFrame(animeLoop);
+			  }
+			  animeLoop();
+			  return timer;
+			}
+
+			// 清除AnimationFrame
+			function clearAnimationFrame(timer) {
+				console.log(timer)
+			  cancelAnimationFrame(timer.id);
+			}
+
+			// 打开视频
+			async function openVideo(){
+				if(video !== true){
+					video = true;
+					// 打开摄像头，增加视频通话
+					const videoStream = TRTC.createStream({ userId, audio: false, video: true });
+					videoStream.initialize().then(() => {
+					  console.log('打开视频成功');
+
+					  // 增加视频通话
+					  localStream.addTrack(videoStream.getVideoTrack()).then(() => {
+					    console.log('增加视频成功');
+						localStream.unmuteVideo();
+						setTimeout(function(){
+							console.log('打开视频',!localStream.unmuteVideo())
+							if(!localStream.unmuteVideo()){
+								alert('打开视频失败')
+							}
+						},500)
+					  });
+					});
+					// 禁用打开视频
+					$(".openVideo").css("display","none")
+					// 开启关闭视频
+					$(".closeVideo").css("display","block")
+				}else{
+					video = false;
+					localStream.muteVideo();
+					console.log("关闭视频",localStream.muteVideo())
+					// 关闭视频通话
+					const videoTrack = localStream.getVideoTrack();
+					if (videoTrack) {
+					  localStream.removeTrack(videoTrack).then(() => {
+					    console.log('移除视频成功');
+					    // 关闭摄像头
+					    videoTrack.stop();
+					  });
+					  // 开启打开视频
+					  $(".openVideo").css("display","block")
+					  // 禁用关闭视频
+					  $(".closeVideo").css("display","none")
+					}
+				}
+			}
+
+			// 打开音频
+			async function openAudio(type){
+				if(type == '打开'){
+					if(stream){
+						shareStream.unmuteAudio();
+					}else{
+						localStream.unmuteAudio();
+					}
+					// 禁用打开音频
+					$(".openAudio").css("display","none")
+					// 开启关闭音频
+					$(".closeAudio").css("display","block")
+				}else{
+					if(stream){
+						shareStream.muteAudio();
+					}else{
+						localStream.muteAudio();
+					}
+					// 开启打开音频
+					$(".openAudio").css("display","block")
+					// 禁用关闭音频
+					$(".closeAudio").css("display","none")
+				}
+			}
+
+			// 打开屏幕分享
+			async function openShare(type){
+				if(!stream){
+					console.log("打开屏幕分享")
+					// localStream.stop()
+					unpublish(localStream)
+					// 打开摄像头，增加视频通话
+					shareStream = TRTC.createStream({ audio: true, screen: true, userId });
+					await shareStream.initialize()
+					.catch(e=>{
+						// 当屏幕分享流初始化失败时, 提醒用户并停止后续进房发布流程
+						switch (e.name) {
+							case 'NotReadableError':
+							  // 提醒用户确保系统允许当前浏览器获取屏幕内容
+							  alert('确保系统允许当前浏览器获取屏幕内容')
+							  localStream.initialize()
+							  .catch(error => {
+								isJoin = true;
+								console.error('初始化本地流失败 ' + error);
+								return 'error';
+							  })
+							  .then((res) => {
+								  console.log('初始化本地流成功');
+								  // 播放本地流
+								  localStream.play('live-box');
+								  // 发布本地流
+								  publish(localStream)
+								  startGetAudioLevel(localStream,'audio-size');
+							  })
+							  return 'error';
+							case 'NotAllowedError':
+							  if (e.message === 'Permission denied by system') {
+								// 提醒用户确保系统允许当前浏览器获取屏幕内容
+								alert('确保系统允许当前浏览器获取屏幕内容')
+								  localStream.initialize()
+								  .catch(error => {
+									isJoin = true;
+									console.error('初始化本地流失败 ' + error);
+									return 'error';
+								  })
+								  .then((res) => {
+									  console.log('初始化本地流成功');
+									  // 播放本地流
+									  localStream.play('live-box');
+									  // 发布本地流
+									  publish(localStream)
+									  startGetAudioLevel(localStream,'audio-size');
+								  })
+							  } else {
+								// 用户拒绝/取消屏幕分享
+								alert('拒绝/取消屏幕分享')
+								  localStream.initialize()
+								  .catch(error => {
+									isJoin = true;
+									console.error('初始化本地流失败 ' + error);
+									return 'error';
+								  })
+								  .then((res) => {
+									  console.log('初始化本地流成功');
+									  // 播放本地流
+									  localStream.play('live-box');
+									  // 发布本地流
+									  publish(localStream)
+									  startGetAudioLevel(localStream,'audio-size');
+								  })
+							  }
+							  return 'error';
+							default:
+							  // 初始化屏幕分享流时遇到了未知错误，提醒用户重试
+								alert('初始化屏幕分享流时遇到了未知错误')
+								  localStream.initialize()
+								  .catch(error => {
+									isJoin = true;
+									console.error('初始化本地流失败 ' + error);
+									return 'error';
+								  })
+								  .then((res) => {
+									  console.log('初始化本地流成功');
+									  // 播放本地流
+									  localStream.play('live-box');
+									  // 发布本地流
+									  publish(localStream)
+									  startGetAudioLevel(localStream,'audio-size');
+								  })
+							  return 'error';
+						}
+					})
+					.then((res) => {
+						if(res !== 'error'){
+							stream = true;
+							// unpublish(localStream)
+							console.log('打开屏幕分享成功');
+							shareStream.play('live-box');
+							publishShare(shareStream);
+							// // 增加视频通话
+							// localStream.addTrack(shareStream.getVideoTrack()).then(() => {
+							//   console.log('增加屏幕分享成功');
+							// });
+						    startGetAudioLevel(shareStream,'audio-size');
+							// 禁用打开视频
+							$(".openShare").css("display","none")
+							// 禁用打开视频
+							$(".openVideo").css("display","none")
+							// 禁用关闭视频
+							$(".closeVideo").css("display","none")
+							// 开启关闭视频
+							$(".closeShare").css("display","block")
+						}
+					});
+					// localStream.unmuteVideo();
+				}else{
+					  stream = false;
+					  // 屏幕分享客户端停止推流
+					  unpublishShare(shareStream);
+					  if(!video){
+						  // 打开摄像头，增加视频通话
+						  const videoStream = TRTC.createStream({ userId, audio: false, video: true });
+						  videoStream.initialize().then(() => {
+						    console.log('打开视频成功');
+
+						    // 增加视频通话
+						    localStream.addTrack(videoStream.getVideoTrack()).then(() => {
+						      console.log('增加视频成功');
+						    });
+						  });
+						  localStream.unmuteVideo();
+					  }
+					  localStream.initialize()
+					  .catch(error => {
+						isJoin = true;
+						console.error('初始化本地流失败 ' + error);
+						return 'error';
+					  })
+					  .then((res) => {
+						  console.log('初始化本地流成功');
+						  localStream.play('live-box');
+						  publish(localStream)
+					  })
+					  // 开启打开视频
+					  $(".openShare").css("display","block")
+					  // 禁用关闭视频
+					  $(".closeShare").css("display","none")
+					  if(!video){
+						  // 禁用打开视频
+						  $(".openVideo").css("display","block")
+						  // 开启关闭视频
+						  $(".closeVideo").css("display","none")
+					  }else{
+						  // 禁用打开视频
+						  $(".openVideo").css("display","none")
+						  // 开启关闭视频
+						  $(".closeVideo").css("display","block")
+					  }
+				}
+			}
+
+			// 发布屏幕分享
+			async function publishShare(shareStream){
+				await client.publish(shareStream)
+					.catch(error => {
+						console.error('发布屏幕分享失败 ' + error);
+					})
+					.then(() => {
+						console.log('发布屏幕分享成功');
+					});
+			}
+
+			// 停止屏幕分享
+			async function unpublishShare(shareStream){
+				await client.unpublish(shareStream)
+					.catch(error => {
+						console.error('停止屏幕分享失败 ' + error);
+					}).then(() => {
+					  // 取消发布本地流成功
+					  console.log('停止屏幕分享成功')
+					  shareStream.stop();
+					});
+			}
+
+			// // 解散房间
+			// function dissolution(){
+			// 	$.ajax('https://trtc.tencentcloudapi.com',{
+			// 		type:'get',
+			// 		data:{
+			// 			Action:'DismissRoom',
+			// 			Version:'2019-07-22',
+			// 			Region:'ap-guangzhou',
+			// 			SdkAppId:genTestUserSig(userId).sdkAppId,
+			// 			RoomId:Number(roomId)
+			// 		},
+			// 		success:function(res){
+			// 			console.log(res)
+			// 		}
+			// 	})
+			// }
+
+			// 创建自己视频窗口
+			async function foundMe(){
+				let box = document.createElement("div")
+				box.id = 'live-box';
+				box.className = 'live-box active';
+				let audioLevel = document.createElement("div");
+				let audio = document.createElement("div");
+				audioLevel.className = 'audio-level'
+				audio.className = 'audio-size'
+				audioLevel.appendChild(audio);
+				audio.id = 'audio-size';
+				box.appendChild(audioLevel);
+				$(".live-card")[0].appendChild(box);
+				$(".active").css("width",(100/Math.ceil(Math.sqrt($(".active").length)))+"%")
+				$(".active").css("height",(100/Math.ceil(Math.sqrt($(".active").length)))+"%")
+			}
+
+			// 创建其他人窗口
+			async function foundOther(otherId){
+				let box = document.createElement("div")
+				box.id = 'live-box' + otherId;
+				box.className = 'live-box active';
+				$(".live-card")[0].appendChild(box);
+				// 创建音量条背景
+				let audioLevel = document.createElement("div");
+				audioLevel.className = 'audio-level'
+				box.appendChild(audioLevel);
+				// 创建音量条
+				let audio = document.createElement("div");
+				audio.className = 'audio-size'
+				audio.id = 'audio-size' + otherId;
+				audioLevel.appendChild(audio);
+				// 创建控制音量大小
+				let range = document.createElement("input");
+				range.type = 'range';
+				range.className = 'audio-resize';
+				range.id = 'audio-resize' + otherId;
+				range.style.position = "absolute";
+				range.style.bottom = "0";
+				range.style.left = "0";
+				range.style.zIndex = "2";
+				range.min = 0;
+				range.max = 100;
+				range.value = 50;
+				box.appendChild(range);
+				let video = document.createElement("button");
+				video.innerText = '关闭摄像头'
+				video.id = 'video' + otherId;
+				video.style.position = "absolute";
+				video.style.top = "0";
+				video.style.right = "0";
+				video.style.zIndex = "2";
+				box.appendChild(video);
+				$(".active").css("width",(100/Math.ceil(Math.sqrt($(".active").length)))+"%")
+				$(".active").css("height",(100/Math.ceil(Math.sqrt($(".active").length)))+"%")
+			}
+		</script>
+	</body>
+</html>

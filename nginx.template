@@ -1,0 +1,52 @@
+worker_processes  auto;
+events {
+    worker_connections  1024;
+}
+http {
+        include mime.types;
+        default_type  application/octet-stream;
+        client_max_body_size 50m;
+        sendfile   on;
+        keepalive_timeout 60;
+        limit_conn_zone $binary_remote_addr zone=perip:10m;
+        limit_conn_zone $server_name zone=perserver:10m;
+        server_tokens off;
+        access_log off;
+    server {
+        listen       2104;
+        server_name  localhost;
+        charset utf-8;
+        location / {
+            proxy_set_header Host $host:2104;
+            proxy_redirect off;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_connect_timeout 60;
+            proxy_read_timeout 600;
+            proxy_send_timeout 600;
+            root /etc/nginx/zuihou-ui;
+            index index.html;
+        }
+
+		# 文件访问配置 window 需要修改为 root D:/data/projects/uploadfile
+        location /file {
+            proxy_pass http://192.168.0.67:2114/file;
+        }
+        location /djapi/ {
+            proxy_set_header Host $host:2104;
+            proxy_redirect off;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            # 增加Upgrade协议头和Connection协议头，使http连接升级到websocket连接
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection "upgrade";
+            proxy_connect_timeout 60;
+            proxy_read_timeout 600;
+            proxy_send_timeout 600;
+            proxy_pass http://192.168.0.67:2103/djapi/;
+        }
+		location = /50x.html {
+            root   html;
+        }
+    }
+}

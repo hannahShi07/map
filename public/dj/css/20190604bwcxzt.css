@@ -1,0 +1,353 @@
+@charset "utf-8";
+/* CSS Document */
+
+*{
+    margin:0;
+	padding:0;
+	border:0;
+}
+body{
+	font:normal 12px/180% "宋体";
+	color:#6e6e6e;
+	background:url(../images/20190604bwcxzt_bg.jpg) no-repeat top center #faf9f5;
+}
+img{
+	overflow:hidden;
+    border:0;
+}
+li{
+    list-style:none;
+}
+a{
+	text-decoration:none;
+}
+a:hover{
+	text-decoration:none;
+	color:#cc0000;
+}
+select{
+	font:normal 12px "宋体";
+}
+
+.bwcx-wrap {
+	width:980px;
+	margin:302px auto 0;
+	padding:10px;
+	overflow:hidden;
+	clear:both;
+	background-color:#fff;
+}
+#Footer_box{
+	width:1000px;
+	height:130px;
+	padding:10px 0;
+	margin:0 auto;
+	overflow:hidden;
+	clear:both;
+	text-align:center;
+	color:#656464;
+	font:normal 16px/240% "微软雅黑","宋体"
+}
+.more{
+	text-align:right;
+	display:block;
+	width:auto;
+	float:right;
+	font:normal 14px/300% "微软雅黑";
+}
+.more a{
+	color:#252525;
+}
+.more a:hover{
+	color:#cc0000;
+}
+#div01{
+	width:980px;
+	height:360px;
+	overflow:hidden;
+	clear:both;
+}
+#IBTbox01{
+	overflow:hidden;
+	float:left;
+	width:460px;
+	height:360px;
+}
+#dtbb_box{
+	width:500px;
+	height:360px;
+	float:left;
+	overflow:hidden;
+	margin:0 0 0 20px;
+}
+#dtbb_box h1{
+	width:480px;
+	height:44px;
+	overflow:hidden;
+	clear:both;
+	background:url(http://www.tjzzb.gov.cn/images/lxyz_titlebg.jpg) no-repeat bottom left;
+	font:normal 24px/180% "微软雅黑";
+	color:#c42d18;
+}
+#dtbb_box dl{
+	overflow:hidden;
+	clear:both;
+	width:480px;
+	font:normal 17px/180% "微软雅黑","宋体";
+	color:#c91e0c;
+	margin:6px 0 0 0;
+}
+#dtbb_box dl dd{
+	width:470px;
+	height:30px;
+	float:left;
+	overflow:hidden;
+	margin:6px 0;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+	color:#252525;
+	padding:0 0 0 20px;
+	background:url(../images/lxyz_dian.jpg) no-repeat left;
+}
+#dtbb_box dl a{
+	color:#252525;
+}
+#dtbb_box dl a:hover{
+	color:#cc0000;
+}
+#div02{
+	width:980px;
+	height:90px;
+	overflow:hidden;
+	clear:both;
+	margin:20px 0 0 0;
+}
+#div02 img{
+	display:block;
+	float:left;
+}
+.odiv{
+	float:left;
+	width:480px;
+	height:280px;
+	margin:10px 0 0 0;
+}
+.odiv h2{
+	box-sizing: border-box;
+	width: 100%;
+	padding-right: 10px;
+	height:44px;
+	overflow:hidden;
+	clear:both;
+	background:url(../images/lxyz_titlebg.jpg) no-repeat bottom left;
+	font:normal 24px/180% "微软雅黑";
+	color:#c42d18;
+}
+.IBTbox15{
+	width:460px;
+	height:400px;
+	overflow:hidden;
+	float:left;
+	color:#666666;
+	margin:15px 0 0 15px;
+	font:normal 16px/180% "微软雅黑";
+}
+.IBTbox15 a{
+	color:#000000;
+}
+.IBTbox15 a:hover{
+	color:#cc0000;
+}
+.IBTbox15 li{
+	width:440px;
+	height:38px;
+	overflow:hidden;
+	zoom:1;
+	float:left;
+}
+.IBTbox15 li img{
+	width:140px;
+	height:190px;
+	padding:1px;
+	border:solid 1px #cccccc;
+	display:block;
+	float:left;
+}
+.IBTbox15 li span{
+	width:144px;
+	height:26px;
+	overflow:hidden;
+	zoom:1;
+	text-align:center;
+	display:block;
+	float:left;
+	font:normal 12px/220% "宋体";
+}
+.IBTbox15 li span a{
+	color:#282828;
+}
+.IBTbox15 li span a:hover{
+	color:#cc0000;
+}
+
+.scrollUlcc{width:480px;overflow:hidden;height:35px; float:left; border-bottom:solid 1px #e8e8e8; margin-top:10px;}
+.scrollUlcc li{float:left; width:94px; height:35px; text-align:center; line-height:35px; font-size:16px; font-family:"微软雅黑", "宋体", "黑体"; overflow:hidden; border-right:solid 1px #e8e8e8;}
+.bor02{float:left; width:480px; height:310px; overflow:hidden; margin:10px 0 0 0;}
+.sds01{cursor:pointer;}
+.sds01 a{color:#fff; display:block; background:#e0352d;}
+.sds02{cursor:pointer; border:solid 1px #e8e8e8; border-bottom:none;}
+.sds02 a{color:#4a4a4a;}
+
+
+
+#Index_nexs_ul dd a {
+	float:left;
+	width:370px;
+}
+#Index_nexs_ul dd span {
+	float:right;
+	width:100px;
+	font-size:14px;
+	color:#888;
+}
+#slider {
+	float:left;
+	width:460px;
+	height:360px;
+	border:solid 1px #dadada;
+}
+.focusBox {
+	position: relative;
+	width: 460px;
+	height: 360px;
+	overflow: hidden;
+	font: 16px/1.5 Verdana, Geneva, sans-serif;
+}
+
+.focusBox .pic a {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+.focusBox .pic img {
+	width:v;
+	height:360px;
+}
+
+.focusBox .txt-bg {
+	position: absolute;
+	bottom: 0;
+	z-index: 1;
+	height: 45px;
+	width: 100%;
+	background: #333;
+	filter: alpha(opacity=40);
+	opacity: 0.4;
+	overflow: hidden;
+}
+
+.focusBox .txt {
+	position: absolute;
+	bottom: 0;
+	z-index: 2;
+	height: 45px;
+	width: 100%;
+	overflow: hidden;
+}
+
+.focusBox .txt li {
+	height: 45px;
+	line-height: 45px;
+	position: absolute;
+	bottom: -45px;
+}
+
+.focusBox .txt li a {
+	display: block;
+	color: white;
+	padding: 0 0 0 10px;
+	font-size: 18px;
+	text-decoration: none;
+}
+
+.focusBox .num {
+	position: absolute;
+	z-index: 3;
+	bottom: 8px;
+	right: 8px;
+}
+
+.focusBox .num li {
+	float: left;
+	position: relative;
+	width: 26px;
+	height: 26px;
+	line-height: 26px;
+	overflow: hidden;
+	text-align: center;
+	margin-right: 2px;
+	cursor: pointer;
+}
+
+.focusBox .num li a, .focusBox .num li span {
+	position: absolute;
+	z-index: 2;
+	display: block;
+	color: white;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	text-decoration: none;
+}
+
+.focusBox .num li span {
+	z-index: 1;
+	background: black;
+	filter: alpha(opacity=50);
+	opacity: 0.5;
+}
+
+.focusBox .num li.on span, .focusBox .num span:hover {
+	background: #fe0000;
+}
+
+.zh-pagination {
+	margin-top: 15px;
+	height: 32px;
+	padding-left: 20px;
+}
+.zh-pagination .page-cell {
+	float: left;
+	margin-right: 6px;
+	font-size: 14px;
+	text-align: center;
+	line-height: 32px;
+	color: #999999;
+	width: 32px;
+	height: 32px;
+	border:1px solid #cccccc;
+	border-radius:4px;
+	cursor: pointer;
+}
+.zh-pagination .page-cell.actived {
+	background-color: #f22424;
+	color: #fff;
+	border-color: #f22424;
+}
+.zh-pagination .page-cell img {
+	width: 13px;
+	vertical-align: middle;
+	position: relative;
+}
+.zh-pagination .page-cell.page-prev img {
+	left: -1px;
+}
+.zh-pagination .page-cell.page-next img {
+	right: -1px;
+}
+
+
+
+

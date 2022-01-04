@@ -1,0 +1,521 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=0.3, minimum-scale=0.1, maximum-scale=2.0, user-scalable=yes">
+    <title>经济开发区智慧党建平台</title>
+    <link rel="shortcut icon" type="image/ico" href="../../../public/favicon.ico">
+    <link type="text/css" href="css/jquery.bxslider.css" rel="stylesheet">
+    <link type="text/css" href="css/branch_css.css" rel="stylesheet">
+    <link type="text/css" href="css/style_lb.css" rel="stylesheet">
+    <link type="text/css" href="css/swiper.css" rel="stylesheet">
+    <link type="text/css" href="css/public.css" rel="stylesheet">
+    <script src="js/jquery-1.8.2.js" type="text/javascript"></script>
+    <script src="js/common.js" type="text/javascript"></script>
+    <style>
+        .box {
+            position: absolute;
+            padding-top: 8px;
+            z-index: 9999;
+        }
+
+        .box .con {
+            float: left;
+            width: 520px;
+            border: 1px #c5c5c5 solid;
+            border-radius: 5px;
+            background-color: #fff;
+            z-index: 999999999;
+            padding: 10px 15px;
+            color: #333;
+        }
+
+        .box .top_site {
+            border-bottom: 1px solid #c5c5c5;
+            padding-bottom: 5px;
+            line-height: 50px;
+
+        }
+
+        .box .con-ret {
+            border: 10px solid transparent;
+            border-bottom-color: #c5c5c5;
+            position: absolute;
+            left: 30px;
+            top: -12px;
+        }
+
+        /* 白色覆盖*/
+        .box .triangle {
+            border: 10px solid transparent;
+            border-bottom-color: #fff;
+            position: absolute;
+            left: 30px;
+            top: -11px;
+        }
+
+        .box .cur_site {
+            background-color: #ffebee;
+            padding: 3px 8px;
+            color: #e44142;
+        }
+
+        .box .common_site {
+            padding-right: 30px;
+        }
+
+        .box .sub_site_list span {
+            padding-right: 20px;
+            display: block;
+            float: left;
+        }
+
+        .banner {
+            z-index: -1;
+        }
+
+        .char {
+            text-align: center;
+            margin-right: 7px;
+            margin-top: 7px;
+            float: left;
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            background-color: #f0f0f0;
+            padding: 0px;
+        }
+
+        .bigchar {
+            text-align: center;
+            margin-right: 7px;
+            margin-top: 7px;
+            float: left;
+            width: 67px;
+            height: 30px;
+            line-height: 30px;
+            background-color: #f0f0f0;
+            padding: 0px;
+        }
+
+        .idea_tu img {
+            width: 240px;
+        }
+
+        .color_red {
+            color: #e40b18;
+        }
+
+        .special_col .tit {
+            height: 42px;
+            border-bottom: 1px solid #eee;
+            line-height: 30px;
+            font-size: 16px;
+        }
+
+        .special_col .cont a {
+            width: 268px;
+            height: 110px;
+            margin-top: 15px;
+            display: block;
+        }
+
+        .news_li1 {
+            line-height: 22px;
+            position: relative;
+            padding-left: 30px;
+            font-size: 14px;
+            margin: 15px 0;
+            border-bottom: 1px dotted #eee;
+            padding-bottom: 10px;
+        }
+
+        .news_li1 i {
+            background: #ff6d76;
+            width: 15px;
+            height: 15px;
+            display: inline-block;
+            position: absolute;
+            left: 0px;
+            top: 6px;
+            font-style: normal;
+            font-size: 12px;
+            color: #fff;
+            text-align: center;
+            line-height: 15px;
+        }
+        .logo{ width:580px;}
+        .news_li1 span {
+            position: absolute;
+            right: 0;
+            top: 0;
+            font-size: 12px;
+            color: #999;
+            width: 40px;
+        }
+        .logo_name {
+            font-size: 28px;
+            line-height: 106px;
+            height: 106px;
+            /*font-weight: bold;*/
+        }
+
+        .morename {
+            font-size: 25px;
+            line-height: 40px;
+            word-wrap: break-word;
+            width: 329px;
+            padding-top: 10px;
+        }
+        [v-cloak]{display: none}
+        .tabBox{
+            background-color: #fff;
+        }
+        .tab_box{
+            background-color: #fff;
+        }
+        .pic{
+            background-color: #fff;
+        }
+        .topbanner_item {
+             position: absolute; width: 1686px; left: 0px; top: 0px; display: list-item;
+            background-position: center 0;
+            background-repeat: no-repeat;
+        }
+        .serviceplatef {
+            right: 10px;
+        }
+        #t_2 img{
+            display: none;
+        }
+        .bx-loading{
+            z-index: 0!important;
+        }
+        .text-twoline {
+            overflow:hidden;
+            text-overflow:ellipsis;
+            display:-webkit-box;
+            -webkit-box-orient:vertical;
+            -webkit-line-clamp:2;
+        }
+        .new-inline .detail{
+            height: auto;
+        }
+        .tp_imglist{
+            width: 100%;
+        }
+        .bx-wrapper .bx-next{
+            right: 0px;
+        }
+        .swiper-button-prev.swiper-button-black, .swiper-container-rtl .swiper-button-next.swiper-button-black{
+            background-image: url("images/leftbtn.png");
+            left: 10px;
+        }
+        .swiper-button-next.swiper-button-black, .swiper-container-rtl .swiper-button-prev.swiper-button-black{
+            background-image: url("images/rightbtn.png");
+            right: 10px;
+        }
+        #swiperBox .swiper-slide{
+            position: relative;
+        }
+        .swiper-container .title{
+            position: absolute;
+            height: 24px;
+            line-height: 24px;
+            bottom: 0;
+            left: 0;
+            width: calc(100% - 10px);
+            text-align: center;
+            cursor:pointer;
+            white-space:nowrap;
+            overflow:hidden;
+            text-overflow:ellipsis;
+            font-size: 18px;
+            color: #FFFFFF;
+            padding: 0 5px;
+            padding-bottom: 16px;
+        }
+        .swiper-pagination-bullet{
+            width: 13px;
+            height: 13px;
+            background-color: #fff;
+            opacity: 1;
+        }
+        .swiper-pagination-bullet-active{
+            background: #ED3C3C;
+        }
+        .swiper-pagination{
+            height: 24px;
+            line-height: 24px;
+            text-align: right;
+            right: 20px;
+        }
+        .news_li{
+            line-height: 34px;
+            height: 34px;
+        }
+    </style>
+    <script src="js/jquery.fn.imgplayer.js"></script>
+</head>
+
+<body style="background-color: #f0f0f0;">
+<div class="container" v-cloak>
+    <!-- 头部 -->
+    <header-nav :actived="0"></header-nav>
+    <div class="fullSlide">
+        <div class="bd">
+            <ul style="position: relative; width: 1686px; height: 460px;">
+                <li v-for="(item,index) in topBannerList" class="topbanner_item" :style="{'backgroundImage': 'url(' + item.picture + ')'}"></li>
+            </ul>
+        </div>
+        <div class="hd">
+            <ul>
+                <li class="on">1</li>
+                <li class="">2</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 主体 -->
+    <div style="background-color: #fff">
+        <div class="w1100">
+            <br>
+            <br>
+            <!-- 图片新闻 -->
+            <div class="newsmain clearfix">
+                <!-- 新闻左侧 -->
+                <div class="fl pic">
+                    <div id="swiperBox" class="swiper-container"
+                         style="width: 530px; height: 350px;">
+                        <ul class="items swiper-wrapper">
+                            <li v-for="(value,index) in newsImgList" class="slide swiper-slide" v-if="newsImgList && newsImgList.length > 0" :key="index">
+                                <a href="javascript:;">
+                                    <img :src="value.image" :data-index="index" style="margin: 0px; padding: 0px;width: 530px; height: 350px;">
+                                    <span class="title" >{{value.title |filterLength}}</span>
+                                </a>
+                            </li>
+                            <li class="slide swiper-slide"  v-if="!(newsImgList && newsImgList.length > 0)">
+                              <a href="javascript:;">
+                                <img src="images/yqjs.png" style="margin: 0px; padding: 0px;width: 530px; height: 350px;">
+
+                              </a>
+                            </li>
+                        </ul>
+                        <div class="swiper-pagination"></div>
+                    </div>
+                </div>
+                <!-- 新闻右侧 -->
+                <div class="fr newslist tabBox">
+                    <div class="news-header">
+                        <img src="images/content.png" alt=""/>
+                        <span class="news-title" @click="lookDetail('bsTxt.html','','1','0')">园区介绍</span>
+                        <a class="right_link actived" @click="lookDetail('bsTxt.html','','1','0')">更多</a>
+                    </div>
+                    <div class="new-box" @click="lookInfo(info)">
+                        <div class="news_li">
+                            <a href="javascript:;" v-html="info.brief"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 新闻列表 end-->
+            <!--新增横幅-->
+            <div class="smallbanner" style="margin: 10px 0;">
+                <a href="javascript:;">
+                    <img src="images/smallbanner.png" alt="" style="width:100%;height: 105px;display: block;">
+                </a>
+            </div>
+            <!--新增横幅-->
+            <br>
+            <!-- 园区党建|党建动态 -->
+            <div class="tab_score_box clearfix">
+                <!-- 园区党建 -->
+                <div class="fl newslist tabBox" style="width: 535px;margin-right: 28px;">
+                    <div class="news-header">
+                        <img src="images/content.png" alt=""/>
+                        <span class="news-title" @click="lookDetail('tzgg.html','27','2','0','yqdj')">园区党建</span>
+                        <a class="right_link actived" @click="lookDetail('tzgg.html','27','2','0','yqdj')">更多</a>
+                    </div>
+                    <div class="new-box" v-if="tabInfo[0] && tabInfo[0].length">
+                        <div class="news_li" v-for="(value,index,) in tabInfo[0]" v-if="index<9"
+                             @click="lookDetail('text.html','27','2',value.infoId)">
+                            <i></i>
+                            <a href="#">{{value.title | filterLength}}</a>
+                            <span>{{value.publishdate | filterDateSub}}</span>
+                        </div>
+                    </div>
+                    <div class="nodata-wrap" style="margin-top: 80px;min-height: 500px;" else>
+                      <img src="images/nodata.png" alt="">
+                      <p class="txt">暂无数据</p>
+                    </div>
+                </div>
+                <!--党建动态 -->
+                <div class="tab_box tabBox" style="margin-right: 0;width: 535px;"  >
+                    <div class="news-header">
+                        <img src="images/content.png" alt=""/>
+                        <span class="news-title" @click="lookDetail('tzgg.html','64','4','0','djdt')">党建动态</span>
+                        <a class="right_link actived" @click="lookDetail('tzgg.html','64','4','0','djdt')">更多</a>
+                    </div>
+                    <div class="new-box" v-if="tabInfo[6] && tabInfo[6].length">
+                        <div class="news_li" v-for="(value,index,) in tabInfo[6]" v-if="index<9"
+                             @click="lookDetail('text.html','64','4',value.infoId)">
+                            <i></i>
+                            <a href="#">{{value.title | filterLength}}</a>
+                            <span>{{value.publishdate | filterDateSub}}</span>
+                        </div>
+                    </div>
+                    <div class="nodata-wrap" style="margin-top: 80px;min-height: 500px;" v-if="!(tabInfo[6] && tabInfo[6].length)">
+                      <img src="images/nodata.png" alt="">
+                      <p class="txt">暂无数据</p>
+                    </div>
+                </div>
+            </div>
+            <!--新增横幅-->
+            <!--<div class="smallbanner" style="margin: 10px 0;">-->
+                <!--<a href="javacript:void(0);">-->
+                    <!--<img src="images/smallBanners.jpg" alt="" style="width:100%;height: 105px;display: block;">-->
+                <!--</a>-->
+            <!--</div>-->
+            <!--党建要闻|党建特色-->
+            <!--<div class="tab_box_main clearfix tabBox">-->
+                <!--<div class="fl newslist tabBox" style="width: 535px;margin-right: 28px;" >-->
+                    <!--<div class="news-header">-->
+                        <!--<img src="images/content.png" alt=""/>-->
+                        <!--<span class="news-title" @click="lookDetail('tzgg.html','14','100','0','djyw')">党建要闻</span>-->
+                        <!--<a class="right_link actived" @click="lookDetail('tzgg.html','14','100','0','djyw')">更多</a>-->
+                    <!--</div>-->
+                    <!--<div class="new-box">-->
+                        <!--<div class="news_li" v-for="(value,index,) in tabInfo[5]" v-if="index<9"-->
+                             <!--@click="lookDetail('bsTxt.html','','',value.infoId)">-->
+                            <!--<i></i>-->
+                            <!--<a href="#">{{value.title | filterLength}}</a>-->
+                            <!--<span>{{value.publishdate | filterDateSub}}</span>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="tab_box tabBox" style="margin-right: 0;width: 535px;"  >-->
+                    <!--<div class="news-header">-->
+                        <!--<img src="images/content.png" alt=""/>-->
+                        <!--<span class="news-title" @click="lookDetail('tzgg.html','113','2','0','djts')">党建特色</span>-->
+                        <!--<a class="right_link actived" @click="lookDetail('tzgg.html','113','2','0','djts')">更多</a>-->
+                    <!--</div>-->
+                    <!--<div class="new-box">-->
+                        <!--<div class="news_li" v-for="(value,index,) in tabInfo[4]" v-if="index<9"-->
+                             <!--@click="lookDetail('text.html','113','2',value.infoId)">-->
+                            <!--<i></i>-->
+                            <!--<a href="#">{{value.infoId}}{{value.title | filterLength}}</a>-->
+                            <!--<span>{{value.publishdate | filterDateSub}}</span>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="tab_box_main clearfix tabBox"  >-->
+                <!--<div class="fl newslist tabBox" style="width: 100%;margin-right: 28px;">-->
+                    <!--<div class="news-header">-->
+                        <!--<img src="images/content.png" alt=""/>-->
+                        <!--<span class="news-title"  @click="lookDetail('tzgg.html','23','5','0','tzgg')">通知公告</span>-->
+                        <!--<a class="right_link actived"  @click="lookDetail('tzgg.html','23','5','0','tzgg')">更多</a>-->
+                    <!--</div>-->
+                    <!--<div class="new-box">-->
+                        <!--<div class="news_li" v-for="(value,index,) in tabInfo[8]" v-if="index<9"-->
+                             <!--@click="lookDetail('text.html','23','5',value.infoId)">-->
+                            <!--<i></i>-->
+                            <!--<a href="#">{{value.title | filterLength}}</a>-->
+                            <!--<span>{{value.publishdate | filterDateSub}}</span>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+
+            <!--增加 图片展示和友情链接-->
+            <div class="tab_box" style="margin-right: 0;width: 100%;float: none;" v-if="imgShowList && imgShowList.length > 0">
+                <div class="tit">
+                    <a href="javascript:;"  class="hover">图片展示</a>
+                </div>
+                <div class="tab_box_cont clearfix">
+                    <div class="zs_pic">
+                        <dl class="active">
+                            <div class="tp_imgbox imgbox01">
+                                <div class="tp_imglist ">
+                                    <div class="swiper-container" id="imgDisplay">
+                                        <ul class="scroll-body mylabel-list slider2 swiper-wrapper" id="pic_slider" style="margin-left: 0px;height: 190px">
+                                            <!--<li class="slide swiper-slide" v-for="(item,index) in imgShowList" :key="index" :data-i="index" @click="lookDetail('text.html',0,0,item.infoId,item.nodeCode)">-->
+                                          <li class="slide swiper-slide" v-for="(item,index) in imgShowList" :key="index">
+                                                <div >
+                                                  <img :src="changeImgSrc(item)"
+                                                       width="275" height="190">
+                                                  <span class="title" :data-index="index">{{item.title}}</span>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <div class="swiper-button-next swiper-button-black"></div>
+                                        <div class="swiper-button-prev swiper-button-black"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+            <div class="tab_box friendlylink-box" style="margin-right: 0;width: 100%;float: none;">
+                <div class="tit">
+                    <a href="javascript:;"  class="hover">友情链接</a>
+                </div>
+                <div class="tab_box_cont clearfix">
+                    <div class="zs_pic">
+                        <dl class="active">
+                            <div class="tp_imgbox imgbox01">
+                                <div class="tp_imglist ">
+                                    <div class="swiper-container" id="link_slider">
+                                        <ul class="scroll-body mylabel-list slider2 swiper-wrapper">
+                                            <li class="slide swiper-slide" v-for="(item,index) in linkImgList">
+                                                <div v-if="item.linkAddress!='' && item.linkAddress!=undefined && item.linkAddress!=null && item.linkAddress!='null'" @click="openlink(item.linkAddress)">
+                                                    <img :src="item.picture" width="275" height="84">
+                                                </div>
+                                                <div v-if="!(item.linkAddress!='' && item.linkAddress!=undefined && item.linkAddress!=null && item.linkAddress!='null')">
+                                                  <img :src="item.picture" width="275" height="84">
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <div class="swiper-button-next swiper-button-black"></div>
+                                        <div class="swiper-button-prev swiper-button-black"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 底部 -->
+    <div class="foot">
+        <div class="w1100">
+            <!--<span></span>-->
+            <!--<span>主办单位：开发区管理委员会      皖ICP备F - 20190040号</span>-->
+            <!--<span>联系电话：0561-6063787</span>-->
+            <!--<span style="line-height: 20px;">系统推荐使用chrome、safari、IE9及以上浏览器，最佳显示分辩率为1280X800或更高。</span>-->
+        </div>
+    </div>
+</div>
+<script src="js/vue.min.js" type="text/javascript"></script>
+<script src="js/public.js" type="text/javascript"></script>
+<script src="index.js" type="text/javascript"></script>
+<script src="js/jquery.SuperSlide.2.1.1.js"></script>
+<script src="js/jquery.bxslider.js"></script>
+<script src="js/swiper.js"></script>
+<script>
+    function changeTopTab(index, tab) {
+        $(tab).closest(".tabBox").find(".t_tab").removeClass("hover white");
+        $(tab).addClass("hover white");
+        $(tab).closest(".tabBox").find(".tab-con").hide();
+        $('#t_'+index).show();
+    }
+</script>
+</body>
+</html>

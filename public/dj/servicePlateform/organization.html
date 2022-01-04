@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>党组织</title>
+    <link rel="stylesheet" href="css/zTreeStyle/zTreeStyle.css" type="text/css">
+    <link rel="stylesheet" href="layui/css/layui.css"  media="all">
+    <link rel="stylesheet" href="css/plateform.css">
+    <style type="text/css">
+        .ztree li span.button.add {margin-left:2px; margin-right: -1px; background-position:-144px 0; vertical-align:top; *vertical-align:middle}
+    </style>
+    <script type="text/javascript" src="js/jquery-1.4.4.min.js"></script>
+    <script type="text/javascript" src="js/jquery.ztree.core.js"></script>
+    <script type="text/javascript" src="js/jquery.ztree.excheck.js"></script>
+    <script src="../js/common.js" type="text/javascript"></script>
+    <!--<script type="text/javascript" src="js/jquery.ztree.exedit.js"></script>-->
+    <script type="text/javascript">
+        var setting = {
+            view: {
+                addHoverDom: addHoverDom,
+                removeHoverDom: removeHoverDom,
+                selectedMulti: false
+            },
+            edit: {
+                enable: true,
+                editNameSelectAll: true,
+                showRemoveBtn: showRemoveBtn,
+                showRenameBtn: showRenameBtn
+            },
+            data: {
+                simpleData: {
+                    enable: true
+                }
+            },
+            callback: {
+                //单击事件
+                onClick: zTreeOnClick,
+                beforeDrag: beforeDrag,
+                beforeEditName: beforeEditName,
+                beforeRemove: beforeRemove,
+                beforeRename: beforeRename,
+                onRemove: onRemove,
+                onRename: onRename
+            }
+        };
+
+        var zNodes =[
+            { id:1, pId:0, name:"组织机构", open:true},
+            { id:11, pId:1, name:"中共县经济开发区委员会",open:true},
+            { id:1101, pId:11, name:"(A类示范类)中共安徽理工电源技术有限公司党总支部",open:true},
+            { id:110101, pId:1101, name:"中共安徽理工电源技术有限公司行政设备党支部"},
+            { id:110102, pId:1101, name:"中共安徽理工电源技术有限公司生产技术党支部"},
+            { id:110103, pId:1101, name:"中共安徽理工电源技术有限公司行政设备党支部"},
+            { id:110103, pId:1101, name:"中共安徽理工电源技术有限公司生产技术党支部"},
+            { id:12, pId:1, name:"(A类示范类)中共安徽华中天力铝业有限公司党支部"},
+            { id:13, pId:1, name:"(A类示范类)中共安徽巨成精细化工有限公司党支部"},
+            { id:14, pId:1, name:"(B类稳健类)中共安徽浩丰实业有限公司党支部"},
+            { id:15, pId:1, name:"(C类成长类)中共淮北矿山机器制造有限公司党支部"}
+        ];
+        var className = "dark";
+        // 单击事件
+        function zTreeOnClick(event, treeId, treeNode) {
+            alert(treeNode.tId + ", " + treeNode.name);
+        }
+        function beforeDrag(treeId, treeNodes) {
+            return false;
+        }
+        function beforeEditName(treeId, treeNode) {
+            className = (className === "dark" ? "":"dark");
+            var zTree = $.fn.zTree.getZTreeObj("organizeTree");
+            zTree.selectNode(treeNode);
+            setTimeout(function() {
+                if (confirm("进入节点 -- " + treeNode.name + " 的编辑状态吗？")) {
+                    setTimeout(function() {
+                        zTree.editName(treeNode);
+                    }, 0);
+                }
+            }, 0);
+            return false;
+        }
+        function beforeRemove(treeId, treeNode) {
+            className = (className === "dark" ? "":"dark");
+            var zTree = $.fn.zTree.getZTreeObj("organizeTree");
+            zTree.selectNode(treeNode);
+            return confirm("确认删除 节点 -- " + treeNode.name + " 吗？");
+        }
+        function onRemove(e, treeId, treeNode) {
+            showLog("[ "+getTime()+" onRemove ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name);
+        }
+        function beforeRename(treeId, treeNode, newName, isCancel) {
+            className = (className === "dark" ? "":"dark");
+            if (newName.length == 0) {
+                setTimeout(function() {
+                    var zTree = $.fn.zTree.getZTreeObj("organizeTree");
+                    zTree.cancelEditName();
+                    alert("节点名称不能为空.");
+                }, 0);
+                return false;
+            }
+            return true;
+        }
+        function onRename(e, treeId, treeNode, isCancel) {
+            return true;
+        }
+        function showRemoveBtn(treeId, treeNode) {
+            return true;
+        }
+        function showRenameBtn(treeId, treeNode) {
+            return true;
+        }
+        var newCount = 1;
+        function addHoverDom(treeId, treeNode) {
+            var sObj = $("#" + treeNode.tId + "_span");
+            if (treeNode.editNameFlag || $("#addBtn_"+treeNode.tId).length>0) return;
+            var addStr = "<span class='button add' id='addBtn_" + treeNode.tId
+                + "' title='add node' onfocus='this.blur();'></span>";
+            sObj.after(addStr);
+            var btn = $("#addBtn_"+treeNode.tId);
+            if (btn) btn.bind("click", function(){
+                var zTree = $.fn.zTree.getZTreeObj("organizeTree");
+                zTree.addNodes(treeNode, {id:(100 + newCount), pId:treeNode.id, name:"new node" + (newCount++)});
+                return false;
+            });
+        };
+        function removeHoverDom(treeId, treeNode) {
+            $("#addBtn_"+treeNode.tId).unbind().remove();
+        };
+        function selectAll() {
+            var zTree = $.fn.zTree.getZTreeObj("organizeTree");
+            zTree.setting.edit.editNameSelectAll =  $("#selectAll").attr("checked");
+        }
+
+        $(document).ready(function(){
+            $.fn.zTree.init($("#organizeTree"), setting, zNodes);
+            $("#selectAll").bind("click", selectAll);
+        });
+    </script>
+</head>
+<body>
+    <div class="container" style="overflow-x: hidden">
+        <div class="headbox">
+            <div class="header">
+                <div class="logo"><img src="images/logo.png">
+                    <div class="logo_name" style="padding-left: 5px;">组织部党支部</div>
+                </div>
+              <!--  <div class="fr top_r"><a target="_blank" class="reg" href="">注册</a><a class="uclog" href="">登录</a><a class="userlog" href="http://sys.sxjkqdj.cn/login">管理员登录</a></div>-->
+                <div class="fr search">
+                    <form action="" method="post">
+                        <ul class="clearfix">
+                            <li class="se_box"><input class="search-keywords" name="infoTitle" type="text" value="" size="24" maxlength="30" placeholder="请输入搜索关键词" data-rule="关键词:required"></li>
+                            <li class="sea_an"><input name="" type="submit" value="" class="topsearchbtn"></li>
+                        </ul>
+                    </form>
+                </div>
+                <!--新增数据平台入口-->
+                <a href="" class="serviceplatef" target="_blank">
+                    <img src="../images/dataservice.png" alt="">
+                    <p class="txt">大数据服务</p>
+                </a>
+            </div>
+        </div>
+        <div class="menubox">
+            <div class="menu">
+                <dl class="sev" style="z-index:1000">
+                    <dd><a href="">网站首页</a>
+                        <div class="sec_nav dpnone"></div>
+                    </dd>
+                    <dd><a href="" class="">通知公告</a>
+                        <div class="sec_nav dpnone" style="display: block;"></div>
+                    </dd>
+                    <dd><a href="" class="">园区介绍</a>
+                        <div class="sec_nav" style="display: none;"></div>
+                    </dd>
+                    <dd><a href="">班子成员</a>
+                        <div class="sec_nav dpnone"></div>
+                    </dd>
+                    <dd><a href="" class="">时政要闻</a>
+                        <div class="sec_nav dpnone" style="display: block;"></div>
+                    </dd>
+                    <dd><a href="">工作动态</a>
+                        <div class="sec_nav dpnone"></div>
+                    </dd>
+                    <dd><a href="">基层党建</a>
+                        <div class="sec_nav dpnone"></div>
+                    </dd>
+                    <dd><a href="">政治文件</a>
+                        <div class="sec_nav dpnone"></div>
+                    </dd>
+                    <dd class="last"><a href="">当地特色</a>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+
+        <div class="organization-wrap">
+            <div class="left-tree">
+                <div class="innerblock">
+                    <ul id="organizeTree" class="ztree" style="width:100%; overflow-x:hidden;overflow-y: auto"></ul>
+                </div>
+            </div>
+            <div class="right-con">
+                <div class="innerblock">
+                    <table class="layui-table" lay-data="{height: 'full-200', cellMinWidth: 80, url:'data/data.json', page:true, id:'idTest'}" lay-filter="demo">
+                        <thead>
+                        <tr>
+                            <th lay-data="{type:'checkbox'}"></th>
+                            <th lay-data="{field:'organize', minWidth:280}">党组织</th>
+                            <th lay-data="{field:'username', width:120, sort: true}">用户姓名</th>
+                            <th lay-data="{field:'phone', width:130}">手机号</th>
+                            <th lay-data="{field:'type', width:120}">人员类别</th>
+                            <th lay-data="{field:'date',width:120,sort: true}">入党日期</th>
+
+                            <th lay-data="{fixed: 'right', width:178, align:'center', toolbar: '#barDemo'}">操作</th>
+                        </tr>
+                        </thead>
+                    </table>
+
+                    <script type="text/html" id="barDemo">
+                        <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+                        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+                        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="layui/layui.all.js" charset="utf-8"></script>
+    <script>
+        layui.use('table', function(){
+            var table = layui.table;
+
+            //监听表格复选框选择
+            table.on('checkbox(demo)', function(obj){
+                console.log(obj)
+            });
+            //监听工具条
+            table.on('tool(demo)', function(obj){
+                var data = obj.data;
+                if(obj.event === 'detail'){
+                    layer.msg('ID：'+ data.id + ' 的查看操作');
+                } else if(obj.event === 'del'){
+                    layer.confirm('真的删除行么', function(index){
+                        obj.del();
+                        layer.close(index);
+                    });
+                } else if(obj.event === 'edit'){
+                    layer.alert('编辑行：<br>'+ JSON.stringify(data))
+                }
+            });
+
+            var $ = layui.$, active = {
+                getCheckData: function(){ //获取选中数据
+                    var checkStatus = table.checkStatus('idTest')
+                        ,data = checkStatus.data;
+                    layer.alert(JSON.stringify(data));
+                }
+                ,getCheckLength: function(){ //获取选中数目
+                    var checkStatus = table.checkStatus('idTest')
+                        ,data = checkStatus.data;
+                    layer.msg('选中了：'+ data.length + ' 个');
+                }
+                ,isAll: function(){ //验证是否全选
+                    var checkStatus = table.checkStatus('idTest');
+                    layer.msg(checkStatus.isAll ? '全选': '未全选')
+                }
+            };
+
+            $('.demoTable .layui-btn').on('click', function(){
+                var type = $(this).data('type');
+                active[type] ? active[type].call(this) : '';
+            });
+        });
+    </script>
+</body>
+</html>
