@@ -1,5 +1,6 @@
 <template>
   <div class="home-cla">
+    <remote-js src="https://webapi.amap.com/maps?v=1.4.15&key=7d672eba11887a4fe23b906e62683577"></remote-js>
       <!--公用部分-->
       <com-background-box :index="4">
         <!--页面内容-->
@@ -7,46 +8,91 @@
           <div class="content-left">
             <div class="content-left-top" v-cloak v-loading="loading">
               <div class="content-left-top-title">
-                <img src="@/assets/image/icon-img-12.png">
-                <span>园区简介</span>
+                <img src="@/assets/image/icon-img-027.png">
+                <span>盐碱地概况</span>
               </div>
               <div class="content-left-top-box">
-                  <vue-seamless-scroll v-show="flagS" :data="partylist1" :class-option="classOption" class="warp">
-                    <ul ref="ulH" class="content-left-top-ul" v-if="!noData1">
-                      <li v-for="(item,index) in partylist1" :key="index">
-                        <span class="content-left-top-ul-li-txt" v-html="item.parkContent"></span>
-                        <img class="content-left-top-ul-li-top" src="@/assets/image/icon-img-top.png">
-                      </li>
-                    </ul>
-                  </vue-seamless-scroll>
-                  <ul class="content-left-top-ul" v-if="!noData1 && !flagS">
-                    <li v-for="(item,index) in partylist1" :key="index">
-                      <span class="content-left-top-ul-li-txt" v-html="item.parkContent"></span>
-                      <img class="content-left-top-ul-li-top" src="@/assets/image/icon-img-top.png">
-                    </li>
-                  </ul>
-
-
-                <div class="no-data" v-if="noData1">
-                  <img src="@/assets/image/noData/noData.png">
-                  <div>暂无内容</div>
-                </div>
+                <ul class="top-list">
+                  <li class="cell">
+                    <p class="num">42 <i>个</i></p>
+                    <p class="tit">盐碱地数量</p>
+                  </li>
+                  <li class="cell">
+                    <p class="num">4 <i>万平方</i></p>
+                    <p class="tit">盐碱地总面积</p>
+                  </li>
+                  <li class="cell">
+                    <p class="num">13 <i>个</i></p>
+                    <p class="tit">盐碱地种植种类</p>
+                  </li>
+                </ul>
+                <ul class="content-right-top-ul statistics-box">
+                  <li>
+                    <div class="content-right-top-ul-li-img">
+                      <img src="@/assets/image/icon-img-031.png">
+                      <img class="content-right-top-ul-li-imgtrian" src="@/assets/image/icon-img-8.png">
+                    </div>
+                    <div class="content-right-top-ul-li-txt">
+                    <span>
+                      <i>4</i>
+                      个</span>
+                      <span class="color-blur">重度盐碱地</span>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="content-right-top-ul-li-img">
+                      <img src="@/assets/image/icon-img-032.png">
+                      <img class="content-right-top-ul-li-imgtrian" src="@/assets/image/icon-img-9.png">
+                    </div>
+                    <div class="content-right-top-ul-li-txt">
+                    <span>
+                      <i>10</i>
+                      个</span>
+                      <span class="color-blur">中度盐碱地</span>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="content-right-top-ul-li-img">
+                      <img src="@/assets/image/icon-img-033.png">
+                      <img class="content-right-top-ul-li-imgtrian" src="@/assets/image/icon-img-11.png">
+                    </div>
+                    <div class="content-right-top-ul-li-txt">
+                    <span>
+                      <i>28</i>
+                      个</span>
+                      <span class="color-blur">轻度盐碱地</span>
+                    </div>
+                  </li>
+                </ul>
               </div>
             </div>
 
             <div class="content-left-bottom" v-cloak v-loading="loading">
               <div class="content-left-bottom-title">
-                <img src="@/assets/image/icon-img-3.png">
-                <span>园区从业人数</span>
+                <img src="@/assets/image/icon-img-028.png">
+                <span>盐碱地参数</span>
               </div>
-              <div class="content-left-bottom-box" v-if="!noData3">
-                <div id="echartsJobs"  style="width:100%;height:100%;"/>
-              </div>
-              <div class="content-left-bottom-box" v-if="noData3">
-                <div class="no-data">
-                  <img src="@/assets/image/noData/noData.png">
-                  <div>暂无内容</div>
-                </div>
+              <div class="content-left-bottom-box">
+                 <el-select v-model="value" placeholder="请选择" class="select-box">
+                   <el-option
+                     v-for="item in options"
+                     :key="item.value"
+                     :label="item.label"
+                     :value="item.value">
+                   </el-option>
+                 </el-select>
+                <ul class="area-parameter clearfix">
+                  <li class="info"><label>温度: </label><span>9℃</span></li>
+                  <li class="info"><label>光照强度: </label><span>45635LUX</span></li>
+                  <li class="info"><label>有效活菌数: </label><span>234</span></li>
+                  <li class="info"><label>硫化物: </label><span>0.3%</span></li>
+                  <li class="info"><label>PH值: </label><span>9.0</span></li>
+                  <li class="info"><label>有机质: </label><span>6%</span></li>
+                  <li class="info"><label>全氮: </label><span>0.5%</span></li>
+                  <li class="info"><label>水分: </label><span>47%</span></li>
+                  <li class="info"><label>含盐量: </label><span>0.9%</span></li>
+                  <li class="info"><label>含碱量: </label><span>0.6%</span></li>
+                </ul>
               </div>
             </div>
 
@@ -54,98 +100,173 @@
           </div>
           <!--地图 start-->
           <div class="map-content">
-            <div class="map-box" id="id-map-content">
+<!--            <div class="map-box" id="id-map-content">
               <canvas id="canvas"></canvas>
               <canvas id="canvas2"></canvas>
             </div>
 
-            <!--按钮-->
+            &lt;!&ndash;按钮&ndash;&gt;
             <div class="button-box">
               <span class="boxactived" @click="editBtn(3)">智能家电<i></i></span>
               <span @click="editBtn(4)">生命健康<i></i></span>
-            </div>
+            </div>-->
 
+            <div id="container" class="map" style="position: fixed;width: 100%;height: 100%;left: 0;bottom: 0;z-index: 10"></div>
           </div>
           <!--地图 end-->
 
           <div class="content-right">
             <div class="content-right-top" v-cloak v-loading="loading">
               <div class="content-right-top-title">
-                <img src="@/assets/image/icon-img-14.png">
-                <span>园区企业规模</span>
+                <img src="@/assets/image/icon-img-029.png">
+                <span>成果</span>
               </div>
               <div class="content-right-top-img">
-                <img src="@/assets/image/icon-img-13.png">
+                <img src="@/assets/image/icon-img-034.png">
               </div>
-
-              <ul class="content-right-top-ul">
-                <li>
-                  <div class="content-right-top-ul-li-img">
-                    <img src="@/assets/image/icon-img-6.png">
-                    <img class="content-right-top-ul-li-imgtrian" src="@/assets/image/icon-img-8.png">
-                  </div>
-                  <div class="content-right-top-ul-li-txt">
-                    <span>
-                      <i v-if="partylist2">{{partylist2.scaleValue | getNum}}</i>
-                      <i v-else>0</i>
-                      家</span>
-                    <span class="color-blur">园区企业总数</span>
-                  </div>
-                </li>
-                <li>
-                  <div class="content-right-top-ul-li-img">
-                    <img src="@/assets/image/icon-img-2.png">
-                    <img class="content-right-top-ul-li-imgtrian" src="@/assets/image/icon-img-9.png">
-                  </div>
-                  <div class="content-right-top-ul-li-txt">
-                    <span>
-                      <i v-if="partylist2">{{partylist2.scaleIncrease | getNum}}</i>
-                      <i v-else>0</i>
-                      家</span>
-                    <span class="color-blur">园区规上企业</span>
-                  </div>
-                </li>
-                <li>
-                  <div class="content-right-top-ul-li-img">
-                    <img src="@/assets/image/icon-img-1.png">
-                    <img class="content-right-top-ul-li-imgtrian" src="@/assets/image/icon-img-10.png">
-                  </div>
-                  <div class="content-right-top-ul-li-txt">
-                    <span>
-                      <i v-if="partylist2">{{partylist2.scaleItem | getNum}}</i>
-                      <i v-else>0</i>
-                      家</span>
-                    <span class="color-blur">园区税收超千万企业</span>
-                  </div>
-                </li>
-                <li>
-                  <div class="content-right-top-ul-li-img">
-                    <img src="@/assets/image/icon-img-5.png">
-                    <img class="content-right-top-ul-li-imgtrian" src="@/assets/image/icon-img-11.png">
-                  </div>
-                  <div class="content-right-top-ul-li-txt">
-                    <span>
-                      <i v-if="partylist2">{{partylist2.scaleInvest | getNum}}</i>
-                      <i v-else>0</i>
-                      家</span>
-                    <span class="color-blur">园区上市公司及子公司</span>
-                  </div>
-                </li>
-              </ul>
+              <div class="table-out-box table-box-scroll">
+                <table class="table-box">
+                  <colgroup>
+                    <col width="32%">
+                    <col width="22%">
+                    <col width="22%">
+                    <col width="24%">
+                  </colgroup>
+                  <thead>
+                    <tr>
+                      <th>盐碱地名称</th>
+                      <th>品种类型</th>
+                      <th>种植面积</th>
+                      <th>产量（Kg）</th>
+                    </tr>
+                  </thead>
+                </table>
+                <div class="scroll-box">
+                  <table class="table-box ">
+                    <colgroup>
+                      <col width="32%">
+                      <col width="22%">
+                      <col width="22%">
+                      <col width="24%">
+                    </colgroup>
+                    <tbody>
+                    <tr>
+                      <td>齐齐哈尔A盐碱地</td>
+                      <td>小麦</td>
+                      <td>50公顷</td>
+                      <td>337500</td>
+                    </tr>
+                    <tr>
+                      <td>齐齐哈尔B盐碱地</td>
+                      <td>水稻</td>
+                      <td>50公顷</td>
+                      <td>337500</td>
+                    </tr>
+                    <tr>
+                      <td>绥化A盐碱地 </td>
+                      <td>小麦</td>
+                      <td>50公顷</td>
+                      <td>337500</td>
+                    </tr>
+                    <tr>
+                      <td>绥化B盐碱地</td>
+                      <td>水稻</td>
+                      <td>50公顷</td>
+                      <td>337500</td>
+                    </tr>
+                    <tr>
+                      <td>大庆A盐碱地 </td>
+                      <td>小麦</td>
+                      <td>50公顷</td>
+                      <td>337500</td>
+                    </tr>
+                    <tr>
+                      <td>大庆B盐碱地</td>
+                      <td>水稻</td>
+                      <td>50公顷</td>
+                      <td>337500</td>
+                    </tr>
+                    <tr>
+                      <td>佳木斯A盐碱地 </td>
+                      <td>小麦</td>
+                      <td>50公顷</td>
+                      <td>337500</td>
+                    </tr>
+                    <tr>
+                      <td>佳木斯B盐碱地</td>
+                      <td>水稻</td>
+                      <td>50公顷</td>
+                      <td>337500</td>
+                    </tr>
+                    <tr>
+                      <td>牡丹江A盐碱地 </td>
+                      <td>小麦</td>
+                      <td>50公顷</td>
+                      <td>337500</td>
+                    </tr>
+                    <tr>
+                      <td>牡丹江B盐碱地</td>
+                      <td>水稻</td>
+                      <td>50公顷</td>
+                      <td>337500</td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </div>
 
             <div class="content-right-bottom" v-cloak v-loading="loading">
               <div class="content-right-bottom-title">
-                <img src="@/assets/image/icon-img-4.png">
-                <span>园区企业类型</span>
+                <img src="@/assets/image/icon-img-030.png">
+                <span>治理结果</span>
               </div>
-              <div class="content-right-bottom-box actived" v-if="!noData4">
-                <div id="echartsType"  style="width:100%;height:100%;"/>
-              </div>
-              <div class="content-right-bottom-box" v-if="noData4">
-                <div class="no-data">
-                  <img src="@/assets/image/noData/noData.png">
-                  <div>暂无内容</div>
+              <div class="table-out-box run-res">
+                <el-select v-model="value2" placeholder="请选择" class="select-box">
+                  <el-option
+                    v-for="item in options"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value">
+                  </el-option>
+                </el-select>
+                <div class="table-box-scroll">
+                  <table class="table-box">
+                    <thead>
+                    <tr>
+                      <th>类型</th>
+                      <th>2020年参数</th>
+                      <th>2021年参数</th>
+                      <th>对比</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                      <td>含碱量</td>
+                      <td>0.3cmol/kg</td>
+                      <td>0.3cmol/kg</td>
+                      <td>持平</td>
+                    </tr>
+                    <tr>
+                      <td>产量</td>
+                      <td>330000kg</td>
+                      <td>337500kg</td>
+                      <td>上升 <img src="@/assets/image/icon-img-035.png"></td>
+                    </tr>
+                    <tr>
+                      <td>碱化度</td>
+                      <td>15%</td>
+                      <td>13%</td>
+                      <td>下降 <img src="@/assets/image/icon-img-036.png"></td>
+                    </tr>
+                    <tr>
+                      <td>PH值</td>
+                      <td>8.5</td>
+                      <td>9.0</td>
+                      <td>上升 <img src="@/assets/image/icon-img-035.png"></td>
+                    </tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>
@@ -173,7 +294,15 @@
     export default {
       name: "screenLogin",
       components: {
-        ComBackgroundBox
+        ComBackgroundBox,
+        'remote-js': {
+          render(createElement) {
+            return createElement('script', { attrs: { type: 'text/javascript', src: this.src }});
+          },
+          props: {
+            src: { type: String, required: true },
+          },
+        },
       },
       data() {
         let self = this;
@@ -196,7 +325,22 @@
           pointBounceYRAF: null,
           circleRAF: null,
           scale: 1,
-
+          options: [
+            {
+              value: 'aa',
+              label: '齐齐哈尔 A 盐碱地'
+            },
+            {
+              value: 'bb',
+              label: '齐齐哈尔 B 盐碱地'
+            },
+            {
+              value: 'cc',
+              label: '齐齐哈尔 C 盐碱地'
+            },
+          ],
+          value: '',
+          value2: '',
         }
       },
       computed: {
@@ -575,7 +719,7 @@
 
         // 初始化map
         initMapCanvas() {
-          console.log("canvas init ....");
+         /* console.log("canvas init ....");
 
           this.clearRAF(); // 清除定时器
 
@@ -604,7 +748,98 @@
           ];
 
           this.pointIconDraw(); // 绘制分布点
-          this.locusPointDraw(); // 绘制轨迹
+          this.locusPointDraw(); // 绘制轨迹*/
+
+          var map = new AMap.Map("container", {
+            center: [123.931869,47.358575],
+            showLabel: false,//不显示地图文字标记
+            zoom: 17,
+            mapStyle:'amap://styles/darkblue'
+          });
+
+          var  Line = [[117.200645,31.805094],[117.19601,31.797361],[117.192062,31.791817],[117.189659,31.788023],[117.187084,31.7835],[117.184681,31.779998],[117.182621,31.776204],[117.176441,31.768615],[117.170433,31.762047],[117.165969,31.757231],[117.16288,31.753727],[117.16288,31.753727],[117.161506,31.75183],[117.162708,31.750772],[117.163223,31.750845],[117.163952,31.750881],[117.164253,31.746575],[117.161592,31.7461],[117.161463,31.744495],[117.160948,31.742378],[117.161549,31.74183],[117.162965,31.741757],[117.163352,31.740225],[117.163352,31.739239],[117.164382,31.738728],[117.163909,31.737451],[117.163352,31.736757],[117.163867,31.735991],[117.167085,31.7361],[117.167944,31.735261],[117.169446,31.73621],[117.170304,31.736319],[117.171849,31.736392],[117.172063,31.735261],[117.169059,31.732779],[117.16657,31.731282],[117.167815,31.728727],[117.16966,31.72599],[117.171591,31.724055],[117.173866,31.722558],[117.178029,31.720916],[117.181762,31.718397],[117.188586,31.713468],[117.195281,31.711095],[117.201031,31.708686],[117.203864,31.707152],[117.206696,31.704597],[117.212704,31.703355],[117.216996,31.702187],[117.220343,31.698974],[117.224635,31.694227],[117.226523,31.688238],[117.228755,31.682176],[117.229613,31.678086],[117.231673,31.674872],[117.236479,31.673265],[117.237595,31.681081],[117.24017,31.689845],[117.24429,31.697659],[117.248667,31.703209],[117.254847,31.709197],[117.261885,31.715476],[117.26755,31.722047],[117.272442,31.730443],[117.277936,31.742268],[117.281111,31.755406],[117.28094,31.775766],[117.280768,31.782843],[117.278536,31.792911],[117.276047,31.794735],[117.266348,31.792619],[117.257594,31.790431],[117.247551,31.789264],[117.239483,31.789337],[117.229699,31.790504],[117.223176,31.792182],[117.217425,31.794662],[117.208499,31.799623],[117.200516,31.805677],[117.200645,31.805094]];
+
+
+          var areapath = [
+            {"title":"齐齐哈尔盐碱地1号",
+              "color":"#01B964",
+              "length":"2208",
+              "address": "地址1",
+              "ph": "9.0",
+              "lntLat":[[123.93011,47.360596],[123.931698,47.360203],[123.931354,47.358953],[123.929702,47.359186]]
+            },
+            {"title":"齐齐哈尔盐碱地2号",
+              "color":"#00BAFF",
+              "length":"2018",
+              "address": "地址2",
+              "ph": "9.0",
+              "lntLat":[[123.931848,47.358052],[123.933329,47.357761],[123.932728,47.35686],[123.931483,47.357034]]
+            },
+            {"title":"齐齐哈尔盐碱地3号",
+              "color":"#FABF19",
+              "length":"1819",
+              "address": "地址3",
+              "ph": "9.0",
+              "lntLat":[[123.933414,47.358604],[123.934788,47.358386],[123.934573,47.359302],[123.933672,47.359331]]
+            },
+            ]
+
+        /*  var polyLine = new AMap.Polyline({//创建折线
+            path:Line,
+            strokeColor:'#2699a7',
+            strokeWeight:3,
+            strokeOpacity:1
+          })
+          map.add(polyLine);*/
+
+          var polygons = [];
+          for(var i = 0; i < areapath.length;i++){//这是  创建覆盖层
+            var polygon = new AMap.Polygon({
+              map: map,
+              strokeColor: areapath[i].color,
+              strokeOpacity:0.4,
+              fillColor:  areapath[i].color,
+              fillOpacity:0.4,
+              path: areapath[i].lntLat
+            });
+            polygons.push(polygon);
+          }
+
+//构建自定义信息窗体
+          var infoWindow = new AMap.InfoWindow({
+            isCustom:true,
+            anchor: 'bottom-left'
+          });
+
+          for(var j = 0 ; j < polygons.length;  j++){
+            polygons[j].index = j;
+            polygons[j].on('mouseover',function(e){
+              this.setOptions({
+                fillOpacity:0.6,
+                strokeOpacity:0.6
+              })
+
+              var area  = this.getArea();
+              console.log('getBounds',this.getBounds())
+              let contentBox = '<div class="tip-box">' +
+                '<i></i>'+
+                '<p> <label>盐碱地名称:</label><span>'+ areapath[this.index].title +'</span></p>' +
+                '<p> <label>盐碱地面积:</label><span>'+ area +'平方米</span></p>' +
+                '<p> <label>盐碱地地址:</label><span>'+ areapath[this.index].address +'</span></p>' +
+                '<p> <label>周长:</label><span>'+ areapath[this.index].length +'</span></p>' +
+                '<p> <label>PH值:</label><span>'+ areapath[this.index].ph +'</span></p>' +
+                '</div>'
+              infoWindow.open(map,e.lnglat);//打开位置
+              infoWindow.setContent(contentBox);
+            })
+            polygons[j].on('mouseout',function(){
+              this.setOptions({
+                fillOpacity:0.4,
+                strokeOpacity:0.4
+              })
+              infoWindow.close();//信息窗口关闭
+            })
+          }
         },
         clearRAF() {
           // 清除定时器
@@ -1006,8 +1241,201 @@
       }
     };
 </script>
+<style lang="scss" >
+.tip-box {
+  background-color: rgba(0, 186, 255, 0.6);
+  //border: 2px solid #00BAFF;
+  border-radius: 8px;
+  position: relative;
+  padding: 10px 30px;
+  i {
+    position: absolute;
+    top: 100%;
+    left: 36px;
+    border: 14px solid transparent;
+    border-left-width: 12px;
+    border-right-width: 12px;
+    border-top: 14px solid rgba(0, 186, 255, 0.6);
+  }
+  p {
+    line-height: 1.6;
+    margin: 0;
+  }
+  label {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: normal;
+    color: #00BAFF;
+    width: 76px;
+    text-align: right;
+    margin-right: 20px;
+  }
 
+  span {
+    display: inline-block;
+    font-size: 14px;
+    color: #fff;
+  }
+}
+</style>
 <style lang="scss" scoped>
+  /* 新增的样式 start */
+  li {
+    list-style: none;
+  }
+  .top-list {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    padding: 0;
+    margin: 10px 0 5px 0;
+    text-align: center;
+    .num {
+      font-size: 26px;
+      color: #fff;
+      line-height: 1;
+      margin-bottom: 10px;
+      i {
+        font-size: 12px;
+        font-style: normal;
+      }
+    }
+    .tit {
+      font-size: 14px;
+      color: #00BAFF;
+      line-height: 1;
+    }
+  }
+  .content-right-top-ul.statistics-box {
+    padding-left: 20px;
+  }
+  .select-box {
+    width: 100%;
+    margin-top: -10px;
+    margin-bottom: 5px;
+    /deep/ .el-input__inner {
+      background-color: transparent;
+      border-color: #02BBFF;
+      color: #FFF;
+    }
+  }
+  .area-parameter {
+    padding: 0;
+    margin-top: 10px;
+    .info {
+      float: left;
+      width: 50%;
+      label {
+        display: inline-block;
+        width: 5.2vw;
+        text-align: right;
+        margin-right: 0.8vw;
+        color: #00BAFF;
+        font-size: 15px;
+        font-weight: normal;
+        line-height: 40px;
+      }
+      span {
+        //font-size: 15px;
+        font-size: 0.8vw;
+        line-height: 2.3;
+        color: #fff;
+        font-weight: bold;
+      }
+    }
+  }
+  .table-out-box {
+    padding: 1.1vw;
+    padding-top: 10vh;
+    &.run-res {
+      padding-top: 1.5vh;
+      .select-box {
+        margin-top: 0;
+        margin-bottom: 2vh;
+      }
+      .table-box-scroll {
+        height: 17vh;
+        overflow: auto;
+        /* 设置滚动条的样式 */
+        &::-webkit-scrollbar {
+          width:0.22vw;
+        }
+        /* 滚动槽 */
+        &::-webkit-scrollbar-track {
+          width: 0.22vw;
+          height: 33.5vh;
+          background: transparent;
+          border-radius: 0.21vw;
+        }
+        /* 滚动条滑块 */
+        &::-webkit-scrollbar-thumb {
+          width: 0.22vw;
+          background: rgba(2, 187, 255, 1);
+          border-radius: 1px;
+        }
+      }
+    }
+    table {
+      width: 100%;
+      border: 1px solid rgba(2, 187, 255, 1) ;
+      border-collapse: collapse;
+      td,th {
+        border: 1px solid rgba(2, 187, 255, 0.5);
+        padding: 0.8vw 0.4vw 0.8vw 0.8vw;
+        font-size: 12px;
+        line-height: 1;
+        color: #fff;
+        font-weight: bold;
+        text-align: left;
+      }
+      th,tr td:first-child {
+        color: rgba(0, 186, 255, 1);
+        font-weight: normal;
+        background: rgba(1, 115, 250, 0.2);
+      }
+      th {
+        border-color: rgba(2, 187, 255, 1);
+      }
+      tr td:first-child {
+        border-right-color: rgba(2, 187, 255, 1);
+        border-left-color: rgba(2, 187, 255, 1);
+      }
+      img {
+        width: 1vw;
+        display: inline-block;
+        vertical-align: inherit;
+        margin-left: 0.5vw;
+      }
+    }
+    &.table-box-scroll {
+      height: 43vh;
+      .scroll-box {
+        margin-right: -0.22vw;
+        margin-top: -1px;
+        max-height: 25.5vh;
+        overflow: auto;
+        border-bottom: 1px solid rgba(2, 187, 255, 1);
+        /* 设置滚动条的样式 */
+        &::-webkit-scrollbar {
+          width:0.22vw;
+        }
+        /* 滚动槽 */
+        &::-webkit-scrollbar-track {
+          width: 0.22vw;
+          height: 33.5vh;
+          background: transparent;
+          border-radius: 0.21vw;
+        }
+        /* 滚动条滑块 */
+        &::-webkit-scrollbar-thumb {
+          width: 0.22vw;
+          background: rgba(2, 187, 255, 1);
+          border-radius: 1px;
+        }
+      }
+    }
+  }
+  /* 新增的样式 end */
   .content-box{
     display:flex;
     justify-content:space-between;
@@ -1015,6 +1443,7 @@
   .content-left{
     //display:flex;
     //justify-content:space-between;
+    z-index: 11;
   }
   .content-left-top{
     width:23.7vw;
@@ -1139,12 +1568,14 @@
     //display:flex;
     //justify-content:space-between;
     //align-items: flex-end;
+    z-index: 11;
   }
   .content-right-top{
     position:relative;
     width:23.7vw;
     height:auto;
-    background:url('../../assets/image/icon-bg-77.png') no-repeat;
+    //background:url('../../assets/image/icon-bg-77.png') no-repeat;
+    background:url('../../assets/image/icon-bg-5.png') no-repeat;
     background-size:100% 100%;
     margin-bottom:3.06vh;
     //margin-bottom:5.2vh;

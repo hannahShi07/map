@@ -1,15 +1,16 @@
 <template>
   <div class="bg-cla" :class="currentIndex!=4 ? '':'bg-active'">
     <div class="header-cla">
-      <div  class="left-cla" v-for="(item,index) in typeList" @click="clickHandle(index)" :class="currentIndex === index  ? 'left-active' : 'left-disble'">
+<!--      <div class="left-cla" v-for="(item,index) in typeList" @click="clickHandle(index)" :class="currentIndex === index  ? 'left-active' : 'left-disble'">
         <span class="header-time">
           <img class="middle-cla" :src="currentIndex === index ? item.imgActive : item.imgDisable" >
           <div class="reflect-cla">{{item.name}}</div>
         </span>
-      </div>
+      </div>-->
+      <div style="width: 21%;"></div>
 
       <div class="center-cla" @click="clickHandle(4)">
-        <img src="@/assets/image/icon-header-title.png">
+<!--        <img src="@/assets/image/icon-header-title.png">-->
       </div>
 
       <div  class="right-cla">
@@ -22,7 +23,7 @@
         </div>
         <div class="header-address">
           <img src="@/assets/image/icon-header-address.png">
-          <span>当涂县</span>
+          <span>黑龙江</span>
         </div>
         <div  class="time-cla">
           <span class="header-time">{{nowTime}}</span>
